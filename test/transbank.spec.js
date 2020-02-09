@@ -29,7 +29,7 @@ describe('Transbank API', () => {
             }));
           done();
         })
-        .catch((tbkError) => expect(tbkError).toBeUndefined())
+        .catch((tbkError) => expect(tbkError).toBeUndefined());
     });
   });
 });
