@@ -1,4 +1,4 @@
-const Transbank = require('../lib/transbank');
+const Transbank = require('../index');
 
 jest.setTimeout(10000);
 
@@ -9,7 +9,11 @@ describe('Transbank API', () => {
       expect(tbk).toBeDefined();
     });
     it('Debe poder hacer una transacción de prueba usando configuración webpay normal', (done) => {
-      const tbk = new Transbank();
+      const tbk = new Transbank()
+        .withConfiguration(Transbank.Configuration.forTestingWebpayPlusNormal())
+        .withEnvironment(Transbank.Environment
+          .forIntegration()
+          .forService(Transbank.services.normal));
       tbk.initTransaction({
         wSTransactionType: 'TR_NORMAL_WS',
         buyOrder: 'testOrder',
