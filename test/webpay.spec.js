@@ -69,4 +69,17 @@ describe('Test de servicios de Transbank | initTransaction de cada uno de ellos'
         .catch((tbkError) => expect(tbkError).toBeUndefined());
     });
   });
+
+  describe('Transacción nullify', () => {
+    it('Ambiente integración | solo testeo de llamada', (done) => {
+      const tbk = new Webpay()
+        .withConfiguration(Webpay.Configuration.forTestingWebpayPlusNormal())
+        .getNullifyTransaction();
+
+      tbk.nullify(1, 1000, 1, 1000, 597020000540)
+        .then(done)
+        .catch((tbkError) => expect(tbkError).toMatchSnapshot())
+        .finally(done);
+    });
+  });
 });
