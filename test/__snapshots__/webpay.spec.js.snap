@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Test de servicios de Transbank | initTransaction de cada uno de ellos Transacción capture Ambiente integración | solo testeo de llamada 1`] = `[Error: soap:Server: <!-- Operation not allowed(308) -->]`;
+
 exports[`Test de servicios de Transbank | initTransaction de cada uno de ellos Transacción nullify Ambiente integración | solo testeo de llamada 1`] = `[Error: soap:Server: <!-- Transaction not found(274) -->]`;

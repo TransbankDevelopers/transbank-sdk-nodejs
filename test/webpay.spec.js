@@ -82,4 +82,17 @@ describe('Test de servicios de Transbank | initTransaction de cada uno de ellos'
         .finally(done);
     });
   });
+
+  describe('Transacción capture', () => {
+    it('Ambiente integración | solo testeo de llamada', (done) => {
+      const tbk = new Webpay()
+        .withConfiguration(Webpay.Configuration.forTestingWebpayPlusNormal())
+        .getCaptureTransaction();
+
+      tbk.capture(1, 1000, 1)
+        .then(done)
+        .catch((tbkError) => expect(tbkError).toMatchSnapshot())
+        .finally(done);
+    });
+  });
 });
