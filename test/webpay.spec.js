@@ -95,4 +95,17 @@ describe('Test de servicios de Transbank | initTransaction de cada uno de ellos'
         .finally(done);
     });
   });
+
+  describe('Transacción OneClick', () => {
+    it('Ambiente integración | solo testeo de llamada', (done) => {
+      const tbk = new Transbank.Webpay()
+        .withConfiguration(Transbank.Configuration.forTestingWebpayOneClickNormal())
+        .getOneClickTransaction();
+
+      tbk.initInscription('aUserName', 'atest@email.com', 'https://a.test.url')
+        .then(done)
+        .catch((tbkError) => expect(tbkError).toMatchSnapshot())
+        .finally(done);
+    });
+  });
 });
