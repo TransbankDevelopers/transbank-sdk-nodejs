@@ -1,4 +1,25 @@
 language: node_js
 node_js:
+  - 8
+  - 9
+  - 10
+  - 11
   - 12
-
+  - 13
+branches:
+  only:
+    - master
+cache:
+  directories:
+    - node_modules
+before_install:
+  - npm update
+install:
+  - npm install
+script:
+  - npm test
+deploy:
+  provider: npm
+  email: transbankdevelopers@continuum.cl
+  api_key:
+    secure: BDLrS0Bi7u9R67vBfL4L50YK+TjiWpktsXAgVgW2fnqjN4NNxmsQ7F6AzTwCWJMvN2c7of9NaDoXD0GGBKwLIgsypcLLiti47Ml95VMgkMIXHOLguDr8ObZSfwMHRbvzJ8H7AOIYZyBzHjzaTCMxB+SBM1s1cFTOuXPJUinx0hViKthPv55QloKfG7lsx6Evu53reXDaet2i7Sxsp7WlAhrTkdYoC1D8EEb2y+2+dHlNBNEsfK1zmxc175Dy5c6lXvmcONzbQpPgzIGk2WTEnz62VkMcwCwT74l9jWEKwDeyUvscq0R1Nwn1VUjNerMQt2cVbckx1w+dhIJC61eyjenh52lC4HbdRDBbpdTZ0DZTHv1oZOAh6U2pyIhMdpXnmBEqIEJnaPmjyU+83TarG3pjJDQO+Qj55PRYWsp3ewWiAPTkhtvO7zMuAB7qe0E3I/3dPiY/WDX0xvg/GJ7NgC1RbDfefL8Zvmk2wO6ykHRa6gTbGqVdr0W50DkfN8+AY/rG2P+sKG8F6Y2Bcd9MQ3apt+7iJk6SWa37D/iyZvMs9B6C7FaAS7fRIlzRlfA3tEMQBBtlgYOBYSleDnIu2yMhjuB7R+4To/84P1SHjKeGpWklaDryao4MLR/PDrhyf2SjRaO5xxcdSIHlcK+lb3+z4vhJBg5Q+9LTcWdn2tg=
