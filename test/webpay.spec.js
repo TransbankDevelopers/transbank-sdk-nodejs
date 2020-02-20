@@ -103,7 +103,13 @@ describe('Test de servicios de Transbank | initTransaction de cada uno de ellos'
         .getOneClickTransaction();
 
       tbk.initInscription('aUserName', 'atest@email.com', 'https://a.test.url')
-        .then(done)
+        .then((response) => {
+          expect(response)
+            .toEqual(expect.objectContaining({
+              token: expect.any(String),
+            }));
+          done();
+        })
         .catch((tbkError) => expect(tbkError).toMatchSnapshot())
         .finally(done);
     });
