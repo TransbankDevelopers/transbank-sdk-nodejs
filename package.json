@@ -1,7 +1,7 @@
 {
-  "name": "tbk_sdk",
+  "name": "transbank-sdk",
   "version": "1.0.0",
-  "description": "Transbank sdk for node.js",
+  "description": "Transbank SDK for node.js",
   "main": "index.js",
   "scripts": {
     "test": "jest"
