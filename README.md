@@ -1,6 +1,6 @@
-[![Build Status](https://semaphoreci.com/api/v1/continuum/transbank-sdk-nodejs/branches/master/badge.svg)](https://semaphoreci.com/continuum/transbank-sdk-nodejs)
-[![Latest Stable Version](https://poser.pugx.org/transbank/transbank-sdk/v/stable)](https://packagist.org/packages/transbank/transbank-sdk)
-
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/transbankdevelopers/transbank-sdk-nodejs)](https://github.com/TransbankDevelopers/transbank-sdk-nodejs/releases/latest)
+[![GitHub](https://img.shields.io/github/license/transbankdevelopers/transbank-sdk-nodejs)](LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/transbankdevelopers/transbank-sdk-nodejs)](https://github.com/TransbankDevelopers/transbank-sdk-nodejs/graphs/contributors)
 # Transbank SDK Node.js
 
 Este es el SDK oficial de Transbank para Node.js 
