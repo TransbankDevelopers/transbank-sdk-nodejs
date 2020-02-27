@@ -1,6 +1,6 @@
 {
   "name": "transbank-sdk",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Transbank SDK for node.js",
   "main": "index.js",
   "scripts": {
@@ -8,28 +8,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/continuum/sdk-nodejs.git"
+    "url": "git+https://github.com/TransbankDevelopers/transbank-sdk-nodejs.git"
   },
   "keywords": [
-    "tbk",
+    "webpay",
     "transbank",
     "sdk"
   ],
   "author": "Continuum, Fabián Alexis Bravo Abarca",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/continuum/sdk-nodejs/issues"
+    "url": "https://github.com/TransbankDevelopers/transbank-sdk-nodejs/issues"
   },
-  "homepage": "https://github.com/continuum/sdk-nodejs#readme",
+  "homepage": "https://github.com/TransbankDevelopers/transbank-sdk-nodejs#readme",
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",
     "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4"
+    "@babel/preset-env": "^7.8.4",
+    "jest": "^25.1.0"
   },
   "dependencies": {
-    "jest": "^25.1.0",
     "tbk_signer": "^1.0.5"
   }
 }
