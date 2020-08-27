@@ -18,6 +18,11 @@ Puedes instalar SDK en tu proyecto usando NPM
 ```bash
 npm install transbank-sdk 
 ```
+es necesario tener instalado openssl de manera global, puedes usar
+```bash
+npm install -g openssl
+```
+
 ### Instalar con `yarn`
 ó también instalarlo usando [Yarn](https://yarnpkg.com/)
 ```bash
