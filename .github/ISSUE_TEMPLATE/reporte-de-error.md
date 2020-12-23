@@ -30,9 +30,9 @@ Una explicación concisa y clara de qué es lo que esperas que ocurra.
 Si aplica, agrega aquí capturas de pantalla que ayuden a explicar tu problema.
 
 **Versiones (por favor agrega aquí la siguiente información):**
-- SDK: [e.g. 1.5.2]
-- Node.js: [e.g. 9.0.0]
-- NPM [e.g. 6.0.0]
+- SDK: [ejemplo: 1.5.2]
+- Node.js: [ejemplo: 9.0.0]
+- NPM [ejemplo: 6.0.0]
 
 **Contexto adicional**
 
