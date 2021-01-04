@@ -6,6 +6,8 @@ abstract class RequestBase {
     this.endpoint = endpoint;
     this.method = method;
   }
+
+  abstract toJson(): string;
 }
 
 export default RequestBase;

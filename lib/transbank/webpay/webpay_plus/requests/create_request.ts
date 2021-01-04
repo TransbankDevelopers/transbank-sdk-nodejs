@@ -14,4 +14,15 @@ class CreateRequest extends RequestBase {
     this.amount = amount;
     this.returnUrl = returnUrl;
   }
+
+  toJson(): string {
+    return JSON.stringify({
+      buy_order: this.buyOrder,
+      session_id: this.sessionId,
+      amount: this.amount,
+      return_url: this.returnUrl,
+    });
+  }
 }
+
+export { CreateRequest };

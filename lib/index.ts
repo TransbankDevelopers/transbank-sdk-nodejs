@@ -1,7 +1,3 @@
-import Webpay from './transbank/webpay';
+import WebpayPlus from './transbank/webpay/webpay_plus';
 
-const Transbank = {
-  Webpay,
-};
-
-export { Transbank };
+export { WebpayPlus };

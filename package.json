@@ -3,12 +3,11 @@
   "version": "2.0.0",
   "description": "Transbank SDK for Node.js",
   "main": "dist/index.js",
-  "type": "module",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "try": "npm run build && node remove_this.js"
+    "try": "rm -rf dist/ && npm run build && node remove_this.js"
   },
   "repository": {
     "type": "git",
