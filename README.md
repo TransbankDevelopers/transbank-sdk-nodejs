@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.org/TransbankDevelopers/transbank-sdk-nodejs.svg?branch=master)](https://travis-ci.org/TransbankDevelopers/transbank-sdk-nodejs)
 # Transbank SDK Node.js
 
+NOTA: Esta SDK solo implementa la API SOAP, por lo que ya se encuentra obsoleto para nuevas integraciones. Próximamente estará disponible la versión 2.0 de este SDK, el que implementrá la nueva API REST de Webpay. 
+
 Este es el SDK oficial de Transbank para Node.js 
 
 ## Requisitos:
