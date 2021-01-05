@@ -7,7 +7,9 @@ abstract class RequestBase {
     this.method = method;
   }
 
-  abstract toJson(): string;
+  toJson(): string | undefined {
+    return JSON.stringify({});
+  }
 }
 
 export default RequestBase;

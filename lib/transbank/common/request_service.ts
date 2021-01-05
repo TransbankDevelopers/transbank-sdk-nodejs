@@ -20,11 +20,11 @@ const getHeaders = (
 const RequestService = {
   perform: async (request: RequestBase, options: Options) => {
     let requestHeaders = getHeaders(options);
-
     return axios({
       method: request.method,
       url: options.environment + request.endpoint,
       headers: requestHeaders,
+      timeout: 10000,
       data: request.toJson(),
     })
       .then((response) => {
@@ -32,12 +32,7 @@ const RequestService = {
       })
       .catch((error) => {
         let response = error.response;
-        throw new TransbankError(
-          error,
-          response.data.error_message,
-          response.status,
-          response.statusText
-        );
+        throw new TransbankError(error, response.data.error_message);
       });
   },
 };
