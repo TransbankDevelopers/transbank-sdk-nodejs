@@ -1,3 +1,1 @@
-import WebpayPlus from './transbank/webpay/webpay_plus';
-
-export { WebpayPlus };
+export { default as WebpayPlus } from './transbank/webpay/webpay_plus';

@@ -2,10 +2,11 @@
   "name": "transbank-sdk",
   "version": "2.0.0",
   "description": "Transbank SDK for Node.js",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/es5/index.js",
+  "module": "dist/es6/index.js",
+  "sideEffects": false,
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist/ && tsc && tsc --build tsconfig.es5.json",
     "test": "jest",
     "try": "rm -rf dist/ && npm run build && node remove_this.js"
   },
