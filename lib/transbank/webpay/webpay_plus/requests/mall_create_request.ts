@@ -17,15 +17,15 @@ class MallCreateRequest extends RequestBase {
 
     this.buyOrder = buyOrder;
     this.sessionId = sessionId;
-    this.details = details;
     this.returnUrl = returnUrl;
+    this.details = details;
   }
 
   toJson(): string {
     return JSON.stringify({
       buy_order: this.buyOrder,
       session_id: this.sessionId,
-      details: JSON.stringify(this.details),
+      details: this.details.map((detail) => detail.toPlainObject()),
       return_url: this.returnUrl,
     });
   }

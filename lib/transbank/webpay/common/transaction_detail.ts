@@ -8,6 +8,14 @@ class TransactionDetail {
     this.commerceCode = commerceCode;
     this.buyOrder = buyOrder;
   }
+
+  toPlainObject() {
+    return {
+      amount: this.amount,
+      commerce_code: this.commerceCode,
+      buy_order: this.buyOrder,
+    };
+  }
 }
 
 export default TransactionDetail;
