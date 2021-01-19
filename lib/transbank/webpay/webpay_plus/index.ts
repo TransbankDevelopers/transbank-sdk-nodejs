@@ -3,7 +3,7 @@ import DeferredTransaction from './deferred_transaction';
 import Environment from '../common/environment';
 import Options from '../../common/options';
 import MallTransaction from './mall_transaction';
-import MallDeferredTransaction from './mal_deferred_transaction';
+import MallDeferredTransaction from './mall_deferred_transaction';
 
 module WebpayPlus {
   const DEFAULT_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
