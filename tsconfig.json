@@ -12,5 +12,8 @@
     "forceConsistentCasingInFileNames": true,  /* Disallow inconsistently-cased references to the same file. */
     "strictNullChecks": true,
     "moduleResolution": "node"
-  }
+  },
+  "include": [
+    "./lib"
+  ]
 }

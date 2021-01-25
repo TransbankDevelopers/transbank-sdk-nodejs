@@ -13,5 +13,8 @@
     "strictNullChecks": true,
     "moduleResolution": "node",
     "lib": ["ES2017", "DOM"]
-  }
+  },
+  "include": [
+    "./lib"
+  ]
 }
