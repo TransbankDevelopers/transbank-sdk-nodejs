@@ -21,6 +21,12 @@ module WebpayPlus {
     return new Options(WebpayPlus.commerceCode, WebpayPlus.apiKey, WebpayPlus.environment);
   };
 
+  export const configureWebpayPlusForProduction = (_commerceCode: string, _apiKey: string) => {
+    WebpayPlus.commerceCode = _commerceCode;
+    WebpayPlus.apiKey = _apiKey;
+    WebpayPlus.environment = Environment.Production;
+  };
+
   export const configureWebpayPlusForTesting = () => {
     WebpayPlus.commerceCode = '597055555532';
     WebpayPlus.apiKey = DEFAULT_API_KEY;
