@@ -7,8 +7,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "rm -rf dist/ && tsc && tsc --build tsconfig.es5.json",
-    "test": "jest",
-    "try": "rm -rf dist/ && npm run build && node remove_this.js"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
