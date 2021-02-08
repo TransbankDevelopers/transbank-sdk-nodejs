@@ -1,41 +1,42 @@
 import RequestBase from '../../../common/request_base';
+import TransactionDetail from '../../common/transaction_detail';
 
-class CreateRequest extends RequestBase {
+class MallCreateRequest extends RequestBase {
   buyOrder: string;
   sessionId: string;
-  amount: number;
   cvv: number | undefined;
   cardNumber: string;
-  cardExprationDate: string;
+  cardExpirationDate: string;
+  details: Array<TransactionDetail>;
 
   constructor(
     buyOrder: string,
     sessionId: string,
-    amount: number,
     cvv: number | undefined,
     cardNumber: string,
-    cardExpirationDate: string
+    cardExpirationDate: string,
+    details: Array<TransactionDetail>
   ) {
     super('/rswebpaytransaction/api/webpay/v1.0/transactions', 'POST');
 
     this.buyOrder = buyOrder;
     this.sessionId = sessionId;
-    this.amount = amount;
     this.cvv = cvv;
-    this.cardNumber = cardNumber;
-    this.cardExprationDate = cardExpirationDate;
+    this.cardNumber = cardNumber.replace(/\s/g, '');
+    this.cardExpirationDate = cardExpirationDate.replace(/\s/g, '');
+    this.details = details;
   }
 
   toJson(): string {
     return JSON.stringify({
       buy_order: this.buyOrder,
       session_id: this.sessionId,
-      amount: this.amount,
       cvv: this.cvv,
       card_number: this.cardNumber,
-      card_expiration_date: this.cardExprationDate,
+      card_expiration_date: this.cardExpirationDate,
+      details: this.details.map((detail) => detail.toPlainObject()),
     });
   }
 }
 
-export { CreateRequest };
+export { MallCreateRequest };

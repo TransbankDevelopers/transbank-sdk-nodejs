@@ -2,13 +2,16 @@ import Options from '../../common/options';
 import Environment from '../common/environment';
 import _Transaction from './transaction';
 import _DeferredTransaction from './deferred_transaction';
+import _MallTransaction from './mall_transaction';
+import _MallDeferredTransaction from './mall_deferred_transaction';
 
 module TransaccionCompleta {
   const DEFAULT_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
 
   export let Transaction: typeof _Transaction;
   export let DeferredTransaction: typeof _DeferredTransaction;
-  export let MallTransaction: any;
+  export let MallTransaction: typeof _MallTransaction;
+  export let MallDeferredTransaction: typeof _MallDeferredTransaction;
 
   export let commerceCode: string = '597055555530';
   export let apiKey: string = DEFAULT_API_KEY;
@@ -40,8 +43,20 @@ module TransaccionCompleta {
     TransaccionCompleta.environment = Environment.Integration;
   };
 
+  export const configureTransaccionCompletaNoCvvForTesting = () => {
+    TransaccionCompleta.commerceCode = '597055555557';
+    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
+    TransaccionCompleta.environment = Environment.Integration;
+  };
+
   export const configureTransaccionCompletaDeferredForTesting = () => {
     TransaccionCompleta.commerceCode = '597055555531';
+    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
+    TransaccionCompleta.environment = Environment.Integration;
+  };
+
+  export const configureTransaccionCompletaDeferredNoCvvForTesting = () => {
+    TransaccionCompleta.commerceCode = '597055555556';
     TransaccionCompleta.apiKey = DEFAULT_API_KEY;
     TransaccionCompleta.environment = Environment.Integration;
   };
@@ -52,8 +67,20 @@ module TransaccionCompleta {
     TransaccionCompleta.environment = Environment.Integration;
   };
 
+  export const configureTransaccionCompletaMallNoCvvForTesting = () => {
+    TransaccionCompleta.commerceCode = '597055555551';
+    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
+    TransaccionCompleta.environment = Environment.Integration;
+  };
+
   export const configureTransaccionCompletaMallDeferredForTesting = () => {
     TransaccionCompleta.commerceCode = '597055555576';
+    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
+    TransaccionCompleta.environment = Environment.Integration;
+  };
+
+  export const configureTransaccionCompletaMallDeferredNoCvvForTesting = () => {
+    TransaccionCompleta.commerceCode = '597055555561';
     TransaccionCompleta.apiKey = DEFAULT_API_KEY;
     TransaccionCompleta.environment = Environment.Integration;
   };
@@ -61,5 +88,7 @@ module TransaccionCompleta {
 
 TransaccionCompleta.Transaction = _Transaction;
 TransaccionCompleta.DeferredTransaction = _DeferredTransaction;
+TransaccionCompleta.MallTransaction = _MallTransaction;
+TransaccionCompleta.MallDeferredTransaction = _MallDeferredTransaction;
 
 export default TransaccionCompleta;

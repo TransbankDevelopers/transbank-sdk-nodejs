@@ -14,7 +14,7 @@ const Transaction = {
     buyOrder: string,
     sessionId: string,
     amount: number,
-    cvv: number,
+    cvv: number | undefined,
     cardNumber: string,
     cardExpirationDate: string,
     options: Options = TransaccionCompleta.getDefaultOptions()
