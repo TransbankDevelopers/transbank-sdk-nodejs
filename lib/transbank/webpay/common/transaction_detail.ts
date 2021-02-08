@@ -2,13 +2,13 @@ class TransactionDetail {
   amount: number;
   commerceCode: string;
   buyOrder: string;
-  installmentsNumber: string | undefined;
+  installmentsNumber: number | undefined;
 
   constructor(
     amount: number,
     commerceCode: string,
     buyOrder: string,
-    installmentsNumber: string | undefined = undefined
+    installmentsNumber: number | undefined = undefined
   ) {
     this.amount = amount;
     this.commerceCode = commerceCode;
