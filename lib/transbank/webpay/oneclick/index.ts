@@ -8,10 +8,10 @@ import _MallTransaction from './mall_transaction';
 module Oneclick {
   const DEFAULT_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
 
-  export let MallInscription: any;
-  export let MallTransaction: any;
-  export let MallDeferredInscription: any;
-  export let MallDeferredTransaction: any;
+  export let MallInscription: typeof _MallInscription;
+  export let MallTransaction: typeof _MallTransaction;
+  export let MallDeferredInscription: typeof _MallDeferredInscription;
+  export let MallDeferredTransaction: typeof _MallDeferredTransaction;
 
   export let commerceCode: string = '597055555541';
   export let apiKey: string = DEFAULT_API_KEY;
