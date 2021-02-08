@@ -1,0 +1,30 @@
+import RequestBase from '../../../common/request_base';
+
+class InstallmentsRequest extends RequestBase {
+  installmentsNumber: number;
+  commerceCode: string | undefined;
+  buyOrder: string | undefined;
+
+  constructor(
+    token: string,
+    installmentsNumber: number,
+    commerceCode: string | undefined = undefined,
+    buyOrder: string | undefined = undefined
+  ) {
+    super(`/rswebpaytransaction/api/webpay/v1.0/transactions/${token}/installments`, 'POST');
+
+    this.installmentsNumber = installmentsNumber;
+    this.commerceCode = commerceCode;
+    this.buyOrder = buyOrder;
+  }
+
+  toJson(): string {
+    return JSON.stringify({
+      installments_number: this.installmentsNumber,
+      commerce_code: this.commerceCode,
+      buy_order: this.buyOrder,
+    });
+  }
+}
+
+export { InstallmentsRequest };
