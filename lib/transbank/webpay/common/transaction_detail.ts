@@ -2,13 +2,13 @@ class TransactionDetail {
   amount: number;
   commerceCode: string;
   buyOrder: string;
-  installmentsNumber: number | undefined;
+  installmentsNumber: string | undefined;
 
   constructor(
     amount: number,
     commerceCode: string,
     buyOrder: string,
-    installmentsNumber: number | undefined = undefined
+    installmentsNumber: string | undefined = undefined
   ) {
     this.amount = amount;
     this.commerceCode = commerceCode;
@@ -17,12 +17,17 @@ class TransactionDetail {
   }
 
   toPlainObject() {
-    return {
+    let object: any = {
       amount: this.amount,
       commerce_code: this.commerceCode,
       buy_order: this.buyOrder,
-      installments_number: this.installmentsNumber,
     };
+
+    if (this.installmentsNumber != undefined) {
+      object['installments_number'] = this.installmentsNumber;
+    }
+
+    return object;
   }
 }
 
