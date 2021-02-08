@@ -1,17 +1,17 @@
-import Transaction from './transaction';
-import DeferredTransaction from './deferred_transaction';
 import Environment from '../common/environment';
 import Options from '../../common/options';
-import MallTransaction from './mall_transaction';
-import MallDeferredTransaction from './mall_deferred_transaction';
+import _Transaction from './transaction';
+import _DeferredTransaction from './deferred_transaction';
+import _MallTransaction from './mall_transaction';
+import _MallDeferredTransaction from './mall_deferred_transaction';
 
 module WebpayPlus {
   const DEFAULT_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
 
-  export let Transaction: any;
-  export let DeferredTransaction: any;
-  export let MallTransaction: any;
-  export let MallDeferredTransaction: any;
+  export let Transaction: typeof _Transaction;
+  export let DeferredTransaction: typeof _DeferredTransaction;
+  export let MallTransaction: typeof _MallTransaction;
+  export let MallDeferredTransaction: typeof _MallDeferredTransaction;
 
   export let commerceCode: string = '597055555532';
   export let apiKey: string = DEFAULT_API_KEY;
@@ -52,9 +52,9 @@ module WebpayPlus {
   };
 }
 
-WebpayPlus.Transaction = Transaction;
-WebpayPlus.DeferredTransaction = DeferredTransaction;
-WebpayPlus.MallTransaction = MallTransaction;
-WebpayPlus.MallDeferredTransaction = MallDeferredTransaction;
+WebpayPlus.Transaction = _Transaction;
+WebpayPlus.DeferredTransaction = _DeferredTransaction;
+WebpayPlus.MallTransaction = _MallTransaction;
+WebpayPlus.MallDeferredTransaction = _MallDeferredTransaction;
 
 export default WebpayPlus;
