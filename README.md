@@ -4,8 +4,6 @@
 [![Build Status](https://travis-ci.org/TransbankDevelopers/transbank-sdk-nodejs.svg?branch=master)](https://travis-ci.org/TransbankDevelopers/transbank-sdk-nodejs)
 # Transbank SDK Node.js
 
-NOTA: Esta SDK solo implementa la API SOAP, por lo que ya se encuentra obsoleto para nuevas integraciones. Próximamente estará disponible la versión 2.0 de este SDK, el que implementrá la nueva API REST de Webpay. 
-
 Este es el SDK oficial de Transbank para Node.js 
 
 ## Requisitos:
@@ -19,10 +17,6 @@ Este es el SDK oficial de Transbank para Node.js
 Puedes instalar SDK en tu proyecto usando NPM
 ```bash
 npm install transbank-sdk 
-```
-es necesario tener instalado openssl de manera global, puedes usar
-```bash
-npm install -g openssl
 ```
 
 ### Instalar con `yarn`
@@ -38,12 +32,11 @@ Puedes encontrar toda la documentación de cómo usar este SDK en el sitio [www.
 La documentación relevante para usar este SDK es:
 
 - Documentación general sobre los productos y sus diferencias:
-  [Webpay](https://www.transbankdevelopers.cl/producto/webpay) y
-  [Onepay](https://www.transbankdevelopers.cl/producto/onepay).
+  [Webpay](https://www.transbankdevelopers.cl/producto/webpay).
 - Documentación sobre [ambientes, deberes del comercio, puesta en producción,
   etc](https://www.transbankdevelopers.cl/documentacion/como_empezar#ambientes).
-- Primeros pasos con [Webpay](https://www.transbankdevelopers.cl/documentacion/webpay) y [Onepay](https://www.transbankdevelopers.cl/documentacion/onepay).
-- Referencia detallada sobre [Webpay](https://www.transbankdevelopers.cl/referencia/webpay) y [Onepay](https://www.transbankdevelopers.cl/referencia/onepay).
+- Primeros pasos con [Webpay](https://www.transbankdevelopers.cl/documentacion/webpay).
+- Referencia detallada sobre [Webpay](https://www.transbankdevelopers.cl/referencia/webpay)
 
 ## Información para contribuir y desarrollar este SDK
 
@@ -57,7 +50,7 @@ La documentación relevante para usar este SDK es:
 - Usamos ingles, para los mensajes de commit.
 - Se pueden usar tokens como WIP, en el subject de un commit, separando el token con `:`, por ejemplo:
 `WIP: This is a useful commit message`
-- Para los nombres de ramas también usamos ingles.
+- Para los nombres de ramas también usamos inglés.
 - Se asume, que una rama de feature no mezclada, es un feature no terminado.
 - El nombre de las ramas va en minúsculas.
 - Las palabras se separan con `-`.
