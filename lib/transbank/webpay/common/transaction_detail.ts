@@ -17,17 +17,11 @@ class TransactionDetail {
   }
 
   toPlainObject() {
-    let object: any = {
+    return {
       amount: this.amount,
       commerce_code: this.commerceCode,
       buy_order: this.buyOrder,
     };
-
-    if (this.installmentsNumber != undefined) {
-      object['installments_number'] = this.installmentsNumber;
-    }
-
-    return object;
   }
 }
 
