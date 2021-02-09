@@ -29,7 +29,7 @@ const RequestService = {
     })
       .then((response) => {
         if (response.status == 204) {
-          return;
+          return true;
         }
         return response.data;
       })
