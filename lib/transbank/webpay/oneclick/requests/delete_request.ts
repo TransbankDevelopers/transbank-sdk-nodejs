@@ -13,7 +13,7 @@ class DeleteRequest extends RequestBase {
   toJson(): string {
     return JSON.stringify({
       tbk_user: this.tbkUser,
-      user_name: this.userName,
+      username: this.userName,
     });
   }
 }
