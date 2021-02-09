@@ -28,6 +28,9 @@ const RequestService = {
       data: request.toJson(),
     })
       .then((response) => {
+        if (response.status == 204) {
+          return;
+        }
         return response.data;
       })
       .catch((error) => {
