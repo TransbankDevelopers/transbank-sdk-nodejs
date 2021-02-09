@@ -15,6 +15,8 @@ install:
   - npm install
 script:
   - npm test
+before_deploy:
+  - npm run build
 deploy:
   provider: npm
   email: transbankdevelopers@continuum.cl
