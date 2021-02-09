@@ -5,6 +5,12 @@ Todos los cambios notables a este proyecto serán docuemntados en este archivo.
 El formato está basado en [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.1.2] - 2021-02-09
+
+### Fixed
+
+- Se arregla despliege en npm
+
 ## [2.1.1] - 2021-02-09
 
 ### Fixed
