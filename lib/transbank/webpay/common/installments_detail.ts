@@ -1,3 +1,7 @@
+/**
+ * Class used to represent installments request information for child
+ * transactions in Transacción Completa
+ */
 class InstallmentDetail {
   commerceCode: string | undefined;
   buyOrder: string | undefined;
