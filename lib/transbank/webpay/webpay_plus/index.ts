@@ -8,10 +8,10 @@ import _MallDeferredTransaction from './mall_deferred_transaction';
 module WebpayPlus {
   const DEFAULT_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
 
-  export let Transaction: typeof _Transaction;
-  export let DeferredTransaction: typeof _DeferredTransaction;
-  export let MallTransaction: typeof _MallTransaction;
-  export let MallDeferredTransaction: typeof _MallDeferredTransaction;
+  export const Transaction: typeof _Transaction = _Transaction;
+  export const DeferredTransaction: typeof _DeferredTransaction = _DeferredTransaction;
+  export const MallTransaction: typeof _MallTransaction = _MallTransaction;
+  export const MallDeferredTransaction: typeof _MallDeferredTransaction = _MallDeferredTransaction;
 
   export let commerceCode: string = '597055555532';
   export let apiKey: string = DEFAULT_API_KEY;
@@ -51,10 +51,5 @@ module WebpayPlus {
     WebpayPlus.environment = Environment.Integration;
   };
 }
-
-WebpayPlus.Transaction = _Transaction;
-WebpayPlus.DeferredTransaction = _DeferredTransaction;
-WebpayPlus.MallTransaction = _MallTransaction;
-WebpayPlus.MallDeferredTransaction = _MallDeferredTransaction;
 
 export default WebpayPlus;
