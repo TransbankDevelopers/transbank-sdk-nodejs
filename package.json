@@ -6,7 +6,7 @@
   "module": "dist/es6/index.js",
   "sideEffects": false,
   "scripts": {
-    "build": "rm -rf dist/ && tsc && tsc --build tsconfig.es5.json",
+    "build": "rm -rf dist/ && node_modules/typedoc/bin/typedoc lib/index.ts --out ./docs && tsc && tsc --build tsconfig.es5.json",
     "test": "jest"
   },
   "repository": {
@@ -31,6 +31,7 @@
     "@types/jest": "^26.0.20",
     "jest": "^26.6.3",
     "ts-jest": "^26.4.4",
+    "typedoc": "^0.20.24",
     "typescript": "^4.1.4"
   },
   "dependencies": {

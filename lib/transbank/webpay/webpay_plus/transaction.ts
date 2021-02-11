@@ -3,6 +3,9 @@ import WebpayPlus from './';
 import RequestService from '../../common/request_service';
 import { CreateRequest, CommitRequest, StatusRequest, RefundRequest } from './requests';
 
+/**
+ * Contains methods to interact with WebpayPlus API
+ */
 const Transaction = {
   /**
    * Create a Webpay Plus transaction.
