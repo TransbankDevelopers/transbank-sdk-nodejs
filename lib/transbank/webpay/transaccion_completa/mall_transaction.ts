@@ -11,6 +11,16 @@ import MallCommitRequest from './requests/mall_commit_request';
 
 const MallTransaction = {
   ...Transaction,
+  /**
+   * Create Transaccion Completa Mall transaction
+   * @param buyOrder Commerce buy order, make sure this is unique.
+   * @param sessionId You can use this field to pass session data if needed.
+   * @param cvv Card verification value
+   * @param cardNumber Card's fron number
+   * @param cardExpirationDate Card's expiration date
+   * @param details Child transactions details, see {@link TransactionDetail} for more information.
+   * @param options (Optional) You can pass options to use a custom configuration for this request.
+   */
   create: async (
     buyOrder: string,
     sessionId: string,
@@ -30,6 +40,12 @@ const MallTransaction = {
     );
     return RequestService.perform(createRequest, options);
   },
+  /**
+   * Ask for installment conditions and price of each child transaction
+   * @param token Unique transaction identifier
+   * @param details Child transactions details, see {@link InstallmentDetail} for more information.
+   * @param options (Optional) You can pass options to use a custom configuration for this request.
+   */
   installments: async (
     token: string,
     details: Array<InstallmentDetail>,
@@ -47,6 +63,12 @@ const MallTransaction = {
     }
     return response;
   },
+  /**
+   * Commit a transaction
+   * @param token Unique transaction identifier
+   * @param details Child transactions details, see {@link CommitDetail} for more information.
+   * @param options (Optional) You can pass options to use a custom configuration for this request.
+   */
   commit: async (
     token: string,
     details: Array<TransaccionCompletaCommitDetail>,
@@ -55,6 +77,16 @@ const MallTransaction = {
     let commitResponse = new MallCommitRequest(token, details);
     return RequestService.perform(commitResponse, options);
   },
+  /**
+   * Request a refund of a specific transaction, if you refund for the full amount and you're within
+   * the time window the transaction will be reversed. If you're past that window or refund for less
+   * than the total amount the transaction will be void.
+   * @param token Unique transaction identifier
+   * @param buyOrder Child buy order, used to identify the correct child transaction.
+   * @param commerceCode Child commerce code, used to indetify the correct child transaction
+   * @param amount Amount to be refunded
+   * @param options (Optional) You can pass options to use a custom configuration for this request.
+   */
   refund: async (
     token: string,
     buyOrder: string,

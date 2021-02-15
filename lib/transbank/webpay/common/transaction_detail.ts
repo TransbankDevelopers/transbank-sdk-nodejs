@@ -1,3 +1,6 @@
+/**
+ * Class used to represent "child" transactions in Webpay Plus Mall and Oneclick Mall
+ */
 class TransactionDetail {
   amount: number;
   commerceCode: string;

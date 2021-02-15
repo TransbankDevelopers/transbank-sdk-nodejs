@@ -1,3 +1,6 @@
+/** Class used to represent "child" transactions in Transacción Completa when
+ * commiting the "parent" transaction
+ */
 class CommitDetail {
   commerceCode: string;
   buyOrder: string;

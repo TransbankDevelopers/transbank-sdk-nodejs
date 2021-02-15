@@ -1,0 +1,227 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>transbank-sdk</title>
+	<meta name="description" content="Documentation for transbank-sdk">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">transbank-sdk</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>transbank-sdk</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><a href="https://github.com/TransbankDevelopers/transbank-sdk-nodejs/releases/latest"><img src="https://img.shields.io/github/v/tag/transbankdevelopers/transbank-sdk-nodejs" alt="GitHub tag (latest by date)"></a>
+					<a href="LICENSE"><img src="https://img.shields.io/github/license/transbankdevelopers/transbank-sdk-nodejs" alt="GitHub"></a>
+					<a href="https://github.com/TransbankDevelopers/transbank-sdk-nodejs/graphs/contributors"><img src="https://img.shields.io/github/contributors/transbankdevelopers/transbank-sdk-nodejs" alt="GitHub contributors"></a>
+				<a href="https://travis-ci.org/TransbankDevelopers/transbank-sdk-nodejs"><img src="https://travis-ci.org/TransbankDevelopers/transbank-sdk-nodejs.svg?branch=master" alt="Build Status"></a></p>
+				<a href="#transbank-sdk-nodejs" id="transbank-sdk-nodejs" style="color: inherit; text-decoration: none;">
+					<h1>Transbank SDK Node.js</h1>
+				</a>
+				<p>Este es el SDK oficial de Transbank para Node.js </p>
+				<a href="#requisitos" id="requisitos" style="color: inherit; text-decoration: none;">
+					<h2>Requisitos:</h2>
+				</a>
+				<ul>
+					<li>Node.js 8+</li>
+				</ul>
+				<a href="#instalación" id="instalación" style="color: inherit; text-decoration: none;">
+					<h1>Instalación</h1>
+				</a>
+				<a href="#instalar-con-npm" id="instalar-con-npm" style="color: inherit; text-decoration: none;">
+					<h3>Instalar con <code>npm</code></h3>
+				</a>
+				<p>Puedes instalar SDK en tu proyecto usando NPM</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm install transbank-sdk </span>
+</code></pre>
+				<a href="#instalar-con-yarn" id="instalar-con-yarn" style="color: inherit; text-decoration: none;">
+					<h3>Instalar con <code>yarn</code></h3>
+				</a>
+				<p>ó también instalarlo usando <a href="https://yarnpkg.com/">Yarn</a></p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn add transbank-sdk </span>
+</code></pre>
+				<a href="#documentación" id="documentación" style="color: inherit; text-decoration: none;">
+					<h2>Documentación</h2>
+				</a>
+				<p>Puedes encontrar toda la documentación de cómo usar este SDK en el sitio <a href="https://www.transbankdevelopers.cl">www.transbankdevelopers.cl</a>.</p>
+				<p>La documentación relevante para usar este SDK es:</p>
+				<ul>
+					<li>Documentación general sobre los productos y sus diferencias:
+					<a href="https://www.transbankdevelopers.cl/producto/webpay">Webpay</a>.</li>
+					<li>Documentación sobre <a href="https://www.transbankdevelopers.cl/documentacion/como_empezar#ambientes">ambientes, deberes del comercio, puesta en producción,
+					etc</a>.</li>
+					<li>Primeros pasos con <a href="https://www.transbankdevelopers.cl/documentacion/webpay">Webpay</a>.</li>
+					<li>Referencia detallada sobre <a href="https://www.transbankdevelopers.cl/referencia/webpay">Webpay</a></li>
+				</ul>
+				<a href="#información-para-contribuir-y-desarrollar-este-sdk" id="información-para-contribuir-y-desarrollar-este-sdk" style="color: inherit; text-decoration: none;">
+					<h2>Información para contribuir y desarrollar este SDK</h2>
+				</a>
+				<a href="#requerimientos" id="requerimientos" style="color: inherit; text-decoration: none;">
+					<h3>Requerimientos</h3>
+				</a>
+				<ul>
+					<li>Node.js +8</li>
+					<li>Plugin de editorconfig para tu editor favorito.</li>
+				</ul>
+				<a href="#estándares" id="estándares" style="color: inherit; text-decoration: none;">
+					<h3>Estándares</h3>
+				</a>
+				<ul>
+					<li>Para los commits respetamos las siguientes normas: <a href="https://chris.beams.io/posts/git-commit/">https://chris.beams.io/posts/git-commit/</a></li>
+					<li>Usamos ingles, para los mensajes de commit.</li>
+					<li>Se pueden usar tokens como WIP, en el subject de un commit, separando el token con <code>:</code>, por ejemplo:
+					<code>WIP: This is a useful commit message</code></li>
+					<li>Para los nombres de ramas también usamos inglés.</li>
+					<li>Se asume, que una rama de feature no mezclada, es un feature no terminado.</li>
+					<li>El nombre de las ramas va en minúsculas.</li>
+					<li>Las palabras se separan con <code>-</code>.</li>
+					<li>Las ramas comienzan con alguno de los short lead tokens definidos, por ejemplo: <code>feat/tokens-configuration</code></li>
+				</ul>
+				<a href="#short-lead-tokens" id="short-lead-tokens" style="color: inherit; text-decoration: none;">
+					<h4>Short lead tokens</h4>
+				</a>
+				<a href="#commits" id="commits" style="color: inherit; text-decoration: none;">
+					<h5>Commits</h5>
+				</a>
+				<ul>
+					<li>WIP = Trabajo en progreso.
+						<a href="#ramas" id="ramas" style="color: inherit; text-decoration: none;">
+							<h5>Ramas</h5>
+						</a>
+					</li>
+					<li>feat = Nuevos features</li>
+					<li>chore = Tareas, que no son visibles al usuario.</li>
+					<li>bug = Resolución de bugs.</li>
+				</ul>
+				<a href="#todas-las-mezclas-a-master-se-hacen-mediante-pull-request" id="todas-las-mezclas-a-master-se-hacen-mediante-pull-request" style="color: inherit; text-decoration: none;">
+					<h3>Todas las mezclas a master se hacen mediante Pull Request.</h3>
+				</a>
+				<a href="#test" id="test" style="color: inherit; text-decoration: none;">
+					<h3>Test</h3>
+				</a>
+				<p>Para ejecutar los test localmente debes ejecutar los siguientes comandos en una terminal.</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm install </span><span style="color: #008000"># si es que no se han instaldo todavía</span>
+<span style="color: #000000">npm run </span><span style="color: #795E26">test</span>
+</code></pre>
+				<a href="#deploy-de-una-nueva-versión" id="deploy-de-una-nueva-versión" style="color: inherit; text-decoration: none;">
+					<h3>Deploy de una nueva versión.</h3>
+				</a>
+				<p>Para generar una nueva versión, se debe crear un PR (con un título &quot;Prepare release X.Y.Z&quot; con los valores que correspondan para <code>X</code>, <code>Y</code> y <code>Z</code>). Se debe seguir el estándar semver para determinar si se incrementa el valor de <code>X</code> (si hay cambios no retrocompatibles), <code>Y</code> (para mejoras retrocompatibles) o <code>Z</code> (si sólo hubo correcciones a bugs).</p>
+				<p>En ese PR deben incluirse los siguientes cambios:</p>
+				<ol>
+					<li>Modificar el archivo <code>CHANGELOG.md</code> para incluir una nueva entrada (al comienzo) para <code>X.Y.Z</code> que explique en español los cambios <strong>de cara al usuario del SDK</strong>.</li>
+					<li>Modificar el archivo <code>package.json</code> para que la propiedad <code>&quot;version&quot;</code> apunte a la nueva versión <code>X.Y.Z</code></li>
+				</ol>
+				<p>Luego de obtener aprobación del pull request, debe mezclarse a master e inmediatamente generar un release en GitHub con el tag <code>X.Y.Z</code>. En la descripción del release debes poner lo mismo que agregaste al changelog.</p>
+				<p>Con eso Travis CI generará automáticamente una nueva versión de la librería y la publicará en npm.</p>
+				<a href="#vulnerabilidades-de-seguridad" id="vulnerabilidades-de-seguridad" style="color: inherit; text-decoration: none;">
+					<h3>Vulnerabilidades de seguridad</h3>
+				</a>
+				<p>Si descubres una falla de seguridad dentro de este proyecto, por favor, notifícanos por correo electrónico a <a href="mailto:transbankdevelopers@continuum.cl">transbankdevelopers@continuum.cl</a>. Tomaremos el caso con la mayor celeridad. </p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/oneclick.html">Oneclick</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/transaccioncompleta.html">Transaccion<wbr>Completa</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/webpayplus.html">Webpay<wbr>Plus</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/environment.html" class="tsd-kind-icon">Environment</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/commitdetail.html" class="tsd-kind-icon">Commit<wbr>Detail</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/installmentdetail.html" class="tsd-kind-icon">Installment<wbr>Detail</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/options.html" class="tsd-kind-icon">Options</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/transactiondetail.html" class="tsd-kind-icon">Transaction<wbr>Detail</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
