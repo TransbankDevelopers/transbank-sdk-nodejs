@@ -8,10 +8,10 @@ import _MallDeferredTransaction from './mall_deferred_transaction';
 module TransaccionCompleta {
   const DEFAULT_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
 
-  export let Transaction: typeof _Transaction;
-  export let DeferredTransaction: typeof _DeferredTransaction;
-  export let MallTransaction: typeof _MallTransaction;
-  export let MallDeferredTransaction: typeof _MallDeferredTransaction;
+  export const Transaction: typeof _Transaction = _Transaction;
+  export const DeferredTransaction: typeof _DeferredTransaction = _DeferredTransaction;
+  export const MallTransaction: typeof _MallTransaction = _MallTransaction;
+  export const MallDeferredTransaction: typeof _MallDeferredTransaction = _MallDeferredTransaction;
 
   export let commerceCode: string = '597055555530';
   export let apiKey: string = DEFAULT_API_KEY;
@@ -85,10 +85,5 @@ module TransaccionCompleta {
     TransaccionCompleta.environment = Environment.Integration;
   };
 }
-
-TransaccionCompleta.Transaction = _Transaction;
-TransaccionCompleta.DeferredTransaction = _DeferredTransaction;
-TransaccionCompleta.MallTransaction = _MallTransaction;
-TransaccionCompleta.MallDeferredTransaction = _MallDeferredTransaction;
 
 export default TransaccionCompleta;
