@@ -21,10 +21,20 @@ module WebpayPlus {
     return new Options(WebpayPlus.commerceCode, WebpayPlus.apiKey, WebpayPlus.environment);
   };
 
-  export const configureWebpayPlusForProduction = (_commerceCode: string, _apiKey: string) => {
+  export const configureForProduction = (_commerceCode: string, _apiKey: string) => {
     WebpayPlus.commerceCode = _commerceCode;
     WebpayPlus.apiKey = _apiKey;
     WebpayPlus.environment = Environment.Production;
+  };
+
+  export const configureForIntegration = (_commerceCode: string, _apiKey: string) => {
+    WebpayPlus.commerceCode = _commerceCode;
+    WebpayPlus.apiKey = _apiKey;
+    WebpayPlus.environment = Environment.Integration;
+  };
+
+  export const configureWebpayPlusForProduction = (_commerceCode: string, _apiKey: string) => {
+    configureForProduction(_commerceCode, _apiKey);
   };
 
   export const configureWebpayPlusForTesting = () => {
