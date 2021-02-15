@@ -11,20 +11,20 @@ module Oneclick {
   /**
    * Contains methods used to start, finish and delete Inscriptions.
    */
-  export let MallInscription: typeof _MallInscription;
+  export const MallInscription: typeof _MallInscription = _MallInscription;
   /**
    * Contains methods used to authorize, commit, refund and capture mall Transactions.
    */
-  export let MallTransaction: typeof _MallTransaction;
+  export const MallTransaction: typeof _MallTransaction = _MallTransaction;
   /**
    * Contains methods used to start, finish and delete Inscriptions.
    * This is freely interchangeable with {@link MallInscription}
    */
-  export let MallDeferredInscription: typeof _MallDeferredInscription;
+  export const MallDeferredInscription: typeof _MallDeferredInscription = _MallDeferredInscription;
   /**
    * Contains methods used to authorize, commit, refund and capture deferred mall Transactions.
    */
-  export let MallDeferredTransaction: typeof _MallDeferredTransaction;
+  export const MallDeferredTransaction: typeof _MallDeferredTransaction = _MallDeferredTransaction;
 
   /**
    * Used to authenticate against the API, currently configured Commerce Code.
@@ -88,10 +88,5 @@ module Oneclick {
     Oneclick.environment = Environment.Integration;
   };
 }
-
-Oneclick.MallInscription = _MallInscription;
-Oneclick.MallTransaction = _MallTransaction;
-Oneclick.MallDeferredInscription = _MallDeferredInscription;
-Oneclick.MallDeferredTransaction = _MallDeferredTransaction;
 
 export default Oneclick;

@@ -10,19 +10,19 @@ module TransaccionCompleta {
   /**
    * Contains methods used to create, commit, refund and capture Transactions.
    */
-  export let Transaction: typeof _Transaction;
+  export const Transaction: typeof _Transaction = _Transaction;
   /**
    * Contains methods used to create, commit, refund and capture deferred Transactions.
    */
-  export let DeferredTransaction: typeof _DeferredTransaction;
+  export const DeferredTransaction: typeof _DeferredTransaction = _DeferredTransaction;
   /**
    * Contains methods used to create, commit, refund and capture Mall Transactions.
    */
-  export let MallTransaction: typeof _MallTransaction;
+  export const MallTransaction: typeof _MallTransaction = _MallTransaction;
   /**
    * Contains methods used to create, commit, refund and capture Mall deferred Transactions.
    */
-  export let MallDeferredTransaction: typeof _MallDeferredTransaction;
+  export const MallDeferredTransaction: typeof _MallDeferredTransaction = _MallDeferredTransaction;
 
   /**
    * Used to authenticate against the API, currently configured Commerce Code.
@@ -144,10 +144,5 @@ module TransaccionCompleta {
     TransaccionCompleta.environment = Environment.Integration;
   };
 }
-
-TransaccionCompleta.Transaction = _Transaction;
-TransaccionCompleta.DeferredTransaction = _DeferredTransaction;
-TransaccionCompleta.MallTransaction = _MallTransaction;
-TransaccionCompleta.MallDeferredTransaction = _MallDeferredTransaction;
 
 export default TransaccionCompleta;
