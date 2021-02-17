@@ -19,11 +19,11 @@ const DeferredTransaction = {
   capture: async (
     token: string,
     buyOrder: string,
-    sessionId: string,
+    authorizationCode: string,
     amount: number,
     options: Options = TransaccionCompleta.getDefaultOptions()
   ) => {
-    let captureRequest = new CaptureRequest(token, buyOrder, sessionId, amount);
+    let captureRequest = new CaptureRequest(token, buyOrder, authorizationCode, amount);
     return RequestService.perform(captureRequest, options);
   },
 };
