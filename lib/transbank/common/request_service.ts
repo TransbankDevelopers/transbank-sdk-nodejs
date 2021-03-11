@@ -20,20 +20,20 @@ const getHeaders = (
 const RequestService = {
   perform: async (request: RequestBase, options: Options) => {
     let requestHeaders = getHeaders(options);
-    return axios({
+    await axios({
       method: request.method,
       url: options.environment + request.endpoint,
       headers: requestHeaders,
       timeout: 10000,
       data: request.toJson(),
     })
-      .then((response) => {
+      .then((response: any) => {
         if (response.status == 204) {
           return true;
         }
         return response.data;
       })
-      .catch((error) => {
+      .catch((error: any) => {
         let response = error.response;
         throw new TransbankError(error, response.data.error_message);
       });
