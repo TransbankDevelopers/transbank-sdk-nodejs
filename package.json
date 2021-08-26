@@ -27,7 +27,8 @@
     "eslint-plugin-import": "^2.20.1",
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
-    "jest": "^25.1.0"
+    "jest": "^25.1.0",
+    "path-parse": ">=1.0.7"
   },
   "dependencies": {
     "tbk_signer": "^1.0.5"
