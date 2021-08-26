@@ -30,6 +30,7 @@
     "jest": "^25.1.0"
   },
   "dependencies": {
-    "tbk_signer": "^1.0.5"
+    "tbk_signer": "^1.0.5",
+    "path-parse": ">=1.0.7"
   }
 }
