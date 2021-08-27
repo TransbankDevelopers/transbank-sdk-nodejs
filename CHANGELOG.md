@@ -13,6 +13,7 @@ y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.ht
 
 ## [1.0.2] - 2020-02-27
 
+
 ### Fixed
 
 - Fix on travis configuration
