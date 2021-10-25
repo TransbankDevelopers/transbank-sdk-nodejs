@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class CaptureRequest extends RequestBase {
@@ -7,7 +8,7 @@ class CaptureRequest extends RequestBase {
   authorizationCode: string;
 
   constructor(commercerCode: string, buyOrder: string, amount: number, authorizationCode: string) {
-    super('/rswebpaytransaction/api/oneclick/v1.0/transactions/capture', 'PUT');
+    super(`${Constants.ONECLICK_METHOD}/transactions/capture`, 'PUT');
 
     this.commerceCode = commercerCode;
     this.buyOrder = buyOrder;

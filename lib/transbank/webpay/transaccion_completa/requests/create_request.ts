@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class CreateRequest extends RequestBase {
@@ -16,7 +17,7 @@ class CreateRequest extends RequestBase {
     cardNumber: string,
     cardExpirationDate: string
   ) {
-    super('/rswebpaytransaction/api/webpay/v1.0/transactions', 'POST');
+    super(`${Constants.WEBPAY_METHOD}/transactions`, 'POST');
 
     this.buyOrder = buyOrder;
     this.sessionId = sessionId;

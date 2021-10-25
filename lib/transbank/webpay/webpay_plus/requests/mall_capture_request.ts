@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class MallCaptureRequest extends RequestBase {
@@ -13,7 +14,7 @@ class MallCaptureRequest extends RequestBase {
     authorizationCode: string,
     amount: number
   ) {
-    super(`/rswebpaytransaction/api/webpay/v1.0/transactions/${token}/capture`, 'PUT');
+    super(`${Constants.WEBPAY_METHOD}/transactions/${token}/capture`, 'PUT');
 
     this.commerceCode = commerceCode;
     this.buyOrder = buyOrder;

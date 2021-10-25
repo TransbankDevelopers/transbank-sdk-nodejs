@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class CaptureRequest extends RequestBase {
@@ -5,8 +6,8 @@ class CaptureRequest extends RequestBase {
   authorizationCode: string;
   amount: number;
 
-  constructor(token: string, buyOrder: string, authorizationCode: string, amount: number) {
-    super(`/rswebpaytransaction/api/webpay/v1.0/transactions/${token}/capture`, 'PUT');
+  constructor(token: string, buyOrder: string, authorizationCode: string, amount: number) {  
+    super(`${Constants.WEBPAY_METHOD}/transactions/${token}/capture`, 'PUT');
 
     this.buyOrder = buyOrder;
     this.authorizationCode = authorizationCode;

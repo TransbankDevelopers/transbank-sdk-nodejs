@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class DeleteRequest extends RequestBase {
@@ -5,7 +6,7 @@ class DeleteRequest extends RequestBase {
   userName: string;
 
   constructor(tbkUser: string, userName: string) {
-    super('/rswebpaytransaction/api/oneclick/v1.0/inscriptions', 'DELETE');
+    super(`${Constants.ONECLICK_METHOD}/inscriptions`, 'DELETE');
     this.tbkUser = tbkUser;
     this.userName = userName;
   }

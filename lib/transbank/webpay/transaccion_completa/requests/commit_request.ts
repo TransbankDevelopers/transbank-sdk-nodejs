@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class CommitRequest extends RequestBase {
@@ -11,7 +12,7 @@ class CommitRequest extends RequestBase {
     deferredPeriodIndex: number | undefined = undefined,
     gracePeriod: boolean | undefined = undefined
   ) {
-    super(`/rswebpaytransaction/api/webpay/v1.0/transactions/${token}`, 'PUT');
+    super(`${Constants.WEBPAY_METHOD}/transactions/${token}`, 'PUT');
 
     this.idQueryInstallments = idQueryInstallments;
     this.deferredPeriodIndex = deferredPeriodIndex;

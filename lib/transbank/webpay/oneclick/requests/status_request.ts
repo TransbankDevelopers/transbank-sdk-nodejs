@@ -1,8 +1,9 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class StatusRequest extends RequestBase {
   constructor(buyOrder: string) {
-    super(`/rswebpaytransaction/api/oneclick/v1.0/transactions/${buyOrder}`, 'GET');
+    super(`${Constants.ONECLICK_METHOD}/transactions/${buyOrder}`, 'GET');
   }
 
   toJson(): undefined {

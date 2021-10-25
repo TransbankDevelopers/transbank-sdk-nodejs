@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class RefundRequest extends RequestBase {
@@ -6,7 +7,7 @@ class RefundRequest extends RequestBase {
   amount: number;
 
   constructor(buyOrder: string, commerceCode: string, childBuyOrder: string, amount: number) {
-    super(`/rswebpaytransaction/api/oneclick/v1.0/transactions/${buyOrder}/refunds`, 'POST');
+    super(`${Constants.ONECLICK_METHOD}/transactions/${buyOrder}/refunds`, 'POST');
 
     this.commerceCode = commerceCode;
     this.childBuyOrder = childBuyOrder;
