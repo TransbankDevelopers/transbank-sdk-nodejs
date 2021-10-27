@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class MallRefundRequest extends RequestBase {
@@ -6,7 +7,7 @@ class MallRefundRequest extends RequestBase {
   amount: number;
 
   constructor(token: string, buyOrder: string, commerceCode: string, amount: number) {
-    super(`/rswebpaytransaction/api/webpay/v1.0/transactions/${token}/refunds`, 'POST');
+    super(`${Constants.WEBPAY_METHOD}/transactions/${token}/refunds`, 'POST');
 
     this.buyOrder = buyOrder;
     this.commerceCode = commerceCode;

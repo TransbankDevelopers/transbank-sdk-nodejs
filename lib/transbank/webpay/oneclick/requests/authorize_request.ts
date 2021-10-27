@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 import TransactionDetail from '../../common/transaction_detail';
 
@@ -13,7 +14,7 @@ class AuthorizeRequest extends RequestBase {
     buyOrder: string,
     details: Array<TransactionDetail>
   ) {
-    super('/rswebpaytransaction/api/oneclick/v1.0/transactions', 'POST');
+    super(`${Constants.ONECLICK_METHOD}/transactions`, 'POST'); 
 
     this.userName = userName;
     this.tbkUser = tbkUser;

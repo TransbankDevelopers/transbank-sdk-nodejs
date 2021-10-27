@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class InstallmentsRequest extends RequestBase {
@@ -11,7 +12,7 @@ class InstallmentsRequest extends RequestBase {
     commerceCode: string | undefined = undefined,
     buyOrder: string | undefined = undefined
   ) {
-    super(`/rswebpaytransaction/api/webpay/v1.0/transactions/${token}/installments`, 'POST');
+    super(`${Constants.WEBPAY_METHOD}/transactions/${token}/installments`, 'POST');
 
     this.installmentsNumber = installmentsNumber;
     this.commerceCode = commerceCode;

@@ -1,8 +1,9 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class StatusRequest extends RequestBase {
   constructor(token: string) {
-    super(`/rswebpaytransaction/api/webpay/v1.0/transactions/${token}`, 'GET');
+    super(`${Constants.WEBPAY_METHOD}/transactions/${token}`, 'GET');
   }
 
   toJson(): undefined {

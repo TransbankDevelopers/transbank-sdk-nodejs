@@ -1,8 +1,9 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class FinishRequest extends RequestBase {
   constructor(token: string) {
-    super(`/rswebpaytransaction/api/oneclick/v1.0/inscriptions/${token}`, 'PUT');
+    super(`${Constants.ONECLICK_METHOD}/inscriptions/${token}`, 'PUT');
   }
 
   tooJson(): undefined {

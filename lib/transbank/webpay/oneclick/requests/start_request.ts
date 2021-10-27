@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 
 class StartRequest extends RequestBase {
@@ -6,7 +7,7 @@ class StartRequest extends RequestBase {
   responseUrl: string;
 
   constructor(userName: string, email: string, responseUrl: string) {
-    super('/rswebpaytransaction/api/oneclick/v1.0/inscriptions', 'POST');
+    super(`${Constants.ONECLICK_METHOD}/inscriptions`, 'POST');
 
     this.userName = userName;
     this.email = email;

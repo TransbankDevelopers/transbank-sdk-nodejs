@@ -1,3 +1,4 @@
+import Constants from '../../../common/constants';
 import RequestBase from '../../../common/request_base';
 import TransactionDetail from '../../common/transaction_detail';
 
@@ -13,7 +14,7 @@ class MallCreateRequest extends RequestBase {
     returnUrl: string,
     details: Array<TransactionDetail>
   ) {
-    super('/rswebpaytransaction/api/webpay/v1.0/transactions', 'POST');
+    super(`${Constants.WEBPAY_METHOD}/transactions`, 'POST');
 
     this.buyOrder = buyOrder;
     this.sessionId = sessionId;
