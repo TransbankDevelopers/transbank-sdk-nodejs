@@ -25,7 +25,7 @@ npm install transbank-sdk
 yarn add transbank-sdk 
 ```
 
-## Documentación 
+## Documentación
 
 Puedes encontrar toda la documentación de cómo usar este SDK en el sitio [www.transbankdevelopers.cl](https://www.transbankdevelopers.cl).
 
