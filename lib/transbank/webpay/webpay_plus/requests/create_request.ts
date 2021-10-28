@@ -1,4 +1,4 @@
-import Constants from '../../../common/constants';
+import ApiConstants from '../../../common/ApiConstants';
 import RequestBase from '../../../common/request_base';
 
 class CreateRequest extends RequestBase {
@@ -8,7 +8,7 @@ class CreateRequest extends RequestBase {
   returnUrl: string;
 
   constructor(buyOrder: string, sessionId: string, amount: number, returnUrl: string) {
-    super(`${Constants.WEBPAY_METHOD}/transactions`, 'POST');
+    super(`${ApiConstants.WEBPAY_METHOD}/transactions`, 'POST');
 
     this.buyOrder = buyOrder;
     this.sessionId = sessionId;

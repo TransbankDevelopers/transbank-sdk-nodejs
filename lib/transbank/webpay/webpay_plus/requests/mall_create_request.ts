@@ -1,4 +1,4 @@
-import Constants from '../../../common/constants';
+import ApiConstants from '../../../common/ApiConstants';
 import RequestBase from '../../../common/request_base';
 import TransactionDetail from '../../common/transaction_detail';
 
@@ -14,7 +14,7 @@ class MallCreateRequest extends RequestBase {
     returnUrl: string,
     details: Array<TransactionDetail>
   ) {
-    super(`${Constants.WEBPAY_METHOD}/transactions`, 'POST');
+    super(`${ApiConstants.WEBPAY_METHOD}/transactions`, 'POST');
 
     this.buyOrder = buyOrder;
     this.sessionId = sessionId;

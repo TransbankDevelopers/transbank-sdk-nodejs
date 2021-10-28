@@ -1,4 +1,4 @@
-import Constants from '../../../common/constants';
+import ApiConstants from '../../../common/ApiConstants';
 import RequestBase from '../../../common/request_base';
 
 class DeleteRequest extends RequestBase {
@@ -6,7 +6,7 @@ class DeleteRequest extends RequestBase {
   userName: string;
 
   constructor(tbkUser: string, userName: string) {
-    super(`${Constants.ONECLICK_METHOD}/inscriptions`, 'DELETE');
+    super(`${ApiConstants.ONECLICK_METHOD}/inscriptions`, 'DELETE');
     this.tbkUser = tbkUser;
     this.userName = userName;
   }

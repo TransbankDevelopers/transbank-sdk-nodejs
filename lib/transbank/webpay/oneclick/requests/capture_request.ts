@@ -1,4 +1,4 @@
-import Constants from '../../../common/constants';
+import ApiConstants from '../../../common/ApiConstants';
 import RequestBase from '../../../common/request_base';
 
 class CaptureRequest extends RequestBase {
@@ -8,7 +8,7 @@ class CaptureRequest extends RequestBase {
   authorizationCode: string;
 
   constructor(commercerCode: string, buyOrder: string, amount: number, authorizationCode: string) {
-    super(`${Constants.ONECLICK_METHOD}/transactions/capture`, 'PUT');
+    super(`${ApiConstants.ONECLICK_METHOD}/transactions/capture`, 'PUT');
 
     this.commerceCode = commercerCode;
     this.buyOrder = buyOrder;

@@ -1,4 +1,4 @@
-import Constants from '../../../common/constants';
+import ApiConstants from '../../../common/ApiConstants';
 import RequestBase from '../../../common/request_base';
 
 class CaptureRequest extends RequestBase {
@@ -7,7 +7,7 @@ class CaptureRequest extends RequestBase {
   amount: number;
 
   constructor(token: string, buyOrder: string, sessionId: string, amount: number) {
-    super(`${Constants.WEBPAY_METHOD}/transactions/${token}/capture`, 'PUT');
+    super(`${ApiConstants.WEBPAY_METHOD}/transactions/${token}/capture`, 'PUT');
 
     this.buyOrder = buyOrder;
     this.authorizationCode = sessionId;

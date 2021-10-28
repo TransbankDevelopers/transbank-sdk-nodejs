@@ -1,4 +1,4 @@
-import Constants from '../../../common/constants';
+import ApiConstants from '../../../common/ApiConstants';
 import RequestBase from '../../../common/request_base';
 
 class RefundRequest extends RequestBase {
@@ -7,7 +7,7 @@ class RefundRequest extends RequestBase {
   amount: number;
 
   constructor(buyOrder: string, commerceCode: string, childBuyOrder: string, amount: number) {
-    super(`${Constants.ONECLICK_METHOD}/transactions/${buyOrder}/refunds`, 'POST');
+    super(`${ApiConstants.ONECLICK_METHOD}/transactions/${buyOrder}/refunds`, 'POST');
 
     this.commerceCode = commerceCode;
     this.childBuyOrder = childBuyOrder;

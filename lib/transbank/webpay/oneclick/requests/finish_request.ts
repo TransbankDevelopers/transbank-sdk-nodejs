@@ -1,9 +1,9 @@
-import Constants from '../../../common/constants';
+import ApiConstants from '../../../common/ApiConstants';
 import RequestBase from '../../../common/request_base';
 
 class FinishRequest extends RequestBase {
   constructor(token: string) {
-    super(`${Constants.ONECLICK_METHOD}/inscriptions/${token}`, 'PUT');
+    super(`${ApiConstants.ONECLICK_METHOD}/inscriptions/${token}`, 'PUT');
   }
 
   tooJson(): undefined {
