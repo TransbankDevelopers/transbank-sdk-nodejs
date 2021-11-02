@@ -1,15 +1,18 @@
 import TransaccionCompleta from '.';
 import Options from '../../common/options';
-import RequestService from '../../common/request_service';
-import {
-  CommitRequest,
-  CreateRequest,
-  InstallmentsRequest,
-  RefundRequest,
-  StatusRequest,
-} from './requests';
+import BaseTransaction from '../../common/base_transaction';
+import CompleteTransactionUtil from '../common/complete_transaction_util';
 
-const Transaction = {
+class Transaction extends BaseTransaction {
+
+  /**
+   * Constructor class transaction.
+   * @param options (Optional) You can pass options to use a custom configuration.
+   */
+  constructor(options: Options = TransaccionCompleta.getDefaultOptions()) { 
+    super(options);
+  }
+
   /**
    * Create a new Transaccion Completa transaction
    * @param buyOrder Commerce buy order, make sure this is unique.
@@ -18,41 +21,36 @@ const Transaction = {
    * @param cvv Card verification value
    * @param cardNumber Card's fron number
    * @param cardExpirationDate Card's expiration date
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  create: async (
+  async create(
     buyOrder: string,
     sessionId: string,
     amount: number,
     cvv: number | undefined,
     cardNumber: string,
-    cardExpirationDate: string,
-    options: Options = TransaccionCompleta.getDefaultOptions()
-  ) => {
-    let createRequest = new CreateRequest(
-      buyOrder,
+    cardExpirationDate: string
+  ){
+    return CompleteTransactionUtil.create(buyOrder,
       sessionId,
       amount,
       cvv,
-      cardNumber.replace(/\s/g, ''),
-      cardExpirationDate.replace(/\s/g, '')
-    );
-    return RequestService.perform(createRequest, options);
-  },
+      cardNumber,
+      cardExpirationDate,
+      this.options);
+  }
+
   /**
    * Ask for installment conditions and price
    * @param token Unique transaction identifier
    * @param installmentsNumber Number of installments to ask for
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  installments: async (
+  async installments(
     token: string,
-    installmentsNumber: number,
-    options: Options = TransaccionCompleta.getDefaultOptions()
-  ) => {
-    let installmentsRequest = new InstallmentsRequest(token, installmentsNumber);
-    return RequestService.perform(installmentsRequest, options);
-  },
+    installmentsNumber: number
+  ){
+    return CompleteTransactionUtil.installments(token, installmentsNumber, this.options);
+  }
+
   /**
    * Commit a transaction
    * @param token Unique transaction identifier
@@ -62,48 +60,41 @@ const Transaction = {
    * if the commerce is configured to offer deferred payment
    * @param gracePeriod (Optional) Use this when paying with installments, this indicates if there's
    * a grace period.
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  commit: async (
+  async commit(
     token: string,
     idQueryInstallments: number | undefined = undefined,
     deferredPeriodIndex: number | undefined = undefined,
-    gracePeriod: boolean | undefined = undefined,
-    options: Options = TransaccionCompleta.getDefaultOptions()
-  ) => {
-    let commitRequest = new CommitRequest(
-      token,
+    gracePeriod: boolean | undefined = undefined
+  ){
+    return CompleteTransactionUtil.commit(token,
       idQueryInstallments,
       deferredPeriodIndex,
-      gracePeriod
-    );
-    return RequestService.perform(commitRequest, options);
-  },
+      gracePeriod,
+      this.options);
+  }
+
   /**
    * Obtain the status of a specific transaction
    * @param token Unique transaction identifier
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  status: async (token: string, options: Options = TransaccionCompleta.getDefaultOptions()) => {
-    let statusRequest = new StatusRequest(token);
-    return RequestService.perform(statusRequest, options);
-  },
+  async status(token: string){
+    return CompleteTransactionUtil.status(token, this.options);
+  }
+
   /**
    * Request a refund of a specific transaction, if you refund for the full amount and you're within
    * the time window the transaction will be reversed. If you're past that window or refund for less
    * than the total amount the transaction will be void.
    * @param token Unique transaction identifier
    * @param amount Amount to be refunded
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  refund: async (
+  refund(
     token: string,
-    amount: number,
-    options: Options = TransaccionCompleta.getDefaultOptions()
-  ) => {
-    let refundRequest = new RefundRequest(token, amount);
-    return RequestService.perform(refundRequest, options);
-  },
+    amount: number
+  ){
+    return CompleteTransactionUtil.refund(token, amount, this.options);
+  }
 };
 
 export default Transaction;

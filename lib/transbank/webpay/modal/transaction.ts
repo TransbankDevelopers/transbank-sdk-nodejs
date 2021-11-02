@@ -1,36 +1,37 @@
-import WebpayPlus from '.';
 import Options from '../../common/options';
-import TransactionDetail from '../common/transaction_detail';
-import MallTransactionUtil from '../common/mall_transaction_util';
 import TransactionUtil from '../common/transaction_util';
 import BaseTransaction from '../../common/base_transaction';
+import WebpayPlusModal from './';
+import ModalTransactionUtil from '../common/modal_transaction_util';
 
-class MallTransaction extends BaseTransaction {
+
+/**
+ * Contains methods to interact with WebpayPlus API
+ */
+class Transaction extends BaseTransaction {
 
   /**
    * Constructor class Webpay Plus transaction.
    * @param options (Optional) You can pass options to use a custom configuration.
    */
-   constructor(options: Options = WebpayPlus.getDefaultOptions()) { 
+  constructor(options: Options = WebpayPlusModal.getDefaultOptions()) { 
     super(options);
   }
 
   /**
-   * Create a Webpay Plus Mall transaction.
+   * Create a Webpay Plus transaction.
    * @param buyOrder Commerce buy order, make sure this is unique.
    * @param sessionId You can use this field to pass session data if needed.
-   * @param returnUrl URL to which Transbank will redirect after card holder pays
-   * @param details Child transactions details, see {@link TransactionDetail} for more information.
+   * @param amount Transaction amount
    */
-  async create(
+   async create(
     buyOrder: string,
     sessionId: string,
-    returnUrl: string,
-    details: Array<TransactionDetail>
-  ){
-    return MallTransactionUtil.create(buyOrder, sessionId, returnUrl, details, this.options);
+    amount: number
+   ){
+    return ModalTransactionUtil.create(buyOrder, sessionId, amount, this.options);
   }
-
+  
   /**
    * Commit a transaction, this should be invoked after the card holder pays
    * @param token Unique transaction identifier
@@ -51,19 +52,14 @@ class MallTransaction extends BaseTransaction {
    * the time window the transaction will be reversed. If you're past that window or refund for less
    * than the total amount the transaction will be void.
    * @param token Unique transaction identifier
-   * @param buyOrder Child buy order, used to identify the correct child transaction.
-   * @param commerceCode Child commerce code, used to indetify the correct child transaction
    * @param amount Amount to be refunded
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-   async refund(
+  async refund(
     token: string,
-    buyOrder: string,
-    commerceCode: string,
     amount: number
   ){
-    return MallTransactionUtil.refund(token, buyOrder, commerceCode, amount, this.options);
+    return TransactionUtil.refund(token, amount, this.options);
   }
-};
+}
 
-export default MallTransaction;
+export default Transaction;

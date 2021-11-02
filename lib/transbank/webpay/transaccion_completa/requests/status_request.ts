@@ -1,9 +1,9 @@
-import ApiConstants from '../../../common/ApiConstants';
+import ApiConstants from '../../../common/api_constants';
 import RequestBase from '../../../common/request_base';
 
 class StatusRequest extends RequestBase {
   constructor(token: string) {
-    super(`${ApiConstants.WEBPAY_METHOD}/transactions/${token}`, 'GET');
+    super(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}`, 'GET');
   }
 
   toJson(): undefined {

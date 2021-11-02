@@ -1,11 +1,7 @@
-import Options from '../../common/options';
-import WebpayPlus from '.';
-import RequestService from '../../common/request_service';
 import Transaction from './transaction';
-import { CaptureRequest } from './requests';
+import TransactionUtil from '../common/transaction_util';
 
-const DeferredTransaction = {
-  ...Transaction,
+class DeferredTransaction extends Transaction {
   /** Capture a deferred transaction.
    *
    * Your commerce code must be configured to support deferred capture.
@@ -14,20 +10,15 @@ const DeferredTransaction = {
    * @param buyOrder Transaction's buy order
    * @param authorizationCode Transaction's authorization code
    * @param amount Amount to be captured
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  capture: async (
+   async capture(
     token: string,
     buyOrder: string,
     authorizationCode: string,
-    amount: number,
-    options: Options = WebpayPlus.getDefaultOptions()
-  ) => {
-    return RequestService.perform(
-      new CaptureRequest(token, buyOrder, authorizationCode, amount),
-      options
-    );
-  },
+    amount: number
+   ){
+    return TransactionUtil.capture(token, buyOrder, authorizationCode, amount, this.options);
+   }
 };
 
 export default DeferredTransaction;

@@ -4,9 +4,11 @@ import _MallDeferredInscription from './mall_deferred_inscription';
 import _MallDeferredTransaction from './mall_deferred_transaction';
 import _MallInscription from './mall_inscription';
 import _MallTransaction from './mall_transaction';
+import ApiKeyIntegrationConstants from '../../common/api_key_integration_constants';
+import CommerceCodeIntegrationConstants from '../../common/commerce_code_integration_constants';
 
 module Oneclick {
-  const DEFAULT_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
+  const DEFAULT_API_KEY = ApiKeyIntegrationConstants.WEBPAY;
 
   /**
    * Contains methods used to start, finish and delete Inscriptions.
@@ -29,7 +31,7 @@ module Oneclick {
   /**
    * Used to authenticate against the API, currently configured Commerce Code.
    */
-  export let commerceCode: string = '597055555541';
+  export let commerceCode: string = CommerceCodeIntegrationConstants.ONECLICK_MALL;
   /**
    * Used to authenticate against the API, currently configured Api Key.
    */
@@ -74,7 +76,7 @@ module Oneclick {
    * This method configures the module to use Oneclick Mall in the Integration environment.
    */
   export const configureOneclickMallForTesting = () => {
-    Oneclick.commerceCode = '597055555541';
+    Oneclick.commerceCode = CommerceCodeIntegrationConstants.ONECLICK_MALL;
     Oneclick.apiKey = DEFAULT_API_KEY;
     Oneclick.environment = Environment.Integration;
   };
@@ -83,7 +85,7 @@ module Oneclick {
    * This method configures the module to use Oneclick Mall deferred in the Integration environment.
    */
   export const configureOneclickMallDeferredForTesting = () => {
-    Oneclick.commerceCode = '597055555547';
+    Oneclick.commerceCode = CommerceCodeIntegrationConstants.ONECLICK_MALL_DEFERRED;
     Oneclick.apiKey = DEFAULT_API_KEY;
     Oneclick.environment = Environment.Integration;
   };

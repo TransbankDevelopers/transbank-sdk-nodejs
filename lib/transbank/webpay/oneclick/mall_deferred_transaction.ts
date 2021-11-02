@@ -1,11 +1,8 @@
-import Oneclick from '.';
-import Options from '../../common/options';
-import RequestService from '../../common/request_service';
 import MallTransaction from './mall_transaction';
-import { CaptureRequest } from './requests/capture_request';
+import OneclickUtil from '../common/oneclick_util';
 
-const MallDeferredTransaction = {
-  ...MallTransaction,
+class MallDeferredTransaction extends MallTransaction {
+
   /**
    * Capture a deferred transaction.
    * Your commerce code must be configured to support deferred capture.
@@ -13,18 +10,15 @@ const MallDeferredTransaction = {
    * @param buyOrder Child buy order, used to identify the correct child transaction.
    * @param amount Amount to be captured
    * @param authorizationCode Child transaction's authorization code
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  capture: async (
+  async capture(
     commerceCode: string,
     buyOrder: string,
     amount: number,
-    authorizationCode: string,
-    options: Options = Oneclick.getDefaultOptions()
-  ) => {
-    let captureRequest = new CaptureRequest(commerceCode, buyOrder, amount, authorizationCode);
-    return RequestService.perform(captureRequest, options);
-  },
+    authorizationCode: string
+  ){
+    return OneclickUtil.capture(commerceCode, buyOrder, amount, authorizationCode, this.options);
+  }
 };
 
 export default MallDeferredTransaction;

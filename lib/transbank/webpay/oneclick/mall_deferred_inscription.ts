@@ -1,7 +1,7 @@
 import MallInscription from './mall_inscription';
 
-const MallDeferredInscription = {
-  ...MallInscription,
-};
+class MallDeferredInscription extends MallInscription {
+
+}
 
 export default MallDeferredInscription;

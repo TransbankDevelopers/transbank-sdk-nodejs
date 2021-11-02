@@ -1,9 +1,9 @@
-import ApiConstants from '../../../common/ApiConstants';
+import ApiConstants from '../../../common/api_constants';
 import RequestBase from '../../../common/request_base';
 
 class CommitRequest extends RequestBase {
   constructor(token: string) {
-    super(`${ApiConstants.WEBPAY_METHOD}/transactions/${token}`, 'PUT');
+    super(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}`, 'PUT');
   }
 }
 

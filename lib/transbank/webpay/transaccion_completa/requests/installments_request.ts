@@ -1,4 +1,4 @@
-import ApiConstants from '../../../common/ApiConstants';
+import ApiConstants from '../../../common/api_constants';
 import RequestBase from '../../../common/request_base';
 
 class InstallmentsRequest extends RequestBase {
@@ -12,7 +12,7 @@ class InstallmentsRequest extends RequestBase {
     commerceCode: string | undefined = undefined,
     buyOrder: string | undefined = undefined
   ) {
-    super(`${ApiConstants.WEBPAY_METHOD}/transactions/${token}/installments`, 'POST');
+    super(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/installments`, 'POST');
 
     this.installmentsNumber = installmentsNumber;
     this.commerceCode = commerceCode;

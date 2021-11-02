@@ -1,4 +1,4 @@
-import ApiConstants from '../../../common/ApiConstants';
+import ApiConstants from '../../../common/api_constants';
 import RequestBase from '../../../common/request_base';
 import TransactionDetail from '../../common/transaction_detail';
 
@@ -14,7 +14,7 @@ class AuthorizeRequest extends RequestBase {
     buyOrder: string,
     details: Array<TransactionDetail>
   ) {
-    super(`${ApiConstants.ONECLICK_METHOD}/transactions`, 'POST'); 
+    super(`${ApiConstants.ONECLICK_ENDPOINT}/transactions`, 'POST'); 
 
     this.userName = userName;
     this.tbkUser = tbkUser;

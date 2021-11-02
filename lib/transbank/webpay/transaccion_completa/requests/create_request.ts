@@ -1,4 +1,4 @@
-import ApiConstants from '../../../common/ApiConstants';
+import ApiConstants from '../../../common/api_constants';
 import RequestBase from '../../../common/request_base';
 
 class CreateRequest extends RequestBase {
@@ -17,7 +17,7 @@ class CreateRequest extends RequestBase {
     cardNumber: string,
     cardExpirationDate: string
   ) {
-    super(`${ApiConstants.WEBPAY_METHOD}/transactions`, 'POST');
+    super(`${ApiConstants.WEBPAY_ENDPOINT}/transactions`, 'POST');
 
     this.buyOrder = buyOrder;
     this.sessionId = sessionId;

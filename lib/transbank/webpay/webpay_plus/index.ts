@@ -4,14 +4,17 @@ import _Transaction from './transaction';
 import _DeferredTransaction from './deferred_transaction';
 import _MallTransaction from './mall_transaction';
 import _MallDeferredTransaction from './mall_deferred_transaction';
+import CommerceCodeIntegrationConstants from '../../common/commerce_code_integration_constants';
+import ApiKeyIntegrationConstants from '../../common/api_key_integration_constants';
 
 module WebpayPlus {
-  const DEFAULT_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
+  const DEFAULT_API_KEY = ApiKeyIntegrationConstants.WEBPAY;
 
   /**
    * Contains methods used to create, commit, refund and capture Transactions.
    */
   export const Transaction: typeof _Transaction = _Transaction;
+
   /**
    * Contains methods used to create, commit, refund and capture deferred Transactions.
    */
@@ -28,7 +31,7 @@ module WebpayPlus {
   /**
    * Used to authenticate against the API, currently configured Commerce Code.
    */
-  export let commerceCode: string = '597055555532';
+  export let commerceCode: string = CommerceCodeIntegrationConstants.WEBPAY_PLUS;
   /**
    * Used to authenticate against the API, currently configured Api Key.
    */
@@ -84,7 +87,7 @@ module WebpayPlus {
    * This method configures the module to use Webpay Plus in the Integration environment.
    */
   export const configureWebpayPlusForTesting = () => {
-    WebpayPlus.commerceCode = '597055555532';
+    WebpayPlus.commerceCode = CommerceCodeIntegrationConstants.WEBPAY_PLUS;
     WebpayPlus.apiKey = DEFAULT_API_KEY;
     WebpayPlus.environment = Environment.Integration;
   };
@@ -93,7 +96,7 @@ module WebpayPlus {
    * This method configures the module to use Webpay Plus Deferred in the Integration environment.
    */
   export const configureWebpayPlusDeferredForTesting = () => {
-    WebpayPlus.commerceCode = '597055555540';
+    WebpayPlus.commerceCode = CommerceCodeIntegrationConstants.WEBPAY_PLUS_DEFERRED;
     WebpayPlus.apiKey = DEFAULT_API_KEY;
     WebpayPlus.environment = Environment.Integration;
   };
@@ -102,7 +105,7 @@ module WebpayPlus {
    * This method configures the module to use Webpay Plus Mall in the Integration environment.
    */
   export const configureWebpayPlusMallForTesting = () => {
-    WebpayPlus.commerceCode = '597055555535';
+    WebpayPlus.commerceCode = CommerceCodeIntegrationConstants.WEBPAY_PLUS_MALL;
     WebpayPlus.apiKey = DEFAULT_API_KEY;
     WebpayPlus.environment = Environment.Integration;
   };
@@ -111,7 +114,7 @@ module WebpayPlus {
    * This method configures the module to use Webpay Plus Mall Deferred in the Integration environment.
    */
   export const configureWebpayPlusMallDeferredForTesting = () => {
-    WebpayPlus.commerceCode = '597055555581';
+    WebpayPlus.commerceCode = CommerceCodeIntegrationConstants.WEBPAY_PLUS_MALL_DEFERRED;
     WebpayPlus.apiKey = DEFAULT_API_KEY;
     WebpayPlus.environment = Environment.Integration;
   };

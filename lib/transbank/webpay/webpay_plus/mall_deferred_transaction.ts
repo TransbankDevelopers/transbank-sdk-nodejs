@@ -1,11 +1,8 @@
-import WebpayPlus from '.';
-import Options from '../../common/options';
-import RequestService from '../../common/request_service';
 import MallTransaction from './mall_transaction';
-import { MallCaptureRequest } from './requests';
+import MallTransactionUtil from '../common/mall_transaction_util';
 
-const MallDeferredTransaction = {
-  ...MallTransaction,
+class MallDeferredTransaction extends MallTransaction {
+
   /**
    * Capture a deferred transaction.
    * Your commerce code must be configured to support deferred capture.
@@ -14,21 +11,16 @@ const MallDeferredTransaction = {
    * @param buyOrder Child buy order, used to identify the correct child transaction.
    * @param authorizationCode Child transaction's authorization code
    * @param amount Amount to be captured
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  capture: async (
+   async capture(
     token: string,
     commerceCode: string,
     buyOrder: string,
     authorizationCode: string,
-    amount: number,
-    options: Options = WebpayPlus.getDefaultOptions()
-  ) => {
-    return RequestService.perform(
-      new MallCaptureRequest(token, commerceCode, buyOrder, authorizationCode, amount),
-      options
-    );
-  },
+    amount: number
+  ){
+    return MallTransactionUtil.capture(token, commerceCode, buyOrder, authorizationCode, amount, this.options);
+  }
 };
 
 export default MallDeferredTransaction;

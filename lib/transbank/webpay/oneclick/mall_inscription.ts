@@ -1,50 +1,53 @@
-import Oneclick from '.';
+import BaseTransaction from '../../common/base_transaction';
+import OneclickUtil from '../common/oneclick_util';
 import Options from '../../common/options';
-import RequestService from '../../common/request_service';
-import { StartRequest, FinishRequest, DeleteRequest } from './requests';
+import Oneclick from '.';
 
-const MallInscription = {
+class MallInscription extends BaseTransaction {
+
+  /**
+   * Constructor class MallInscription Oneclick.
+   * @param options (Optional) You can pass options to use a custom configuration.
+   */
+   constructor(options: Options = Oneclick.getDefaultOptions()) { 
+    super(options);
+  }
+
   /**
    * Starts a card inscription process
    * @param userName Cardholder's username
    * @param email Cardholder's email
    * @param responseUrl URL to which Transbank will redirect after cardholder finish enrolling
    * their card
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  start: async (
+  start(
     userName: string,
     email: string,
-    responseUrl: string,
-    options: Options = Oneclick.getDefaultOptions()
-  ) => {
-    let startRequest = new StartRequest(userName, email, responseUrl);
-    return RequestService.perform(startRequest, options);
-  },
+    responseUrl: string
+  ){
+    return OneclickUtil.start(userName, email, responseUrl, this.options);
+  }
+
   /**
    * This finalizes the card enrolling process
    * @param token Unique inscription identifier
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  finish: async (token: string, options: Options = Oneclick.getDefaultOptions()) => {
-    let finishRequest = new FinishRequest(token);
-    return RequestService.perform(finishRequest, options);
-  },
+  finish(token: string){
+    return OneclickUtil.finish(token, this.options);
+  }
+
   /**
    * This deletes an inscription
    * @param tbkUser Cardholder's card TBK user assigned by Transbank and returned in
    * Inscription.finish
    * @param userName Cardholder's username
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  delete: async (
+  delete(
     tbkUser: string,
-    userName: string,
-    options: Options = Oneclick.getDefaultOptions()
-  ) => {
-    let deleteRequest = new DeleteRequest(tbkUser, userName);
-    return RequestService.perform(deleteRequest, options);
-  },
+    userName: string
+  ){
+    return OneclickUtil.delete(tbkUser, userName, this.options);
+  }
 };
 
 export default MallInscription;
