@@ -4,8 +4,8 @@ import _Transaction from './transaction';
 import _DeferredTransaction from './deferred_transaction';
 import _MallTransaction from './mall_transaction';
 import _MallDeferredTransaction from './mall_deferred_transaction';
-import CommerceCodeIntegrationConstants from '../../common/commerce_code_integration_constants';
-import ApiKeyIntegrationConstants from '../../common/api_key_integration_constants';
+import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
+import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
 
 module WebpayPlus {
   const DEFAULT_API_KEY = ApiKeyIntegrationConstants.WEBPAY;

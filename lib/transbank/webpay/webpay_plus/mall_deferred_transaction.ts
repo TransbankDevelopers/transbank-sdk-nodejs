@@ -1,5 +1,6 @@
 import MallTransaction from './mall_transaction';
-import MallTransactionUtil from '../common/mall_transaction_util';
+import MallCaptureRequest from '../transaccion_completa/requests/mall_capture_request';
+import RequestService from '../../common/request_service';
 
 class MallDeferredTransaction extends MallTransaction {
 
@@ -19,7 +20,10 @@ class MallDeferredTransaction extends MallTransaction {
     authorizationCode: string,
     amount: number
   ){
-    return MallTransactionUtil.capture(token, commerceCode, buyOrder, authorizationCode, amount, this.options);
+    return RequestService.perform(
+      new MallCaptureRequest(token, commerceCode, buyOrder, authorizationCode, amount),
+      this.options
+    );
   }
 };
 

@@ -1,5 +1,6 @@
 import MallTransaction from './mall_transaction';
-import OneclickUtil from '../common/oneclick_util';
+import { CaptureRequest } from './requests';
+import RequestService from '../../common/request_service';
 
 class MallDeferredTransaction extends MallTransaction {
 
@@ -17,7 +18,8 @@ class MallDeferredTransaction extends MallTransaction {
     amount: number,
     authorizationCode: string
   ){
-    return OneclickUtil.capture(commerceCode, buyOrder, amount, authorizationCode, this.options);
+    let captureRequest = new CaptureRequest(commerceCode, buyOrder, amount, authorizationCode);
+    return RequestService.perform(captureRequest, this.options);
   }
 };
 

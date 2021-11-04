@@ -1,5 +1,6 @@
-import CompleteTransactionUtil from '../common/complete_transaction_util';
+import { CaptureRequest } from './requests';
 import Transaction from './transaction';
+import RequestService from '../../common/request_service';
 
 class DeferredTransaction extends Transaction {
 
@@ -18,7 +19,8 @@ class DeferredTransaction extends Transaction {
     authorizationCode: string,
     amount: number
     ){
-      return CompleteTransactionUtil.capture(token, buyOrder, authorizationCode, amount, this.options);
+      let captureRequest = new CaptureRequest(token, buyOrder, authorizationCode, amount);
+      return RequestService.perform(captureRequest, this.options);
   }
 }
 

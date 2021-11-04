@@ -4,8 +4,8 @@ import _MallDeferredInscription from './mall_deferred_inscription';
 import _MallDeferredTransaction from './mall_deferred_transaction';
 import _MallInscription from './mall_inscription';
 import _MallTransaction from './mall_transaction';
-import ApiKeyIntegrationConstants from '../../common/api_key_integration_constants';
-import CommerceCodeIntegrationConstants from '../../common/commerce_code_integration_constants';
+import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
 
 module Oneclick {
   const DEFAULT_API_KEY = ApiKeyIntegrationConstants.WEBPAY;

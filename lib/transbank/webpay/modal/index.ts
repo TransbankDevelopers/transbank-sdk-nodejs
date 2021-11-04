@@ -1,5 +1,5 @@
-import ApiKeyIntegrationConstants from '../../common/api_key_integration_constants';
-import CommerceCodeIntegrationConstants from '../../common/commerce_code_integration_constants';
+import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
 import Environment from '../common/environment';
 import Options from '../../common/options';
 import _Transaction from './transaction';

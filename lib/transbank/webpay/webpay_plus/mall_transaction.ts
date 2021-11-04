@@ -1,9 +1,10 @@
 import WebpayPlus from '.';
 import Options from '../../common/options';
 import TransactionDetail from '../common/transaction_detail';
-import MallTransactionUtil from '../common/mall_transaction_util';
-import TransactionUtil from '../common/transaction_util';
 import BaseTransaction from '../../common/base_transaction';
+import { CommitRequest, MallCreateRequest, MallRefundRequest, StatusRequest } from './requests';
+import RequestService from '../../common/request_service';
+
 
 class MallTransaction extends BaseTransaction {
 
@@ -28,7 +29,10 @@ class MallTransaction extends BaseTransaction {
     returnUrl: string,
     details: Array<TransactionDetail>
   ){
-    return MallTransactionUtil.create(buyOrder, sessionId, returnUrl, details, this.options);
+    return RequestService.perform(
+      new MallCreateRequest(buyOrder, sessionId, returnUrl, details),
+      this.options
+    );
   }
 
   /**
@@ -36,14 +40,15 @@ class MallTransaction extends BaseTransaction {
    * @param token Unique transaction identifier
    */
    async commit(token: string){
-    return TransactionUtil.commit(token, this.options);
+    return RequestService.perform(new CommitRequest(token), this.options);
   }
+
   /**
    * Obtain the status of a specific transaction
    * @param token Unique transaction identifier
    */
    async status(token: string){
-    return TransactionUtil.status(token, this.options);
+    return RequestService.perform(new StatusRequest(token), this.options);
    }
 
   /**
@@ -62,7 +67,10 @@ class MallTransaction extends BaseTransaction {
     commerceCode: string,
     amount: number
   ){
-    return MallTransactionUtil.refund(token, buyOrder, commerceCode, amount, this.options);
+    return RequestService.perform(
+      new MallRefundRequest(token, buyOrder, commerceCode, amount),
+      this.options
+    );
   }
 };
 

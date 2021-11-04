@@ -1,8 +1,9 @@
 import Options from '../../common/options';
-import TransactionUtil from '../common/transaction_util';
 import BaseTransaction from '../../common/base_transaction';
 import WebpayPlusModal from './';
-import ModalTransactionUtil from '../common/modal_transaction_util';
+import { ModalCreateRequest } from './requests';
+import RequestService from '../../common/request_service';
+import { CommitRequest, RefundRequest, StatusRequest } from '../webpay_plus/requests';
 
 
 /**
@@ -29,7 +30,8 @@ class Transaction extends BaseTransaction {
     sessionId: string,
     amount: number
    ){
-    return ModalTransactionUtil.create(buyOrder, sessionId, amount, this.options);
+    let createRequest = new ModalCreateRequest(buyOrder, sessionId, amount);
+    return RequestService.perform(createRequest, this.options);
   }
   
   /**
@@ -37,14 +39,14 @@ class Transaction extends BaseTransaction {
    * @param token Unique transaction identifier
    */
    async commit(token: string){
-    return TransactionUtil.commit(token, this.options);
+    return RequestService.perform(new CommitRequest(token), this.options);
   }
   /**
    * Obtain the status of a specific transaction
    * @param token Unique transaction identifier
    */
    async status(token: string){
-    return TransactionUtil.status(token, this.options);
+    return RequestService.perform(new StatusRequest(token), this.options);
    }
 
   /**
@@ -58,7 +60,7 @@ class Transaction extends BaseTransaction {
     token: string,
     amount: number
   ){
-    return TransactionUtil.refund(token, amount, this.options);
+    return RequestService.perform(new RefundRequest(token, amount), this.options);
   }
 }
 

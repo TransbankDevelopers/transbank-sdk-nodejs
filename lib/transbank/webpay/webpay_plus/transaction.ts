@@ -1,7 +1,8 @@
 import Options from '../../common/options';
 import WebpayPlus from './';
-import TransactionUtil from '../common/transaction_util';
 import BaseTransaction from '../../common/base_transaction';
+import { CommitRequest, CreateRequest, RefundRequest, StatusRequest } from './requests';
+import RequestService from '../../common/request_service';
 
 /**
  * Contains methods to interact with WebpayPlus API
@@ -29,7 +30,8 @@ class Transaction extends BaseTransaction {
     amount: number,
     returnUrl: string
    ){
-    return TransactionUtil.create(buyOrder, sessionId, amount, returnUrl, this.options);
+    let createRequest = new CreateRequest(buyOrder, sessionId, amount, returnUrl);
+    return RequestService.perform(createRequest, this.options);
   }
   
   /**
@@ -37,14 +39,14 @@ class Transaction extends BaseTransaction {
    * @param token Unique transaction identifier
    */
    async commit(token: string){
-    return TransactionUtil.commit(token, this.options);
+    return RequestService.perform(new CommitRequest(token), this.options);
   }
   /**
    * Obtain the status of a specific transaction
    * @param token Unique transaction identifier
    */
    async status(token: string){
-    return TransactionUtil.status(token, this.options);
+    return RequestService.perform(new StatusRequest(token), this.options);
    }
 
   /**
@@ -58,7 +60,7 @@ class Transaction extends BaseTransaction {
     token: string,
     amount: number
   ){
-    return TransactionUtil.refund(token, amount, this.options);
+    return RequestService.perform(new RefundRequest(token, amount), this.options);
   }
 }
 

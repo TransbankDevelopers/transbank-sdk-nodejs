@@ -1,7 +1,7 @@
 /**
  * Contains the Webpay, Oneclick and Patpass Comercio constants for testing.
  */
- enum CommerceCodeIntegrationConstants {
+ enum IntegrationCommerceCodes {
     WEBPAY_PLUS = '597055555532',
     WEBPAY_PLUS_MODAL = '597055555584',
     WEBPAY_PLUS_DEFERRED = '597055555540',
@@ -36,4 +36,4 @@
     PATPASS_COMERCIO = '28299257',
   } 
   
-export default CommerceCodeIntegrationConstants;
+export default IntegrationCommerceCodes;

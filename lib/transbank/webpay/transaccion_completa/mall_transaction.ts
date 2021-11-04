@@ -4,8 +4,8 @@ import InstallmentDetail from '../common/installments_detail';
 import TransaccionCompletaCommitDetail from './common/commit_detail';
 import TransactionDetail from '../common/transaction_detail';
 import BaseTransaction from '../../common/base_transaction';
-import CompleteMallTransactionUtil from '../common/complete_mall_transaction_util';
-import CompleteTransactionUtil from '../common/complete_transaction_util';
+import { InstallmentsRequest, MallCommitRequest, MallCreateRequest, MallRefundRequest, StatusRequest } from './requests';
+import RequestService from '../../common/request_service';
 
 class MallTransaction extends BaseTransaction {
 
@@ -34,13 +34,15 @@ class MallTransaction extends BaseTransaction {
     cardExpirationDate: string,
     details: Array<TransactionDetail>
   ){
-    return CompleteMallTransactionUtil.create(buyOrder,
+    let createRequest = new MallCreateRequest(
+      buyOrder,
       sessionId,
       cvv,
-      cardNumber,
-      cardExpirationDate,
-      details, 
-      this.options);
+      cardNumber.replace(/\s/g, ''),
+      cardExpirationDate.replace(/\s/g, ''),
+      details
+    );
+    return RequestService.perform(createRequest, this.options);  
   }
 
   /**
@@ -52,7 +54,17 @@ class MallTransaction extends BaseTransaction {
     token: string,
     details: Array<InstallmentDetail>
   ){
-    return CompleteMallTransactionUtil.installments(token, details, this.options);
+    let response = [];
+    for (let detail of details) {
+      let installmentsRequest = new InstallmentsRequest(
+        token,
+        detail.installmentsNumber,
+        detail.commerceCode,
+        detail.buyOrder
+      );
+      response.push(await RequestService.perform(installmentsRequest, this.options));
+    }
+    return response;
   }
 
   /**
@@ -64,7 +76,7 @@ class MallTransaction extends BaseTransaction {
     token: string,
     details: Array<TransaccionCompletaCommitDetail>
   ){
-    return CompleteMallTransactionUtil.commit(token, details, this.options);
+    return RequestService.perform(new MallCommitRequest(token, details), this.options);
   }
 
   /**
@@ -82,7 +94,8 @@ class MallTransaction extends BaseTransaction {
     commerceCode: string,
     amount: number
   ){
-    return CompleteMallTransactionUtil.refund(token, buyOrder, commerceCode, amount, this.options);
+    let refundRequest = new MallRefundRequest(token, buyOrder, commerceCode, amount);
+    return RequestService.perform(refundRequest, this.options);
   }
 
   /**
@@ -90,7 +103,7 @@ class MallTransaction extends BaseTransaction {
    * @param token Unique transaction identifier
    */
    async status(token: string){
-    return CompleteTransactionUtil.status(token, this.options);
+    return RequestService.perform(new StatusRequest(token), this.options);
   }
 };
 

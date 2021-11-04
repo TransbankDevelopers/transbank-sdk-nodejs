@@ -2,7 +2,8 @@ import Oneclick from '.';
 import Options from '../../common/options';
 import TransactionDetail from '../common/transaction_detail';
 import BaseTransaction from '../../common/base_transaction';
-import OneclickUtil from '../common/oneclick_util';
+import RequestService from '../../common/request_service';
+import { AuthorizeRequest, RefundRequest, StatusRequest } from './requests';
 
 class MallTransaction extends BaseTransaction {
   
@@ -28,7 +29,8 @@ class MallTransaction extends BaseTransaction {
     buyOrder: string,
     details: Array<TransactionDetail>
   ){
-    return OneclickUtil.authorize(userName, tbkUser, buyOrder, details, this.options);
+    let authorizeRequest = new AuthorizeRequest(userName, tbkUser, buyOrder, details);
+    return RequestService.perform(authorizeRequest, this.options);
   }
 
   /**
@@ -36,7 +38,7 @@ class MallTransaction extends BaseTransaction {
    * @param buyOrder Child transaction buy order
    */
    async status(buyOrder: string){
-    return OneclickUtil.status(buyOrder, this.options);
+    return RequestService.perform(new StatusRequest(buyOrder), this.options);
   }
 
   /**
@@ -54,7 +56,8 @@ class MallTransaction extends BaseTransaction {
     childBuyOrder: string,
     amount: number
   ){
-    return OneclickUtil.refund(buyOrder, commerceCode, childBuyOrder, amount, this.options);
+    let refundRequest = new RefundRequest(buyOrder, commerceCode, childBuyOrder, amount);
+    return RequestService.perform(refundRequest, this.options);
   }
 };
 

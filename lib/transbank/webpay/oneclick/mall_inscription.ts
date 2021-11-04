@@ -1,7 +1,8 @@
 import BaseTransaction from '../../common/base_transaction';
-import OneclickUtil from '../common/oneclick_util';
 import Options from '../../common/options';
 import Oneclick from '.';
+import { DeleteRequest, FinishRequest, StartRequest } from './requests';
+import RequestService from '../../common/request_service';
 
 class MallInscription extends BaseTransaction {
 
@@ -25,7 +26,8 @@ class MallInscription extends BaseTransaction {
     email: string,
     responseUrl: string
   ){
-    return OneclickUtil.start(userName, email, responseUrl, this.options);
+    let startRequest = new StartRequest(userName, email, responseUrl);
+    return RequestService.perform(startRequest, this.options);
   }
 
   /**
@@ -33,7 +35,7 @@ class MallInscription extends BaseTransaction {
    * @param token Unique inscription identifier
    */
   finish(token: string){
-    return OneclickUtil.finish(token, this.options);
+    return RequestService.perform(new FinishRequest(token), this.options);
   }
 
   /**
@@ -46,7 +48,7 @@ class MallInscription extends BaseTransaction {
     tbkUser: string,
     userName: string
   ){
-    return OneclickUtil.delete(tbkUser, userName, this.options);
+    return RequestService.perform(new DeleteRequest(tbkUser, userName), this.options);
   }
 };
 

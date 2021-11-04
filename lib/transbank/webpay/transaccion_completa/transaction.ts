@@ -1,7 +1,8 @@
 import TransaccionCompleta from '.';
 import Options from '../../common/options';
 import BaseTransaction from '../../common/base_transaction';
-import CompleteTransactionUtil from '../common/complete_transaction_util';
+import { CommitRequest, CreateRequest, InstallmentsRequest, RefundRequest, StatusRequest } from './requests';
+import RequestService from '../../common/request_service';
 
 class Transaction extends BaseTransaction {
 
@@ -30,13 +31,15 @@ class Transaction extends BaseTransaction {
     cardNumber: string,
     cardExpirationDate: string
   ){
-    return CompleteTransactionUtil.create(buyOrder,
+    let createRequest = new CreateRequest(
+      buyOrder,
       sessionId,
       amount,
       cvv,
-      cardNumber,
-      cardExpirationDate,
-      this.options);
+      cardNumber.replace(/\s/g, ''),
+      cardExpirationDate.replace(/\s/g, '')
+      );
+      return RequestService.perform(createRequest, this.options);
   }
 
   /**
@@ -48,7 +51,7 @@ class Transaction extends BaseTransaction {
     token: string,
     installmentsNumber: number
   ){
-    return CompleteTransactionUtil.installments(token, installmentsNumber, this.options);
+      return RequestService.perform(new InstallmentsRequest(token, installmentsNumber), this.options);
   }
 
   /**
@@ -67,11 +70,13 @@ class Transaction extends BaseTransaction {
     deferredPeriodIndex: number | undefined = undefined,
     gracePeriod: boolean | undefined = undefined
   ){
-    return CompleteTransactionUtil.commit(token,
+    let commitRequest = new CommitRequest(
+      token,
       idQueryInstallments,
       deferredPeriodIndex,
-      gracePeriod,
-      this.options);
+      gracePeriod
+    );
+    return RequestService.perform(commitRequest, this.options);  
   }
 
   /**
@@ -79,7 +84,7 @@ class Transaction extends BaseTransaction {
    * @param token Unique transaction identifier
    */
   async status(token: string){
-    return CompleteTransactionUtil.status(token, this.options);
+    return RequestService.perform(new StatusRequest(token), this.options);
   }
 
   /**
@@ -93,7 +98,8 @@ class Transaction extends BaseTransaction {
     token: string,
     amount: number
   ){
-    return CompleteTransactionUtil.refund(token, amount, this.options);
+    let refundRequest = new RefundRequest(token, amount);
+    return RequestService.perform(refundRequest, this.options);
   }
 };
 
