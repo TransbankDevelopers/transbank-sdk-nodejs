@@ -5,6 +5,9 @@ import { DeleteRequest, FinishRequest, StartRequest } from './requests';
 import RequestService from '../../common/request_service';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
+import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
+import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import Environment from '../common/environment';
 
 class MallInscription extends BaseTransaction {
 
@@ -12,7 +15,8 @@ class MallInscription extends BaseTransaction {
    * Constructor class MallInscription Oneclick.
    * @param options (Optional) You can pass options to use a custom configuration.
    */
-   constructor(options: Options = Oneclick.getDefaultOptions()) { 
+   constructor(options: Options) { 
+    options = options || Oneclick.getDefaultOptions() || new Options(CommerceCodeIntegrationConstants.ONECLICK_MALL, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
     super(options);
   }
 
