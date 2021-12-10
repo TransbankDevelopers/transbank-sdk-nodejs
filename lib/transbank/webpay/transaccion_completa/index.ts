@@ -1,53 +1,32 @@
 import Options from '../../common/options';
 import Environment from '../common/environment';
 import _Transaction from './transaction';
-import _DeferredTransaction from './deferred_transaction';
 import _MallTransaction from './mall_transaction';
-import _MallDeferredTransaction from './mall_deferred_transaction';
 import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
 import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
 
 module TransaccionCompleta {
-  const DEFAULT_API_KEY = ApiKeyIntegrationConstants.WEBPAY;
+
   /**
    * Contains methods used to create, commit, refund and capture Transactions.
    */
   export const Transaction: typeof _Transaction = _Transaction;
-  /**
-   * Contains methods used to create, commit, refund and capture deferred Transactions.
-   */
-  export const DeferredTransaction: typeof _DeferredTransaction = _DeferredTransaction;
+
   /**
    * Contains methods used to create, commit, refund and capture Mall Transactions.
    */
   export const MallTransaction: typeof _MallTransaction = _MallTransaction;
-  /**
-   * Contains methods used to create, commit, refund and capture Mall deferred Transactions.
-   */
-  export const MallDeferredTransaction: typeof _MallDeferredTransaction = _MallDeferredTransaction;
 
   /**
-   * Used to authenticate against the API, currently configured Commerce Code.
+   * Contains currently configured Commerce Code, Api Key and Environment
    */
-  export let commerceCode: string = CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA;
-  /**
-   * Used to authenticate against the API, currently configured Api Key.
-   */
-  export let apiKey: string = DEFAULT_API_KEY;
-  /**
-   * Used to select the corresponding API URL, currently configured Environment
-   */
-  export let environment: string = Environment.Integration;
+  export let options: Options;
 
   /**
-   * @returns Configured Commerce Code and Api Key
-   */
+     * @returns currently configured Commerce Code and Api Key
+     */
   export const getDefaultOptions = () => {
-    return new Options(
-      TransaccionCompleta.commerceCode,
-      TransaccionCompleta.apiKey,
-      TransaccionCompleta.environment
-    );
+    return TransaccionCompleta.options;
   };
 
   /**
@@ -56,9 +35,7 @@ module TransaccionCompleta {
    * @param _apiKey Api Key given by Transbank when you sucessfuly validate your integration
    */
   export const configureForProduction = (_commerceCode: string, _apiKey: string) => {
-    TransaccionCompleta.commerceCode = _commerceCode;
-    TransaccionCompleta.apiKey = _apiKey;
-    TransaccionCompleta.environment = Environment.Production;
+    TransaccionCompleta.options = new Options(_commerceCode, _apiKey, Environment.Production);
   };
 
   /**
@@ -69,82 +46,65 @@ module TransaccionCompleta {
    * @param _apiKey Api Key given by Transbank.
    */
   export const configureForIntegration = (_commerceCode: string, _apiKey: string) => {
-    TransaccionCompleta.commerceCode = _commerceCode;
-    TransaccionCompleta.apiKey = _apiKey;
-    TransaccionCompleta.environment = Environment.Integration;
+    TransaccionCompleta.options = new Options(_commerceCode, _apiKey, Environment.Integration);
   };
 
   /**
    * This method configures the module to use Transaccion Completa in the Integration environment.
-   */
-  export const configureTransaccionCompletaForTesting = () => {
-    TransaccionCompleta.commerceCode = CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA;
-    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
-    TransaccionCompleta.environment = Environment.Integration;
+   */          
+   export const configureForTesting = () => {
+    TransaccionCompleta.options = new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
   };
 
   /**
-   * This method configures the module to use Transaccion Completa without CVV in the Integration environment.
+   * This method configures the module to use Transaccion Completa Deferred in the Integration environment.
    */
-  export const configureTransaccionCompletaNoCvvForTesting = () => {
-    TransaccionCompleta.commerceCode = CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_SIN_CVV;
-    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
-    TransaccionCompleta.environment = Environment.Integration;
-  };
-
-  /**
-   * This method configures the module to use Transaccion Completa deferred in the Integration environment.
-   */
-  export const configureTransaccionCompletaDeferredForTesting = () => {
-    TransaccionCompleta.commerceCode = CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_DEFERRED;
-    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
-    TransaccionCompleta.environment = Environment.Integration;
-  };
-
-  /**
-   * This method configures the module to use Transaccion Completa deferred without CVV in the Integration environment.
-   */
-  export const configureTransaccionCompletaDeferredNoCvvForTesting = () => {
-    TransaccionCompleta.commerceCode = CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_DEFERRED_SIN_CVV;
-    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
-    TransaccionCompleta.environment = Environment.Integration;
+  export const configureForTestingDeferred = () => {
+    TransaccionCompleta.options = new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_DEFERRED, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
   };
 
   /**
    * This method configures the module to use Transaccion Completa Mall in the Integration environment.
    */
-  export const configureTransaccionCompletaMallForTesting = () => {
-    TransaccionCompleta.commerceCode = CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_MALL;
-    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
-    TransaccionCompleta.environment = Environment.Integration;
+  export const configureForTestingMall = () => {
+    TransaccionCompleta.options = new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_MALL, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+  };
+
+  /**
+   * This method configures the module to use Transaccion Completa Mall Deferred in the Integration environment.
+   */
+  export const configureForTestingMallDeferred = () => {
+    TransaccionCompleta.options = new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_MALL_DEFERRED, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+  };
+
+  /**
+   * This method configures the module to use Transaccion Completa without CVV in the Integration environment.
+   */          
+   export const configureForTestingNoCVV = () => {
+    TransaccionCompleta.options = new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_SIN_CVV, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+  };
+
+  /**
+   * This method configures the module to use Transaccion Completa Deferred without CVV in the Integration environment.
+   */
+  export const configureForTestingDeferredNoCVV = () => {
+    TransaccionCompleta.options = new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_DEFERRED_SIN_CVV, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
   };
 
   /**
    * This method configures the module to use Transaccion Completa Mall without CVV in the Integration environment.
    */
-  export const configureTransaccionCompletaMallNoCvvForTesting = () => {
-    TransaccionCompleta.commerceCode = CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_MALL_SIN_CVV;
-    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
-    TransaccionCompleta.environment = Environment.Integration;
+  export const configureForTestingMallNoCVV = () => {
+    TransaccionCompleta.options = new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_MALL_SIN_CVV, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
   };
 
   /**
-   * This method configures the module to use Transaccion Completa Mall deferred in the Integration environment.
+   * This method configures the module to use Transaccion Completa Mall Deferred without CVV in the Integration environment.
    */
-  export const configureTransaccionCompletaMallDeferredForTesting = () => {
-    TransaccionCompleta.commerceCode = CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_MALL_DEFERRED;
-    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
-    TransaccionCompleta.environment = Environment.Integration;
+  export const configureForTestingMallDeferredNoCVV = () => {
+    TransaccionCompleta.options = new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_MALL_DEFERRED_SIN_CVV, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
   };
 
-  /**
-   * This method configures the module to use Transaccion Completa Mall deferred without CVV in the Integration environment.
-   */
-  export const configureTransaccionCompletaMallDeferredNoCvvForTesting = () => {
-    TransaccionCompleta.commerceCode = CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_MALL_DEFERRED_SIN_CVV;
-    TransaccionCompleta.apiKey = DEFAULT_API_KEY;
-    TransaccionCompleta.environment = Environment.Integration;
-  };
 }
 
 export default TransaccionCompleta;

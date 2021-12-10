@@ -1,8 +1,13 @@
 import Options from '../../common/options';
 import WebpayPlus from './';
 import BaseTransaction from '../../common/base_transaction';
-import { CommitRequest, CreateRequest, RefundRequest, StatusRequest } from './requests';
+import { CaptureRequest, CommitRequest, CreateRequest, RefundRequest, StatusRequest } from './requests';
 import RequestService from '../../common/request_service';
+import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
+import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import Environment from '../common/environment';
+import ValidationUtil from '../../common/validation_util';
+import ApiConstants from '../../common/api_constants';
 
 /**
  * Contains methods to interact with WebpayPlus API
@@ -13,7 +18,8 @@ class Transaction extends BaseTransaction {
    * Constructor class Webpay Plus transaction.
    * @param options (Optional) You can pass options to use a custom configuration.
    */
-  constructor(options: Options = WebpayPlus.getDefaultOptions()) { 
+  constructor(options: Options) { 
+    options = options || WebpayPlus.getDefaultOptions() || new Options(CommerceCodeIntegrationConstants.WEBPAY_PLUS, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
     super(options);
   }
 
@@ -30,6 +36,10 @@ class Transaction extends BaseTransaction {
     amount: number,
     returnUrl: string
    ){
+    ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
+    ValidationUtil.hasTextWithMaxLength(sessionId, ApiConstants.SESSION_ID_LENGTH, "sessionId");
+    ValidationUtil.hasTextWithMaxLength(returnUrl, ApiConstants.RETURN_URL_LENGTH, "returnUrl");
+
     let createRequest = new CreateRequest(buyOrder, sessionId, amount, returnUrl);
     return RequestService.perform(createRequest, this.options);
   }
@@ -39,6 +49,7 @@ class Transaction extends BaseTransaction {
    * @param token Unique transaction identifier
    */
    async commit(token: string){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     return RequestService.perform(new CommitRequest(token), this.options);
   }
   /**
@@ -46,6 +57,7 @@ class Transaction extends BaseTransaction {
    * @param token Unique transaction identifier
    */
    async status(token: string){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     return RequestService.perform(new StatusRequest(token), this.options);
    }
 
@@ -60,8 +72,31 @@ class Transaction extends BaseTransaction {
     token: string,
     amount: number
   ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     return RequestService.perform(new RefundRequest(token, amount), this.options);
   }
+
+  /** Capture a deferred transaction.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param buyOrder Transaction's buy order
+   * @param authorizationCode Transaction's authorization code
+   * @param captureAmount Amount to be captured
+   */
+   async capture(
+    token: string,
+    buyOrder: string,
+    authorizationCode: string,
+    captureAmount: number
+   ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new CaptureRequest(token, buyOrder, authorizationCode, captureAmount), this.options);
+   }
 }
 
 export default Transaction;

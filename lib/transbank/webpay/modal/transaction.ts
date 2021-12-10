@@ -4,6 +4,8 @@ import WebpayPlusModal from './';
 import { ModalCreateRequest } from './requests';
 import RequestService from '../../common/request_service';
 import { CommitRequest, RefundRequest, StatusRequest } from '../webpay_plus/requests';
+import ValidationUtil from '../../common/validation_util';
+import ApiConstants from '../../common/api_constants';
 
 
 /**
@@ -30,6 +32,8 @@ class Transaction extends BaseTransaction {
     sessionId: string,
     amount: number
    ){
+    ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
+    ValidationUtil.hasTextWithMaxLength(sessionId, ApiConstants.SESSION_ID_LENGTH, "sessionId");
     let createRequest = new ModalCreateRequest(buyOrder, sessionId, amount);
     return RequestService.perform(createRequest, this.options);
   }
@@ -39,6 +43,7 @@ class Transaction extends BaseTransaction {
    * @param token Unique transaction identifier
    */
    async commit(token: string){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     return RequestService.perform(new CommitRequest(token), this.options);
   }
   /**
@@ -46,6 +51,7 @@ class Transaction extends BaseTransaction {
    * @param token Unique transaction identifier
    */
    async status(token: string){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     return RequestService.perform(new StatusRequest(token), this.options);
    }
 
@@ -60,6 +66,7 @@ class Transaction extends BaseTransaction {
     token: string,
     amount: number
   ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     return RequestService.perform(new RefundRequest(token, amount), this.options);
   }
 }

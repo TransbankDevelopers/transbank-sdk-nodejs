@@ -1,8 +1,13 @@
 import TransaccionCompleta from '.';
 import Options from '../../common/options';
 import BaseTransaction from '../../common/base_transaction';
-import { CommitRequest, CreateRequest, InstallmentsRequest, RefundRequest, StatusRequest } from './requests';
+import { CaptureRequest, CommitRequest, CreateRequest, InstallmentsRequest, RefundRequest, StatusRequest } from './requests';
 import RequestService from '../../common/request_service';
+import Environment from '../common/environment';
+import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
+import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import ValidationUtil from '../../common/validation_util';
+import ApiConstants from '../../common/api_constants';
 
 class Transaction extends BaseTransaction {
 
@@ -10,7 +15,8 @@ class Transaction extends BaseTransaction {
    * Constructor class transaction.
    * @param options (Optional) You can pass options to use a custom configuration.
    */
-  constructor(options: Options = TransaccionCompleta.getDefaultOptions()) { 
+  constructor(options: Options) { 
+    options = options || TransaccionCompleta.getDefaultOptions() || new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
     super(options);
   }
 
@@ -31,6 +37,11 @@ class Transaction extends BaseTransaction {
     cardNumber: string,
     cardExpirationDate: string
   ){
+    ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
+    ValidationUtil.hasTextWithMaxLength(sessionId, ApiConstants.SESSION_ID_LENGTH, "sessionId");
+    ValidationUtil.hasTextWithMaxLength(cardNumber, ApiConstants.CARD_NUMBER_LENGTH, "cardNumber");
+    ValidationUtil.hasTextWithMaxLength(cardExpirationDate, ApiConstants.CARD_EXPIRATION_DATE_LENGTH, "cardExpirationDate");
+
     let createRequest = new CreateRequest(
       buyOrder,
       sessionId,
@@ -51,7 +62,8 @@ class Transaction extends BaseTransaction {
     token: string,
     installmentsNumber: number
   ){
-      return RequestService.perform(new InstallmentsRequest(token, installmentsNumber), this.options);
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    return RequestService.perform(new InstallmentsRequest(token, installmentsNumber), this.options);
   }
 
   /**
@@ -70,6 +82,7 @@ class Transaction extends BaseTransaction {
     deferredPeriodIndex: number | undefined = undefined,
     gracePeriod: boolean | undefined = undefined
   ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     let commitRequest = new CommitRequest(
       token,
       idQueryInstallments,
@@ -84,6 +97,7 @@ class Transaction extends BaseTransaction {
    * @param token Unique transaction identifier
    */
   async status(token: string){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     return RequestService.perform(new StatusRequest(token), this.options);
   }
 
@@ -94,12 +108,35 @@ class Transaction extends BaseTransaction {
    * @param token Unique transaction identifier
    * @param amount Amount to be refunded
    */
-  refund(
+   async refund(
     token: string,
     amount: number
   ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     let refundRequest = new RefundRequest(token, amount);
     return RequestService.perform(refundRequest, this.options);
+  }
+
+  /** Capture a deferred transaction.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param buyOrder Transaction's buy order
+   * @param authorizationCode Transaction's authorization code
+   * @param captureAmount Amount to be captured
+   */
+   async capture(
+    token: string,
+    buyOrder: string,
+    authorizationCode: string,
+    captureAmount: number
+    ){
+      ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+      ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
+      ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+      let captureRequest = new CaptureRequest(token, buyOrder, authorizationCode, captureAmount);
+      return RequestService.perform(captureRequest, this.options);
   }
 };
 

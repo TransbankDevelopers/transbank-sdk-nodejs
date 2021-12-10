@@ -3,6 +3,8 @@ import Options from '../../common/options';
 import Oneclick from '.';
 import { DeleteRequest, FinishRequest, StartRequest } from './requests';
 import RequestService from '../../common/request_service';
+import ValidationUtil from '../../common/validation_util';
+import ApiConstants from '../../common/api_constants';
 
 class MallInscription extends BaseTransaction {
 
@@ -16,17 +18,20 @@ class MallInscription extends BaseTransaction {
 
   /**
    * Starts a card inscription process
-   * @param userName Cardholder's username
+   * @param username Cardholder's username
    * @param email Cardholder's email
    * @param responseUrl URL to which Transbank will redirect after cardholder finish enrolling
    * their card
    */
   start(
-    userName: string,
+    username: string,
     email: string,
     responseUrl: string
   ){
-    let startRequest = new StartRequest(userName, email, responseUrl);
+    ValidationUtil.hasTextTrimWithMaxLength(username, ApiConstants.USER_NAME_LENGTH, "username");
+    ValidationUtil.hasTextTrimWithMaxLength(email, ApiConstants.EMAIL_LENGTH, "email");
+    ValidationUtil.hasTextWithMaxLength(responseUrl, ApiConstants.RETURN_URL_LENGTH, "responseUrl");
+    let startRequest = new StartRequest(username, email, responseUrl);
     return RequestService.perform(startRequest, this.options);
   }
 
@@ -35,6 +40,7 @@ class MallInscription extends BaseTransaction {
    * @param token Unique inscription identifier
    */
   finish(token: string){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     return RequestService.perform(new FinishRequest(token), this.options);
   }
 
@@ -42,13 +48,15 @@ class MallInscription extends BaseTransaction {
    * This deletes an inscription
    * @param tbkUser Cardholder's card TBK user assigned by Transbank and returned in
    * Inscription.finish
-   * @param userName Cardholder's username
+   * @param username Cardholder's username
    */
   delete(
     tbkUser: string,
-    userName: string
+    username: string
   ){
-    return RequestService.perform(new DeleteRequest(tbkUser, userName), this.options);
+    ValidationUtil.hasTextTrimWithMaxLength(username, ApiConstants.USER_NAME_LENGTH, "username");
+    ValidationUtil.hasTextWithMaxLength(tbkUser, ApiConstants.TBK_USER_LENGTH, "tbkUser");
+    return RequestService.perform(new DeleteRequest(tbkUser, username), this.options);
   }
 };
 
