@@ -1,11 +1,11 @@
-import Constants from '../../../common/constants';
+import ApiConstants from '../../../common/api_constants';
 import RequestBase from '../../../common/request_base';
 
 class RefundRequest extends RequestBase {
   amount: number;
 
   constructor(token: string, amount: number) {
-    super(`${Constants.WEBPAY_METHOD}/transactions/${token}/refunds`, 'POST');
+    super(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/refunds`, 'POST');
 
     this.amount = amount;
   }

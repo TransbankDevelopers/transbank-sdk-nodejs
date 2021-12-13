@@ -1,4 +1,4 @@
-import Constants from '../../../common/constants';
+import ApiConstants from '../../../common/api_constants';
 import RequestBase from '../../../common/request_base';
 
 class MallCaptureRequest extends RequestBase {
@@ -14,7 +14,7 @@ class MallCaptureRequest extends RequestBase {
     authorizationCode: string,
     amount: number
   ) {
-    super(`${Constants.WEBPAY_METHOD}/transactions/${token}/capture`, 'PUT');
+    super(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/capture`, 'PUT');
 
     this.commerceCode = commerceCode;
     this.buyOrder = buyOrder;

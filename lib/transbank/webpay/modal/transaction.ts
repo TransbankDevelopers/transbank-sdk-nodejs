@@ -1,13 +1,14 @@
 import Options from '../../common/options';
-import WebpayPlus from './';
 import BaseTransaction from '../../common/base_transaction';
-import { CaptureRequest, CommitRequest, CreateRequest, RefundRequest, StatusRequest } from './requests';
+import WebpayPlusModal from './';
+import { ModalCreateRequest } from './requests';
 import RequestService from '../../common/request_service';
+import { CommitRequest, RefundRequest, StatusRequest } from '../webpay_plus/requests';
+import ValidationUtil from '../../common/validation_util';
+import ApiConstants from '../../common/api_constants';
 import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
 import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
 import Environment from '../common/environment';
-import ValidationUtil from '../../common/validation_util';
-import ApiConstants from '../../common/api_constants';
 
 /**
  * Contains methods to interact with WebpayPlus API
@@ -15,11 +16,11 @@ import ApiConstants from '../../common/api_constants';
 class Transaction extends BaseTransaction {
 
   /**
-   * Constructor class Webpay Plus transaction.
+   * Constructor class Webpay Plus Modal transaction.
    * @param options (Optional) You can pass options to use a custom configuration.
    */
-  constructor(options: Options) { 
-    options = options || WebpayPlus.getDefaultOptions() || new Options(CommerceCodeIntegrationConstants.WEBPAY_PLUS, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+   constructor(options: Options) { 
+    options = options || WebpayPlusModal.getDefaultOptions() || new Options(CommerceCodeIntegrationConstants.WEBPAY_PLUS_MODAL, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
     super(options);
   }
 
@@ -28,19 +29,15 @@ class Transaction extends BaseTransaction {
    * @param buyOrder Commerce buy order, make sure this is unique.
    * @param sessionId You can use this field to pass session data if needed.
    * @param amount Transaction amount
-   * @param returnUrl URL to which Transbank will redirect after card holder pays
    */
    async create(
     buyOrder: string,
     sessionId: string,
-    amount: number,
-    returnUrl: string
+    amount: number
    ){
     ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
     ValidationUtil.hasTextWithMaxLength(sessionId, ApiConstants.SESSION_ID_LENGTH, "sessionId");
-    ValidationUtil.hasTextWithMaxLength(returnUrl, ApiConstants.RETURN_URL_LENGTH, "returnUrl");
-
-    let createRequest = new CreateRequest(buyOrder, sessionId, amount, returnUrl);
+    let createRequest = new ModalCreateRequest(buyOrder, sessionId, amount);
     return RequestService.perform(createRequest, this.options);
   }
   
@@ -75,28 +72,6 @@ class Transaction extends BaseTransaction {
     ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     return RequestService.perform(new RefundRequest(token, amount), this.options);
   }
-
-  /** Capture a deferred transaction.
-   *
-   * Your commerce code must be configured to support deferred capture.
-   *
-   * @param token Unique transaction identifier
-   * @param buyOrder Transaction's buy order
-   * @param authorizationCode Transaction's authorization code
-   * @param captureAmount Amount to be captured
-   */
-   async capture(
-    token: string,
-    buyOrder: string,
-    authorizationCode: string,
-    captureAmount: number
-   ){
-    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
-    ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
-    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
-    return RequestService.perform(
-      new CaptureRequest(token, buyOrder, authorizationCode, captureAmount), this.options);
-   }
 }
 
 export default Transaction;

@@ -1,15 +1,25 @@
 import TransaccionCompleta from '.';
 import Options from '../../common/options';
+import BaseTransaction from '../../common/base_transaction';
+import { CaptureRequest, CommitRequest, CreateRequest, InstallmentsRequest, RefundRequest, StatusRequest } from './requests';
 import RequestService from '../../common/request_service';
-import {
-  CommitRequest,
-  CreateRequest,
-  InstallmentsRequest,
-  RefundRequest,
-  StatusRequest,
-} from './requests';
+import Environment from '../common/environment';
+import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
+import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import ValidationUtil from '../../common/validation_util';
+import ApiConstants from '../../common/api_constants';
 
-const Transaction = {
+class Transaction extends BaseTransaction {
+
+  /**
+   * Constructor class transaction.
+   * @param options (Optional) You can pass options to use a custom configuration.
+   */
+  constructor(options: Options) { 
+    options = options || TransaccionCompleta.getDefaultOptions() || new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    super(options);
+  }
+
   /**
    * Create a new Transaccion Completa transaction
    * @param buyOrder Commerce buy order, make sure this is unique.
@@ -18,17 +28,20 @@ const Transaction = {
    * @param cvv Card verification value
    * @param cardNumber Card's fron number
    * @param cardExpirationDate Card's expiration date
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  create: async (
+  async create(
     buyOrder: string,
     sessionId: string,
     amount: number,
     cvv: number | undefined,
     cardNumber: string,
-    cardExpirationDate: string,
-    options: Options = TransaccionCompleta.getDefaultOptions()
-  ) => {
+    cardExpirationDate: string
+  ){
+    ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
+    ValidationUtil.hasTextWithMaxLength(sessionId, ApiConstants.SESSION_ID_LENGTH, "sessionId");
+    ValidationUtil.hasTextWithMaxLength(cardNumber, ApiConstants.CARD_NUMBER_LENGTH, "cardNumber");
+    ValidationUtil.hasTextWithMaxLength(cardExpirationDate, ApiConstants.CARD_EXPIRATION_DATE_LENGTH, "cardExpirationDate");
+
     let createRequest = new CreateRequest(
       buyOrder,
       sessionId,
@@ -36,23 +49,23 @@ const Transaction = {
       cvv,
       cardNumber.replace(/\s/g, ''),
       cardExpirationDate.replace(/\s/g, '')
-    );
-    return RequestService.perform(createRequest, options);
-  },
+      );
+      return RequestService.perform(createRequest, this.options);
+  }
+
   /**
    * Ask for installment conditions and price
    * @param token Unique transaction identifier
    * @param installmentsNumber Number of installments to ask for
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  installments: async (
+  async installments(
     token: string,
-    installmentsNumber: number,
-    options: Options = TransaccionCompleta.getDefaultOptions()
-  ) => {
-    let installmentsRequest = new InstallmentsRequest(token, installmentsNumber);
-    return RequestService.perform(installmentsRequest, options);
-  },
+    installmentsNumber: number
+  ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    return RequestService.perform(new InstallmentsRequest(token, installmentsNumber), this.options);
+  }
+
   /**
    * Commit a transaction
    * @param token Unique transaction identifier
@@ -62,48 +75,69 @@ const Transaction = {
    * if the commerce is configured to offer deferred payment
    * @param gracePeriod (Optional) Use this when paying with installments, this indicates if there's
    * a grace period.
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  commit: async (
+  async commit(
     token: string,
     idQueryInstallments: number | undefined = undefined,
     deferredPeriodIndex: number | undefined = undefined,
-    gracePeriod: boolean | undefined = undefined,
-    options: Options = TransaccionCompleta.getDefaultOptions()
-  ) => {
+    gracePeriod: boolean | undefined = undefined
+  ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     let commitRequest = new CommitRequest(
       token,
       idQueryInstallments,
       deferredPeriodIndex,
       gracePeriod
     );
-    return RequestService.perform(commitRequest, options);
-  },
+    return RequestService.perform(commitRequest, this.options);  
+  }
+
   /**
    * Obtain the status of a specific transaction
    * @param token Unique transaction identifier
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  status: async (token: string, options: Options = TransaccionCompleta.getDefaultOptions()) => {
-    let statusRequest = new StatusRequest(token);
-    return RequestService.perform(statusRequest, options);
-  },
+  async status(token: string){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    return RequestService.perform(new StatusRequest(token), this.options);
+  }
+
   /**
    * Request a refund of a specific transaction, if you refund for the full amount and you're within
    * the time window the transaction will be reversed. If you're past that window or refund for less
    * than the total amount the transaction will be void.
    * @param token Unique transaction identifier
    * @param amount Amount to be refunded
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  refund: async (
+   async refund(
     token: string,
-    amount: number,
-    options: Options = TransaccionCompleta.getDefaultOptions()
-  ) => {
+    amount: number
+  ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     let refundRequest = new RefundRequest(token, amount);
-    return RequestService.perform(refundRequest, options);
-  },
+    return RequestService.perform(refundRequest, this.options);
+  }
+
+  /** Capture a deferred transaction.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param buyOrder Transaction's buy order
+   * @param authorizationCode Transaction's authorization code
+   * @param captureAmount Amount to be captured
+   */
+   async capture(
+    token: string,
+    buyOrder: string,
+    authorizationCode: string,
+    captureAmount: number
+    ){
+      ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+      ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
+      ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+      let captureRequest = new CaptureRequest(token, buyOrder, authorizationCode, captureAmount);
+      return RequestService.perform(captureRequest, this.options);
+  }
 };
 
 export default Transaction;

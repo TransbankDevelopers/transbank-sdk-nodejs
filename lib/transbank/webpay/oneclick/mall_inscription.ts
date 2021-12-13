@@ -1,50 +1,67 @@
-import Oneclick from '.';
+import BaseTransaction from '../../common/base_transaction';
 import Options from '../../common/options';
+import Oneclick from '.';
+import { DeleteRequest, FinishRequest, StartRequest } from './requests';
 import RequestService from '../../common/request_service';
-import { StartRequest, FinishRequest, DeleteRequest } from './requests';
+import ValidationUtil from '../../common/validation_util';
+import ApiConstants from '../../common/api_constants';
+import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
+import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import Environment from '../common/environment';
 
-const MallInscription = {
+class MallInscription extends BaseTransaction {
+
+  /**
+   * Constructor class MallInscription Oneclick.
+   * @param options (Optional) You can pass options to use a custom configuration.
+   */
+   constructor(options: Options) { 
+    options = options || Oneclick.getDefaultOptions() || new Options(CommerceCodeIntegrationConstants.ONECLICK_MALL, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    super(options);
+  }
+
   /**
    * Starts a card inscription process
-   * @param userName Cardholder's username
+   * @param username Cardholder's username
    * @param email Cardholder's email
    * @param responseUrl URL to which Transbank will redirect after cardholder finish enrolling
    * their card
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  start: async (
-    userName: string,
+  start(
+    username: string,
     email: string,
-    responseUrl: string,
-    options: Options = Oneclick.getDefaultOptions()
-  ) => {
-    let startRequest = new StartRequest(userName, email, responseUrl);
-    return RequestService.perform(startRequest, options);
-  },
+    responseUrl: string
+  ){
+    ValidationUtil.hasTextTrimWithMaxLength(username, ApiConstants.USER_NAME_LENGTH, "username");
+    ValidationUtil.hasTextTrimWithMaxLength(email, ApiConstants.EMAIL_LENGTH, "email");
+    ValidationUtil.hasTextWithMaxLength(responseUrl, ApiConstants.RETURN_URL_LENGTH, "responseUrl");
+    let startRequest = new StartRequest(username, email, responseUrl);
+    return RequestService.perform(startRequest, this.options);
+  }
+
   /**
    * This finalizes the card enrolling process
    * @param token Unique inscription identifier
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
    */
-  finish: async (token: string, options: Options = Oneclick.getDefaultOptions()) => {
-    let finishRequest = new FinishRequest(token);
-    return RequestService.perform(finishRequest, options);
-  },
+  finish(token: string){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    return RequestService.perform(new FinishRequest(token), this.options);
+  }
+
   /**
    * This deletes an inscription
    * @param tbkUser Cardholder's card TBK user assigned by Transbank and returned in
    * Inscription.finish
-   * @param userName Cardholder's username
-   * @param options (Optional) You can pass options to use a custom configuration for this request.
+   * @param username Cardholder's username
    */
-  delete: async (
+  delete(
     tbkUser: string,
-    userName: string,
-    options: Options = Oneclick.getDefaultOptions()
-  ) => {
-    let deleteRequest = new DeleteRequest(tbkUser, userName);
-    return RequestService.perform(deleteRequest, options);
-  },
+    username: string
+  ){
+    ValidationUtil.hasTextTrimWithMaxLength(username, ApiConstants.USER_NAME_LENGTH, "username");
+    ValidationUtil.hasTextWithMaxLength(tbkUser, ApiConstants.TBK_USER_LENGTH, "tbkUser");
+    return RequestService.perform(new DeleteRequest(tbkUser, username), this.options);
+  }
 };
 
 export default MallInscription;

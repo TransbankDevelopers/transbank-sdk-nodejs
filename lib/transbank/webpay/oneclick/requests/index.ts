@@ -4,6 +4,7 @@ import { FinishRequest } from './finish_request';
 import { RefundRequest } from './refund_request';
 import { StartRequest } from './start_request';
 import { StatusRequest } from './status_request';
+import { CaptureRequest } from './capture_request';
 
 export {
   AuthorizeRequest,
@@ -12,4 +13,5 @@ export {
   RefundRequest,
   StartRequest,
   StatusRequest,
+  CaptureRequest
 };

@@ -1,12 +1,11 @@
 import Options from '../../common/options';
 import Environment from '../common/environment';
-import _MallDeferredInscription from './mall_deferred_inscription';
-import _MallDeferredTransaction from './mall_deferred_transaction';
 import _MallInscription from './mall_inscription';
 import _MallTransaction from './mall_transaction';
+import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
 
 module Oneclick {
-  const DEFAULT_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
 
   /**
    * Contains methods used to start, finish and delete Inscriptions.
@@ -16,35 +15,18 @@ module Oneclick {
    * Contains methods used to authorize, commit, refund and capture mall Transactions.
    */
   export const MallTransaction: typeof _MallTransaction = _MallTransaction;
-  /**
-   * Contains methods used to start, finish and delete Inscriptions.
-   * This is freely interchangeable with {@link MallInscription}
-   */
-  export const MallDeferredInscription: typeof _MallDeferredInscription = _MallDeferredInscription;
-  /**
-   * Contains methods used to authorize, commit, refund and capture deferred mall Transactions.
-   */
-  export const MallDeferredTransaction: typeof _MallDeferredTransaction = _MallDeferredTransaction;
 
   /**
-   * Used to authenticate against the API, currently configured Commerce Code.
+   * Contains currently configured Commerce Code, Api Key and Environment
    */
-  export let commerceCode: string = '597055555541';
-  /**
-   * Used to authenticate against the API, currently configured Api Key.
-   */
-  export let apiKey: string = DEFAULT_API_KEY;
-  /**
-   * Used to select the corresponding API URL, currently configured Environment
-   */
-  export let environment: string = Environment.Integration;
+   export let options: Options;
 
-  /**
-   * @returns Currently configured Commerce Code and Api Key
-   */
-  export const getDefaultOptions = () => {
-    return new Options(Oneclick.commerceCode, Oneclick.apiKey, Oneclick.environment);
-  };
+   /**
+    * @returns currently configured Commerce Code and Api Key
+    */
+   export const getDefaultOptions = () => {
+     return Oneclick.options;
+   };
 
   /**
    * This methods configures the module to point to the Production Environment with the given params.
@@ -52,9 +34,7 @@ module Oneclick {
    * @param _apiKey Api Key given by Transbank when you sucessfuly validate your integration
    */
   export const configureForProduction = (_commerceCode: string, _apiKey: string) => {
-    Oneclick.commerceCode = _commerceCode;
-    Oneclick.apiKey = _apiKey;
-    Oneclick.environment = Environment.Production;
+    Oneclick.options = new Options(_commerceCode, _apiKey, Environment.Production);
   };
 
   /**
@@ -65,27 +45,21 @@ module Oneclick {
    * @param _apiKey Api Key given by Transbank.
    */
   export const configureForIntegration = (_commerceCode: string, _apiKey: string) => {
-    Oneclick.commerceCode = _commerceCode;
-    Oneclick.apiKey = _apiKey;
-    Oneclick.environment = Environment.Integration;
+    Oneclick.options = new Options(_commerceCode, _apiKey, Environment.Integration);
   };
 
   /**
    * This method configures the module to use Oneclick Mall in the Integration environment.
    */
   export const configureOneclickMallForTesting = () => {
-    Oneclick.commerceCode = '597055555541';
-    Oneclick.apiKey = DEFAULT_API_KEY;
-    Oneclick.environment = Environment.Integration;
+    Oneclick.options = new Options(CommerceCodeIntegrationConstants.ONECLICK_MALL, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
   };
 
   /**
    * This method configures the module to use Oneclick Mall deferred in the Integration environment.
    */
   export const configureOneclickMallDeferredForTesting = () => {
-    Oneclick.commerceCode = '597055555547';
-    Oneclick.apiKey = DEFAULT_API_KEY;
-    Oneclick.environment = Environment.Integration;
+    Oneclick.options = new Options(CommerceCodeIntegrationConstants.ONECLICK_MALL_DEFERRED, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
   };
 }
 
