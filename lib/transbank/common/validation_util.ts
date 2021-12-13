@@ -12,7 +12,7 @@ class ValidationUtil {
     public static hasTextTrimWithMaxLength(value: string, length: number, valueName: string){
         ValidationUtil.hasText(value, valueName);
         if (value.length > value.trim().length)
-            throw new Error("'" + valueName + "'" + " has spaces at the begining or the end");
+            throw new Error("'" + valueName + "'" + " has spaces at the beginning or the end");
         if (value.length > length)
             throw new Error("'" + valueName + "'" + " is too long, the maximum length is " + length);
     }
