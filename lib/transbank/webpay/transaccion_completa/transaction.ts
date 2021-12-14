@@ -4,8 +4,8 @@ import BaseTransaction from '../../common/base_transaction';
 import { CaptureRequest, CommitRequest, CreateRequest, InstallmentsRequest, RefundRequest, StatusRequest } from './requests';
 import RequestService from '../../common/request_service';
 import Environment from '../common/environment';
-import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
-import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
+import IntegrationApiKeys from '../../common/integration_api_keys';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
 
@@ -16,7 +16,7 @@ class Transaction extends BaseTransaction {
    * @param options (Optional) You can pass options to use a custom configuration.
    */
   constructor(options: Options) { 
-    options = options || TransaccionCompleta.getDefaultOptions() || new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    options = options || TransaccionCompleta.getDefaultOptions() || new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration);
     super(options);
   }
 

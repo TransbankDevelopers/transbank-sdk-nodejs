@@ -3,8 +3,8 @@ import WebpayPlus from './';
 import BaseTransaction from '../../common/base_transaction';
 import { CaptureRequest, CommitRequest, CreateRequest, RefundRequest, StatusRequest } from './requests';
 import RequestService from '../../common/request_service';
-import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
-import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
+import IntegrationApiKeys from '../../common/integration_api_keys';
 import Environment from '../common/environment';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
@@ -19,7 +19,7 @@ class Transaction extends BaseTransaction {
    * @param options (Optional) You can pass options to use a custom configuration.
    */
   constructor(options: Options) { 
-    options = options || WebpayPlus.getDefaultOptions() || new Options(CommerceCodeIntegrationConstants.WEBPAY_PLUS, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    options = options || WebpayPlus.getDefaultOptions() || new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration);
     super(options);
   }
 

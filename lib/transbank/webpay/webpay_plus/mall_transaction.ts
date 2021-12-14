@@ -5,8 +5,8 @@ import BaseTransaction from '../../common/base_transaction';
 import { CommitRequest, MallCreateRequest, MallRefundRequest, StatusRequest } from './requests';
 import RequestService from '../../common/request_service';
 import MallCaptureRequest from '../transaccion_completa/requests/mall_capture_request';
-import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
-import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
+import IntegrationApiKeys from '../../common/integration_api_keys';
 import Environment from '../common/environment';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
@@ -18,7 +18,7 @@ class MallTransaction extends BaseTransaction {
    * @param options (Optional) You can pass options to use a custom configuration.
    */
    constructor(options: Options) { 
-    options = options || WebpayPlus.getDefaultOptions() || new Options(CommerceCodeIntegrationConstants.WEBPAY_PLUS_MALL, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    options = options || WebpayPlus.getDefaultOptions() || new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration);
     super(options);
   }
 

@@ -7,3 +7,5 @@ export { default as InstallmentDetail } from './transbank/webpay/common/installm
 export { default as CommitDetail } from './transbank/webpay/transaccion_completa/common/commit_detail';
 export { default as Options } from './transbank/common/options';
 export { default as Environment } from './transbank/webpay/common/environment';
+export { default as IntegrationApiKeys } from './transbank/common/integration_api_keys';
+export { default as IntegrationCommerceCodes } from './transbank/common/integration_commerce_codes';
