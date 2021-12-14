@@ -2,8 +2,8 @@ import Options from '../../common/options';
 import Environment from '../common/environment';
 import _MallInscription from './mall_inscription';
 import _MallTransaction from './mall_transaction';
-import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
-import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
+import IntegrationApiKeys from '../../common/integration_api_keys';
+import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
 
 module Oneclick {
 
@@ -52,14 +52,14 @@ module Oneclick {
    * This method configures the module to use Oneclick Mall in the Integration environment.
    */
   export const configureOneclickMallForTesting = () => {
-    Oneclick.options = new Options(CommerceCodeIntegrationConstants.ONECLICK_MALL, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    Oneclick.options = new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration);
   };
 
   /**
    * This method configures the module to use Oneclick Mall deferred in the Integration environment.
    */
   export const configureOneclickMallDeferredForTesting = () => {
-    Oneclick.options = new Options(CommerceCodeIntegrationConstants.ONECLICK_MALL_DEFERRED, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    Oneclick.options = new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration);
   };
 }
 

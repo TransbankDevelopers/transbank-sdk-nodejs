@@ -8,8 +8,8 @@ import { InstallmentsRequest, MallCommitRequest, MallCreateRequest, MallRefundRe
 import RequestService from '../../common/request_service';
 import MallCaptureRequest from './requests/mall_capture_request';
 import Environment from '../common/environment';
-import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
-import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
+import IntegrationApiKeys from '../../common/integration_api_keys';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
 
@@ -20,7 +20,7 @@ class MallTransaction extends BaseTransaction {
    * @param options (Optional) You can pass options to use a custom configuration.
    */
    constructor(options: Options) { 
-    options = options || TransaccionCompleta.getDefaultOptions() || new Options(CommerceCodeIntegrationConstants.TRANSACCION_COMPLETA_MALL, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    options = options || TransaccionCompleta.getDefaultOptions() || new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration);
     super(options);
   }
 

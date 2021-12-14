@@ -2,8 +2,8 @@ import Environment from '../common/environment';
 import Options from '../../common/options';
 import _Transaction from './transaction';
 import _MallTransaction from './mall_transaction';
-import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
-import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
+import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
+import IntegrationApiKeys from '../../common/integration_api_keys';
 
 module WebpayPlus {
 
@@ -53,28 +53,28 @@ module WebpayPlus {
    * This method configures the module to use Webpay Plus in the Integration environment.
    */          
   export const configureForTesting = () => {
-    WebpayPlus.options = new Options(CommerceCodeIntegrationConstants.WEBPAY_PLUS, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    WebpayPlus.options = new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration);
   };
 
   /**
    * This method configures the module to use Webpay Plus Deferred in the Integration environment.
    */
   export const configureForTestingDeferred = () => {
-    WebpayPlus.options = new Options(CommerceCodeIntegrationConstants.WEBPAY_PLUS_DEFERRED, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    WebpayPlus.options = new Options(IntegrationCommerceCodes.WEBPAY_PLUS_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration);
   };
 
   /**
    * This method configures the module to use Webpay Plus Mall in the Integration environment.
    */
   export const configureForTestingMall = () => {
-    WebpayPlus.options = new Options(CommerceCodeIntegrationConstants.WEBPAY_PLUS_MALL, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    WebpayPlus.options = new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration);
   };
 
   /**
    * This method configures the module to use Webpay Plus Mall Deferred in the Integration environment.
    */
   export const configureForTestingMallDeferred = () => {
-    WebpayPlus.options = new Options(CommerceCodeIntegrationConstants.WEBPAY_PLUS_MALL_DEFERRED, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    WebpayPlus.options = new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration);
   };
 }
 

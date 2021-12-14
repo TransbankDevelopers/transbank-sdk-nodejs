@@ -1,5 +1,5 @@
-import ApiKeyIntegrationConstants from '../../common/integration_api_keys';
-import CommerceCodeIntegrationConstants from '../../common/integration_commerce_codes';
+import IntegrationApiKeys from '../../common/integration_api_keys';
+import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
 import Environment from '../common/environment';
 import Options from '../../common/options';
 import _Transaction from './transaction';
@@ -46,7 +46,7 @@ module WebpayPlusModal {
    * This method configures the module to use Webpay Plus in the Integration environment.
    */
    export const configureWebpayPlusForTesting = () => {
-    WebpayPlusModal.options = new Options(CommerceCodeIntegrationConstants.WEBPAY_PLUS_MODAL, ApiKeyIntegrationConstants.WEBPAY, Environment.Integration);
+    WebpayPlusModal.options = new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MODAL, IntegrationApiKeys.WEBPAY, Environment.Integration);
   };
 
 
