@@ -15,7 +15,7 @@ y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.ht
 - Se actualiza 'axios' hacia la versión '0.21.4'
 - Se refactoriza y migra todos los productos desde clases estáticas a clases instanciables
 - Se unifica 'Transaction' y 'DeferredTransaction' en WebpayPlus
-- Se unifica 'MallTransaction' y 'MallDeferredTransaction' en WebpayPlus y Oneclick
+- Se unifica 'MallTransaction' y 'MallDeferredTransaction' en WebpayPlus y Oneclick Mall
 - Se reordenan los parámetros del método capture de WebpayPlus Mall a 'capture(token: string, buyOrder: string, authorizationCode: string, captureAmount: number)'
 - Se reordenan los parámetros del método capture de Oneclick a 'capture(childCommerceCode: string, childBuyOrder: string, authorizationCode: string, captureAmount: number)'
 - Se reordenan los parámetros del método create de Transacción Completa Mall a 'create(buyOrder: string, sessionId: string, cardNumber: string, cardExpirationDate: string, details: Array, cvv: number | undefined)'
