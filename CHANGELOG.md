@@ -5,6 +5,28 @@ Todos los cambios notables a este proyecto serán docuemntados en este archivo.
 El formato está basado en [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2021-12-14
+
+### Changed
+
+- Se migra el API desde la versión 1.0 a la versión 1.2
+- Ahora el método de retorno al crear la transacción en WebPayPlus debe tener soporte GET (cuando es exitosa) y POST (cuando se retorna sin concluir el ingreso de la tarjeta)
+- Ahora el método de retorno al inscribirse en Oneclick Mall debe tener soporte GET (cuando es exitosa) y POST (cuando se retorna sin concluir la inscripción)
+- Se actualiza 'axios' hacia la versión '0.21.4'
+- Se refactoriza y migra todos los productos desde clases estáticas a clases instanciables
+- Se unifica 'Transaction' y 'DeferredTransaction' en WebpayPlus
+- Se unifica 'MallTransaction' y 'MallDeferredTransaction' en WebpayPlus y Oneclick Mall
+- Se reordenan los parámetros del método capture de WebpayPlus Mall a 'capture(token: string, buyOrder: string, authorizationCode: string, captureAmount: number)'
+- Se reordenan los parámetros del método capture de Oneclick Mall a 'capture(childCommerceCode: string, childBuyOrder: string, authorizationCode: string, captureAmount: number)'
+- Se reordenan los parámetros del método create de Transacción Completa Mall a 'create(buyOrder: string, sessionId: string, cardNumber: string, cardExpirationDate: string, details: Array, cvv: number | undefined)'
+
+### Added
+
+- Se agrega soporte a Webpay Modal
+- Se agregan validaciones de obligatoriedad y tamaño de los parámetros a los métodos de WebpayPlus, Oneclick Mall, Webpay Modal, Transacción Completa
+- Se agrega una clase de constantes con los códigos de comercio de integración: 'IntegrationCommerceCodes'
+- Se agrega una clase de constantes con las claves de comercio de integración: 'IntegrationApiKeys'
+
 ## [2.1.3] - 2021-02-17
 
 ### Added
