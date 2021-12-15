@@ -23,7 +23,7 @@ y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.ht
 ### Added
 
 - Se agrega soporte a Webpay Modal
-- Se agregan validaciones de obligatoriedad y tamaño de los parámetros a los métodos de WebpayPlus, Oneclick, Webpay Modal, Transacción Completa
+- Se agregan validaciones de obligatoriedad y tamaño de los parámetros a los métodos de WebpayPlus, Oneclick Mall, Webpay Modal, Transacción Completa
 - Se agrega una clase de constantes con los códigos de comercio de integración: 'IntegrationCommerceCodes'
 - Se agrega una clase de constantes con las claves de comercio de integración: 'IntegrationApiKeys'
 
