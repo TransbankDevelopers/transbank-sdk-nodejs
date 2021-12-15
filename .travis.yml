@@ -9,8 +9,6 @@ node_js:
 cache:
   directories:
     - node_modules
-before_install:
-  - npm update
 install:
   - npm install
 script:
