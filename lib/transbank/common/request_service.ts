@@ -35,7 +35,8 @@ const RequestService = {
       })
       .catch((error) => {
         let response = error.response;
-        throw new TransbankError(error, response.data.error_message);
+        let msg = response?.data?.error_message;
+        throw new TransbankError(error, msg);
       });
   },
 };
