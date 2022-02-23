@@ -5,6 +5,13 @@ Todos los cambios notables a este proyecto serán docuemntados en este archivo.
 El formato está basado en [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.0.1] - 2022-02-23
+
+### Changed
+
+- Se actualizó la librería 'typedoc' versión '0.20.24' a versión '0.22.12'
+- Se actualizó la dependencia 'follow-redirects' versión '1.14.7' a versión '1.14.8'
+
 ## [3.0.0] - 2021-12-14
 
 ### Changed
