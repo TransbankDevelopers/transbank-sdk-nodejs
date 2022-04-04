@@ -5,6 +5,12 @@ Todos los cambios notables a este proyecto serán docuemntados en este archivo.
 El formato está basado en [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.0.2] - 2022-04-04
+
+### Changed
+
+- Se actualizó la librería 'minimist' versión '1.2.5' a versión '1.2.6'
+
 ## [3.0.1] - 2022-02-23
 
 ### Changed
