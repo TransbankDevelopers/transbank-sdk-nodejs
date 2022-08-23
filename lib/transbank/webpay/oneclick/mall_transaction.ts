@@ -9,6 +9,7 @@ import ApiConstants from '../../common/api_constants';
 import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
 import IntegrationApiKeys from '../../common/integration_api_keys';
 import Environment from '../common/environment';
+import { DeferredCaptureHistoryRequest, IncreaseAmountRequest, IncreaseAuthorizationDateRequest, ReversePreAuthorizedAmountRequest } from '../requests';
 
 class MallTransaction extends BaseTransaction {
   
@@ -103,6 +104,65 @@ class MallTransaction extends BaseTransaction {
     let captureRequest = new CaptureRequest(childCommerceCode, childBuyOrder, captureAmount, authorizationCode);
     return RequestService.perform(captureRequest, this.options);
   }
+
+  async increaseAmount (
+    childCommerceCode: string,
+    childBuyOrder: string,
+    authorizationCode: string,
+    amount: number
+  ){
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new IncreaseAmountRequest(`${ApiConstants.ONECLICK_ENDPOINT}/transactions/amount`, childCommerceCode, childBuyOrder, authorizationCode, amount),
+      this.options
+    );
+  }
+
+  async increaseAuthorizationDate(
+    childCommerceCode: string,
+    childBuyOrder: string,
+    authorizationCode: string
+  ){
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new IncreaseAuthorizationDateRequest(`${ApiConstants.ONECLICK_ENDPOINT}/transactions/authorization_date`, childCommerceCode, childBuyOrder, authorizationCode),
+      this.options
+    );
+  }
+
+  async reversePreAuthorizedAmount(
+    childCommerceCode: string,
+    childBuyOrder: string,
+    authorizationCode: string,
+    amount: number
+  ){
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new ReversePreAuthorizedAmountRequest(`${ApiConstants.ONECLICK_ENDPOINT}/transactions/reverse/amount`, childCommerceCode, childBuyOrder, authorizationCode, amount),
+      this.options
+    );
+  }
+
+  async deferredCaptureHistory(
+    childCommerceCode: string,
+    childBuyOrder: string,
+    authorizationCode: string
+  ){
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new DeferredCaptureHistoryRequest(`${ApiConstants.ONECLICK_ENDPOINT}/transactions/details`, childCommerceCode, childBuyOrder, authorizationCode),
+      this.options
+    );
+  }
+
 };
 
 export default MallTransaction;

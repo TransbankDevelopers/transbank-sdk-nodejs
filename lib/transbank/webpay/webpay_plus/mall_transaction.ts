@@ -10,6 +10,7 @@ import IntegrationApiKeys from '../../common/integration_api_keys';
 import Environment from '../common/environment';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
+import { DeferredCaptureHistoryRequest, IncreaseAmountRequest, IncreaseAuthorizationDateRequest, ReversePreAuthorizedAmountRequest } from '../requests';
 
 class MallTransaction extends BaseTransaction {
 
@@ -117,6 +118,72 @@ class MallTransaction extends BaseTransaction {
     ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
     return RequestService.perform(
       new MallCaptureRequest(token, childCommerceCode, buyOrder, authorizationCode, captureAmount),
+      this.options
+    );
+  }
+
+  async increaseAmount (
+    token: string,
+    childCommerceCode: string,
+    childBuyOrder: string,
+    authorizationCode: string,
+    amount: number
+  ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new IncreaseAmountRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/amount`, childCommerceCode, childBuyOrder, authorizationCode, amount),
+      this.options
+    );
+  }
+
+  async increaseAuthorizationDate(
+    token: string,
+    childCommerceCode: string,
+    childBuyOrder: string,
+    authorizationCode: string
+  ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new IncreaseAuthorizationDateRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/authorization_date`, childCommerceCode, childBuyOrder, authorizationCode),
+      this.options
+    );
+  }
+
+  async reversePreAuthorizedAmount(
+    token: string,
+    childCommerceCode: string,
+    childBuyOrder: string,
+    authorizationCode: string,
+    amount: number
+  ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new ReversePreAuthorizedAmountRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/reverse/amount`, childCommerceCode, childBuyOrder, authorizationCode, amount),
+      this.options
+    );
+  }
+
+  async deferredCaptureHistory(
+    token: string,
+    childCommerceCode: string,
+    childBuyOrder: string,
+    authorizationCode: string
+  ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new DeferredCaptureHistoryRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/details`, childCommerceCode, childBuyOrder, authorizationCode),
       this.options
     );
   }
