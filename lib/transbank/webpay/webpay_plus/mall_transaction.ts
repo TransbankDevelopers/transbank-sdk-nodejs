@@ -122,6 +122,16 @@ class MallTransaction extends BaseTransaction {
     );
   }
 
+  /** Increase pre-authorizate amount.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   * @param authorizationCode Transaction's authorization code
+   * @param amount Amount to be increase
+   */
   async increaseAmount (
     token: string,
     childCommerceCode: string,
@@ -139,6 +149,15 @@ class MallTransaction extends BaseTransaction {
     );
   }
 
+  /** Increase authorization date.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   * @param authorizationCode Transaction's authorization code
+   */
   async increaseAuthorizationDate(
     token: string,
     childCommerceCode: string,
@@ -155,6 +174,16 @@ class MallTransaction extends BaseTransaction {
     );
   }
 
+  /** Reverse pre-authorizate amount.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   * @param authorizationCode Transaction's authorization code
+   * @param amount Amount to be increase
+   */
   async reversePreAuthorizedAmount(
     token: string,
     childCommerceCode: string,
@@ -172,6 +201,14 @@ class MallTransaction extends BaseTransaction {
     );
   }
 
+  /** List deferred capture history.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   */
   async deferredCaptureHistory(
     token: string,
     childCommerceCode: string,

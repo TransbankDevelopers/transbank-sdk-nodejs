@@ -139,6 +139,16 @@ class Transaction extends BaseTransaction {
       let captureRequest = new CaptureRequest(token, buyOrder, authorizationCode, captureAmount);
       return RequestService.perform(captureRequest, this.options);
   }
+
+  /** Increase pre-authorizate amount.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param buyOrder Transaction's buy order
+   * @param authorizationCode Transaction's authorization code
+   * @param amount Amount to be increase
+   */
   async increaseAmount (
     token: string,
     buyOrder: string,
@@ -154,6 +164,14 @@ class Transaction extends BaseTransaction {
     );
   }
 
+  /** Increase authorization date.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param buyOrder Transaction's buy order
+   * @param authorizationCode Transaction's authorization code
+   */
   async increaseAuthorizationDate(
     token: string,
     buyOrder: string,
@@ -168,6 +186,15 @@ class Transaction extends BaseTransaction {
     );
   }
 
+  /** Reverse pre-authorizate amount.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param buyOrder Transaction's buy order
+   * @param authorizationCode Transaction's authorization code
+   * @param amount Amount to be decrease
+   */
   async reversePreAuthorizedAmount(
     token: string,
     buyOrder: string,
@@ -183,6 +210,12 @@ class Transaction extends BaseTransaction {
     );
   }
 
+  /** List deferred capture history.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   */
   async deferredCaptureHistory(
     token: string
   ){

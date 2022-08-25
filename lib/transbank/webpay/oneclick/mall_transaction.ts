@@ -105,6 +105,15 @@ class MallTransaction extends BaseTransaction {
     return RequestService.perform(captureRequest, this.options);
   }
 
+  /** Increase pre-authorizate amount.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   * @param authorizationCode Transaction's authorization code
+   * @param amount Amount to be increase
+   */
   async increaseAmount (
     childCommerceCode: string,
     childBuyOrder: string,
@@ -120,6 +129,14 @@ class MallTransaction extends BaseTransaction {
     );
   }
 
+  /** Increase authorization date.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   * @param authorizationCode Transaction's authorization code
+   */
   async increaseAuthorizationDate(
     childCommerceCode: string,
     childBuyOrder: string,
@@ -134,6 +151,15 @@ class MallTransaction extends BaseTransaction {
     );
   }
 
+  /** Reverse pre-authorizate amount.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   * @param authorizationCode Transaction's authorization code
+   * @param amount Amount to be increase
+   */
   async reversePreAuthorizedAmount(
     childCommerceCode: string,
     childBuyOrder: string,
@@ -149,6 +175,14 @@ class MallTransaction extends BaseTransaction {
     );
   }
 
+  /** List deferred capture history.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   * @param authorizationCode Transaction's authorization code
+   */
   async deferredCaptureHistory(
     childCommerceCode: string,
     childBuyOrder: string,
