@@ -175,15 +175,13 @@ class MallTransaction extends BaseTransaction {
   async deferredCaptureHistory(
     token: string,
     childCommerceCode: string,
-    childBuyOrder: string,
-    authorizationCode: string
+    childBuyOrder: string
   ){
     ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
     ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
-    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
     return RequestService.perform(
-      new DeferredCaptureHistoryRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/details`, childCommerceCode, childBuyOrder, authorizationCode),
+      new DeferredCaptureHistoryRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/details`, childCommerceCode, childBuyOrder, ''),
       this.options
     );
   }
