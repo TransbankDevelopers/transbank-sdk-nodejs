@@ -10,6 +10,7 @@ import IntegrationApiKeys from '../../common/integration_api_keys';
 import Environment from '../common/environment';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
+import { DeferredCaptureHistoryRequest, IncreaseAmountRequest, IncreaseAuthorizationDateRequest, ReversePreAuthorizedAmountRequest } from '../requests';
 
 class MallTransaction extends BaseTransaction {
 
@@ -117,6 +118,107 @@ class MallTransaction extends BaseTransaction {
     ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
     return RequestService.perform(
       new MallCaptureRequest(token, childCommerceCode, buyOrder, authorizationCode, captureAmount),
+      this.options
+    );
+  }
+
+  /** Increase pre-authorizate amount.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   * @param authorizationCode Transaction's authorization code
+   * @param amount Amount to be increase
+   */
+  async increaseAmount (
+    token: string,
+    childCommerceCode: string,
+    childBuyOrder: string,
+    authorizationCode: string,
+    amount: number
+  ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new IncreaseAmountRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/amount`, childCommerceCode, childBuyOrder, authorizationCode, amount),
+      this.options
+    );
+  }
+
+  /** Increase authorization date.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   * @param authorizationCode Transaction's authorization code
+   */
+  async increaseAuthorizationDate(
+    token: string,
+    childCommerceCode: string,
+    childBuyOrder: string,
+    authorizationCode: string
+  ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new IncreaseAuthorizationDateRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/authorization_date`, childCommerceCode, childBuyOrder, authorizationCode),
+      this.options
+    );
+  }
+
+  /** Reverse pre-authorizate amount.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   * @param authorizationCode Transaction's authorization code
+   * @param amount Amount to be increase
+   */
+  async reversePreAuthorizedAmount(
+    token: string,
+    childCommerceCode: string,
+    childBuyOrder: string,
+    authorizationCode: string,
+    amount: number
+  ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
+    return RequestService.perform(
+      new ReversePreAuthorizedAmountRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/reverse/amount`, childCommerceCode, childBuyOrder, authorizationCode, amount),
+      this.options
+    );
+  }
+
+  /** List deferred capture history.
+   *
+   * Your commerce code must be configured to support deferred capture.
+   *
+   * @param token Unique transaction identifier
+   * @param childCommerceCode Child commerce code, used to indetify the correct child transaction
+   * @param childBuyOrder Child buy order, used to identify the correct child transaction.
+   */
+  async deferredCaptureHistory(
+    token: string,
+    childCommerceCode: string,
+    childBuyOrder: string
+  ){
+    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
+    ValidationUtil.hasTextWithMaxLength(childCommerceCode, ApiConstants.COMMERCE_CODE_LENGTH, "childCommerceCode");
+    ValidationUtil.hasTextWithMaxLength(childBuyOrder, ApiConstants.BUY_ORDER_LENGTH, "childBuyOrder");
+    return RequestService.perform(
+      new DeferredCaptureHistoryRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/details`, childCommerceCode, childBuyOrder, ''),
       this.options
     );
   }
