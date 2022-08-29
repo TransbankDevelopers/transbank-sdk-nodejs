@@ -17,6 +17,18 @@ const getHeaders = (
   };
 };
 
+const getPatpassHeaders = (
+  options: Options,
+  commerceCodeHeader: string = 'commercecode',
+  apiKeyHeader: string = 'Authorization'
+) => {
+  return {
+    [commerceCodeHeader]: options.commerceCode,
+    [apiKeyHeader]: options.apiKey,
+    'Content-Type': CONTENT_TYPE,
+  };
+};
+
 const RequestService = {
   perform: async (request: RequestBase, options: Options) => {
     let requestHeaders = getHeaders(options);
@@ -35,9 +47,32 @@ const RequestService = {
       })
       .catch((error) => {
         let response = error.response;
-        throw new TransbankError(error, response.data.error_message);
+        let msg = response?.data?.error_message || 'Unexpected error';
+        throw new TransbankError(error, msg);
       });
   },
+  performPatpass: async (request: RequestBase, options: Options) => {
+    let requestHeaders = getPatpassHeaders(options);
+    return axios({
+      method: request.method,
+      url: options.environment + request.endpoint,
+      headers: requestHeaders,
+      timeout: 10000,
+      data: request.toJson(),
+    })
+      .then((response) => {
+        if (response.status == 204) {
+          return true;
+        }
+        return response.data;
+      })
+      .catch((error) => {
+        console.log(error)
+        let response = error.response;
+        let msg = (response?.data?.code || response?.data?.description) ? (`${response.data.code} - ${response.data.description}`) : 'Unexpected error';
+        throw new TransbankError(error, msg);
+      });
+  }
 };
 
 export default RequestService;
