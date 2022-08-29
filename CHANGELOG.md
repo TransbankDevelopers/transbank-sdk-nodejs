@@ -5,6 +5,15 @@ Todos los cambios notables a este proyecto serán docuemntados en este archivo.
 El formato está basado en [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2022-08-29
+
+### Changed
+
+- Se migra el API desde la versión 1.2 a la versión 1.3
+- Se agrega los métodos 'increaseAmount', 'increaseAuthorizationDate', 'reversePreAuthorizedAmount', 'deferredCaptureHistory' a las versiones diferidas de WebpayPlus, WebpayPlus Mall, Oneclick Mall, Transaccion Completa y Transaccion Completa Mall
+- Se agrega soporte a Patpass Comercio
+- Se mejora el tratamiento de errores, retornando el mensaje 'Unexpected error' en caso de que Transbank no retorne alguno
+
 ## [3.0.2] - 2022-04-04
 
 ### Changed
