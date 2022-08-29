@@ -10,9 +10,12 @@ y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.ht
 ### Changed
 
 - Se migra el API desde la versión 1.2 a la versión 1.3
+- Se mejora el tratamiento de errores, retornando el mensaje 'Unexpected error' en caso de que Transbank no retorne alguno
+
+### Added
+
 - Se agrega los métodos 'increaseAmount', 'increaseAuthorizationDate', 'reversePreAuthorizedAmount', 'deferredCaptureHistory' a las versiones diferidas de WebpayPlus, WebpayPlus Mall, Oneclick Mall, Transaccion Completa y Transaccion Completa Mall
 - Se agrega soporte a Patpass Comercio
-- Se mejora el tratamiento de errores, retornando el mensaje 'Unexpected error' en caso de que Transbank no retorne alguno
 
 ## [3.0.2] - 2022-04-04
 
