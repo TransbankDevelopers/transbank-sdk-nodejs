@@ -1,6 +1,6 @@
 {
   "name": "transbank-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Transbank SDK for Node.js",
   "main": "index.js",
   "scripts": {
