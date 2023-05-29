@@ -99,9 +99,8 @@ Con eso Travis CI generará automáticamente una nueva versión de la librería 
 Si descubres una falla de seguridad dentro de este proyecto, por favor, notifícanos por correo electrónico a transbankdevelopers@continuum.cl. Tomaremos el caso con la mayor celeridad. 
 
 
-### Para marcar una version como Latest
-Cuando se desea forzar una versión especifica de la libreria como la última (versión latest o la que se instalará por defecto cuando se usa el comando 'npm i transbank-sdk') se debe hacer lo siguiente:
+### Para marcar una versión como Latest
+Cuando se desea forzar una versión especifica de la librería como la última (versión `latest` o la que se instalará por defecto cuando se usa el comando `npm i transbank-sdk`) se debe hacer lo siguiente:
 
-1. Agregar el usuario 'transbankdevelopers' desde la consola del sistema operativo con el comando 'npm adduser'.
-2. Ejecutar el comando 'npm dist-tag add transbank-sdk@xxx latest'
-
+1. Agregar el usuario `transbankdevelopers` desde la consola del sistema operativo con el comando `npm adduser`.
+2. Ejecutar el comando `npm dist-tag add transbank-sdk@xxx latest`
