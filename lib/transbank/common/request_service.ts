@@ -36,7 +36,7 @@ const RequestService = {
       method: request.method,
       url: options.environment + request.endpoint,
       headers: requestHeaders,
-      timeout: 10000,
+      timeout: options.timeout,
       data: request.toJson(),
     })
       .then((response) => {
@@ -67,12 +67,14 @@ const RequestService = {
         return response.data;
       })
       .catch((error) => {
-        console.log(error)
         let response = error.response;
-        let msg = (response?.data?.code || response?.data?.description) ? (`${response.data.code} - ${response.data.description}`) : 'Unexpected error';
+        let msg =
+          response?.data?.code || response?.data?.description
+            ? `${response.data.code} - ${response.data.description}`
+            : 'Unexpected error';
         throw new TransbankError(error, msg);
       });
-  }
+  },
 };
 
 export default RequestService;
