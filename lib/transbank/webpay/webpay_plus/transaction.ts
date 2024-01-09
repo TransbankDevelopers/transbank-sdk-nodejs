@@ -8,7 +8,6 @@ import IntegrationApiKeys from '../../common/integration_api_keys';
 import Environment from '../common/environment';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
-import { DeferredCaptureHistoryRequest, GetDeferredCaptureHistoryRequest, IncreaseAmountRequest, IncreaseAuthorizationDateRequest, ReversePreAuthorizedAmountRequest } from '../requests';
 
 /**
  * Contains methods to interact with WebpayPlus API
@@ -98,93 +97,6 @@ class Transaction extends BaseTransaction {
     return RequestService.perform(
       new CaptureRequest(token, buyOrder, authorizationCode, captureAmount), this.options);
    }
-
-   /** Increase pre-authorizate amount.
-   *
-   * Your commerce code must be configured to support deferred capture.
-   *
-   * @param token Unique transaction identifier
-   * @param buyOrder Transaction's buy order
-   * @param authorizationCode Transaction's authorization code
-   * @param amount Amount to be increase
-   */
-   async increaseAmount (
-    token: string,
-    buyOrder: string,
-    authorizationCode: string,
-    amount: number
-  ){
-    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
-    ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
-    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
-    return RequestService.perform(
-      new IncreaseAmountRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/amount`, this.options.commerceCode, buyOrder, authorizationCode, amount),
-      this.options
-    );
-  }
-
-  /** Increase authorization date.
-   *
-   * Your commerce code must be configured to support deferred capture.
-   *
-   * @param token Unique transaction identifier
-   * @param buyOrder Transaction's buy order
-   * @param authorizationCode Transaction's authorization code
-   */
-  async increaseAuthorizationDate(
-    token: string,
-    buyOrder: string,
-    authorizationCode: string
-  ){
-    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
-    ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
-    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
-    return RequestService.perform(
-      new IncreaseAuthorizationDateRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/authorization_date`, this.options.commerceCode, buyOrder, authorizationCode),
-      this.options
-    );
-  }
-
-  /** Reverse pre-authorizate amount.
-   *
-   * Your commerce code must be configured to support deferred capture.
-   *
-   * @param token Unique transaction identifier
-   * @param buyOrder Transaction's buy order
-   * @param authorizationCode Transaction's authorization code
-   * @param amount Amount to be decrease
-   */
-  async reversePreAuthorizedAmount(
-    token: string,
-    buyOrder: string,
-    authorizationCode: string,
-    amount: number
-  ){
-    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
-    ValidationUtil.hasTextWithMaxLength(buyOrder, ApiConstants.BUY_ORDER_LENGTH, "buyOrder");
-    ValidationUtil.hasTextWithMaxLength(authorizationCode, ApiConstants.AUTHORIZATION_CODE_LENGTH, "authorizationCode");
-    return RequestService.perform(
-      new ReversePreAuthorizedAmountRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/reverse/amount`, this.options.commerceCode, buyOrder, authorizationCode, amount),
-      this.options
-    );
-  }
-
-  /** List deferred capture history.
-   *
-   * Your commerce code must be configured to support deferred capture.
-   *
-   * @param token Unique transaction identifier
-   */
-  async deferredCaptureHistory(
-    token: string
-  ){
-    ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
-
-    return RequestService.perform(
-      new GetDeferredCaptureHistoryRequest(`${ApiConstants.WEBPAY_ENDPOINT}/transactions/${token}/details`),
-      this.options
-    );
-  }
 }
 
 export default Transaction;
