@@ -5,6 +5,9 @@
   "main": "dist/es5/index.js",
   "module": "dist/es6/index.js",
   "sideEffects": false,
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "build": "rm -rf dist/ && node_modules/typedoc/bin/typedoc lib/index.ts --out ./docs && tsc && tsc --build tsconfig.es5.json",
     "test": "jest"
