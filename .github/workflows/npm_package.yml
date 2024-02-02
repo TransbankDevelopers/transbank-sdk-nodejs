@@ -24,14 +24,6 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm install
-      - name: Verify if tag is in master branch
-        run: |
-          TAG_COMMIT=$(git rev-list -n 1 ${{ github.ref }})
-          MASTER_COMMIT=$(git rev-list -n 1 master)
-          if ! git merge-base --is-ancestor $TAG_COMMIT $MASTER_COMMIT; then
-            echo "Tag is not in master branch."
-            exit 1
-          fi
       - name: Build (if needed for publication)
         run: npm run build
       - name: npm publish
