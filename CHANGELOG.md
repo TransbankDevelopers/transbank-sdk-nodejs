@@ -5,6 +5,20 @@ Todos los cambios notables a este proyecto serán docuemntados en este archivo.
 El formato está basado en [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [5.0.0] - 2024-03-01
+
+### Changed
+
+- Downgrade del API de la versión 1.3 a la versión 1.2
+- Se actualizó Node.js a la versión 18
+- Se agregó timeout configurable a todas las peticiones en la clase Options.
+- Se actualizó la librería 'axios' versión '1.6.4' a versión '1.6.5'
+- Se actualizó la librería 'jest' versión '27.4.4' a versión '29.7.0'
+- Se actualizó la librería 'ts-jest' versión '27.1.1' a versión '29.1.2'
+- Se actualizó la librería 'typedoc' versión '0.22.12' a versión '0.25.7'
+- Se actualizó la librería 'typescript' versión '4.1.4' a versión '5.3.3'
+- Se actualizó la librería '@types/jest' versión '27.0.0' a versión '29.5.11'
+
 ## [4.0.0] - 2022-08-29
 
 ### Changed
