@@ -57,7 +57,7 @@ const RequestService = {
       method: request.method,
       url: options.environment + request.endpoint,
       headers: requestHeaders,
-      timeout: 10000,
+      timeout: options.timeout,
       data: request.toJson(),
     })
       .then((response) => {
