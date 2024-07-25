@@ -12,7 +12,7 @@ class Options {
    * Production, each has a unique URL. */
   environment: string;
   /** Timeout for requests in milliseconds */
-  timeout: number;
+  timeout?: number;
 
   /**
    * Create an instance of Options
