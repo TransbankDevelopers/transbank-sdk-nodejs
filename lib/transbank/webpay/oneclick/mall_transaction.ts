@@ -1,4 +1,3 @@
-import Oneclick from '.';
 import Options from '../../common/options';
 import TransactionDetail from '../common/transaction_detail';
 import BaseTransaction from '../../common/base_transaction';
@@ -6,8 +5,6 @@ import RequestService from '../../common/request_service';
 import { AuthorizeRequest, CaptureRequest, RefundRequest, StatusRequest } from './requests';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
-import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
-import IntegrationApiKeys from '../../common/integration_api_keys';
 import Environment from '../common/environment';
 
 class MallTransaction extends BaseTransaction {
@@ -17,8 +14,31 @@ class MallTransaction extends BaseTransaction {
    * @param options (Optional) You can pass options to use a custom configuration.
    */
   constructor(options: Options) { 
-    options = options || Oneclick.getDefaultOptions() || new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration);
     super(options);
+  }
+
+  /**
+   * Creates and returns an instance of `MallTransaction` configured for the integration environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `MallTransaction` configured for the test environment (Environment.Integration).
+   */
+  static buildForIntegration(commerceCode: string, apiKey: string): MallTransaction
+  {
+    return new MallTransaction(new Options(commerceCode, apiKey, Environment.Integration));
+  }
+
+  /**
+   * Creates and returns an instance of `MallTransaction` configured for the production environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `MallTransaction` configured for the production environment (Environment.Production).
+   */
+  static buildForProduction(commerceCode: string, apiKey: string): MallTransaction
+  {
+    return new MallTransaction(new Options(commerceCode, apiKey, Environment.Production));
   }
 
   /**
