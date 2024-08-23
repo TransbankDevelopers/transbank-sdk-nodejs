@@ -19,6 +19,30 @@ class Inscription extends BaseTransaction {
   }
 
   /**
+   * Creates and returns an instance of `Inscription` configured for the integration environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `Inscription` configured for the test environment (Environment.Integration).
+   */
+  static buildForIntegration(commerceCode: string, apiKey: string): Inscription
+  {
+    return new Inscription(new Options(commerceCode, apiKey, Environment.Integration));
+  }
+
+  /**
+   * Creates and returns an instance of `Inscription` configured for the production environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `Inscription` configured for the production environment (Environment.Production).
+   */
+  static buildForProduction(commerceCode: string, apiKey: string): Inscription
+  {
+    return new Inscription(new Options(commerceCode, apiKey, Environment.Production));
+  }
+
+  /**
    * Starts a card inscription process
    * @param url URL to which Transbank will redirect after cardholder finish enrolling their card
    * @param name Client's name
