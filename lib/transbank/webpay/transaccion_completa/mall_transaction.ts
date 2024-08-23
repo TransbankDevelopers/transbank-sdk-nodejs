@@ -20,8 +20,31 @@ class MallTransaction extends BaseTransaction {
    * @param options (Optional) You can pass options to use a custom configuration.
    */
    constructor(options: Options) { 
-    options = options || TransaccionCompleta.getDefaultOptions() || new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration);
     super(options);
+  }
+
+  /**
+   * Creates and returns an instance of `MallTransaction` configured for the integration environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `MallTransaction` configured for the test environment (Environment.Integration).
+   */
+  static buildForIntegration(commerceCode: string, apiKey: string): MallTransaction
+  {
+    return new MallTransaction(new Options(commerceCode, apiKey, Environment.Integration));
+  }
+
+  /**
+   * Creates and returns an instance of `MallTransaction` configured for the production environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `MallTransaction` configured for the production environment (Environment.Production).
+   */
+  static buildForProduction(commerceCode: string, apiKey: string): MallTransaction
+  {
+    return new MallTransaction(new Options(commerceCode, apiKey, Environment.Production));
   }
 
   /**
