@@ -1,11 +1,8 @@
-import TransaccionCompleta from '.';
 import Options from '../../common/options';
 import BaseTransaction from '../../common/base_transaction';
 import { CaptureRequest, CommitRequest, CreateRequest, InstallmentsRequest, RefundRequest, StatusRequest } from './requests';
 import RequestService from '../../common/request_service';
 import Environment from '../common/environment';
-import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
-import IntegrationApiKeys from '../../common/integration_api_keys';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
 
@@ -16,8 +13,31 @@ class Transaction extends BaseTransaction {
    * @param options (Optional) You can pass options to use a custom configuration.
    */
   constructor(options: Options) { 
-    options = options || TransaccionCompleta.getDefaultOptions() || new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration);
     super(options);
+  }
+
+  /**
+   * Creates and returns an instance of `Transaction` configured for the integration environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `Transaction` configured for the test environment (Environment.Integration).
+   */
+  static buildForIntegration(commerceCode: string, apiKey: string): Transaction
+  {
+    return new Transaction(new Options(commerceCode, apiKey, Environment.Integration));
+  }
+
+  /**
+   * Creates and returns an instance of `Transaction` configured for the production environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `Transaction` configured for the production environment (Environment.Production).
+   */
+  static buildForProduction(commerceCode: string, apiKey: string): Transaction
+  {
+    return new Transaction(new Options(commerceCode, apiKey, Environment.Production));
   }
 
   /**
