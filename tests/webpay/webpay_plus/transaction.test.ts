@@ -1,5 +1,5 @@
 import nock from 'nock';
-import { Environment, IntegrationApiKeys, IntegrationCommerceCodes, Options, WebpayPlus } from '../../../lib';
+import { Environment, IntegrationApiKeys, IntegrationCommerceCodes, WebpayPlus } from '../../../lib';
 import ApiConstants from '../../../lib/transbank/common/api_constants';
 
 describe('WebpayPlusTest', () => {

@@ -1,4 +1,3 @@
-import TransaccionCompleta from '.';
 import Options from '../../common/options';
 import InstallmentDetail from '../common/installments_detail';
 import TransaccionCompletaCommitDetail from './common/commit_detail';
@@ -8,8 +7,6 @@ import { InstallmentsRequest, MallCommitRequest, MallCreateRequest, MallRefundRe
 import RequestService from '../../common/request_service';
 import MallCaptureRequest from './requests/mall_capture_request';
 import Environment from '../common/environment';
-import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
-import IntegrationApiKeys from '../../common/integration_api_keys';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
 
