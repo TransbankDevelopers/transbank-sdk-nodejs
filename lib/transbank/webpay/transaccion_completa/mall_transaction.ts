@@ -17,7 +17,7 @@ class MallTransaction extends BaseTransaction {
 
   /**
    * Constructor class MallTransaction.
-   * @param options (Optional) You can pass options to use a custom configuration.
+   * @param options You can pass options to use a custom configuration.
    */
    constructor(options: Options) { 
     super(options);
