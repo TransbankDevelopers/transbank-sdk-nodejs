@@ -24,7 +24,7 @@ describe('WebpayPlusTest', () => {
         const buyOrder = 'order_123';
         const sessionId = 'session_123';
         const amount = 1000;
-        const returnUrl = "http://www.google.com";
+        const returnUrl = "https://www.google.com";
     
         const response = await WebpayPlus.Transaction
             .buildForIntegration(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY)

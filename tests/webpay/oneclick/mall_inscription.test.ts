@@ -17,7 +17,7 @@ describe('InscriptionOneclickMallTest', () => {
         };
         const username = "steve";
         const email = "steve.rogers@continuum.cl";
-        const returnUrl = "http://localhost:8081/oneclick-mall/finish";
+        const returnUrl = "https://localhost:8081/oneclick-mall/finish";
 
         nock(apiUrl)
             .post(`/inscriptions`)
