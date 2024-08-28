@@ -24,13 +24,13 @@ describe('PatpassComercioTest', () => {
             .post('/patInscription')
             .reply(200, mockResponse);
 
-        const urlRequest = 'http://localhost:8081/patpass-comercio/commit';
+        const urlRequest = 'https://localhost:8081/patpass-comercio/commit';
         const name = 'nombre';
         const firstLastName = 'apellido';
         const secondLastName = 'sapellido';
         const rut = '14140066-5';
         const serviceId = 'service123';
-        const finalUrl = 'http://localhost:8081/patpass-comercio/final';
+        const finalUrl = 'https://localhost:8081/patpass-comercio/final';
         const maxAmount = 0;
         const phoneNumber = '123456734';
         const mobileNumber = '123456723';

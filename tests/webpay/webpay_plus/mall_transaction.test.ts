@@ -21,7 +21,7 @@ describe('WebpayPlusMallTest', () => {
                 url: urlResponse
             });
 
-        const returnUrl = 'http://www.google.com';
+        const returnUrl = 'https://www.google.com';
 
         const buyOrder = randomInt(0, 1000).toString();
         const sessionId = randomInt(0, 1000).toString();
