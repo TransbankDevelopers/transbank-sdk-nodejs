@@ -21,8 +21,8 @@ describe('WebpayPlusTest', () => {
             .post('/transactions')
             .reply(200, mockResponse);
     
-        const buyOrder = String(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-        const sessionId = String(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+        const buyOrder = 'order_123';
+        const sessionId = 'session_123';
         const amount = 1000;
         const returnUrl = "http://www.google.com";
     
@@ -109,7 +109,7 @@ describe('WebpayPlusTest', () => {
             .reply(200, expectedResponse);
     
 
-        const buyOrder = Math.floor(Math.random() * 1000).toString();
+        const buyOrder = 'order_123';
         const authorization = '1213';
         const amount = 1000;
     

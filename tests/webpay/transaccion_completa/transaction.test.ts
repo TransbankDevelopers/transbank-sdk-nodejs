@@ -107,7 +107,7 @@ describe('FullTransactionTest', () => {
             .reply(200, expectedResponse);
     
 
-        const buyOrder = Math.floor(Math.random() * 1000).toString();
+        const buyOrder = 'order_123';
         const authorization = '1213';
         const amount = 1000;
     
