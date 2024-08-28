@@ -1,23 +1,43 @@
 import BaseTransaction from '../../common/base_transaction';
 import Options from '../../common/options';
-import Oneclick from '.';
 import { DeleteRequest, FinishRequest, StartRequest } from './requests';
 import RequestService from '../../common/request_service';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
-import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
-import IntegrationApiKeys from '../../common/integration_api_keys';
 import Environment from '../common/environment';
 
 class MallInscription extends BaseTransaction {
 
   /**
    * Constructor class MallInscription Oneclick.
-   * @param options (Optional) You can pass options to use a custom configuration.
+   * @param options You can pass options to use a custom configuration.
    */
    constructor(options: Options) { 
-    options = options || Oneclick.getDefaultOptions() || new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration);
     super(options);
+  }
+
+  /**
+   * Creates and returns an instance of `MallInscription` configured for the integration environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `MallInscription` configured for the test environment (Environment.Integration).
+   */
+  static buildForIntegration(commerceCode: string, apiKey: string): MallInscription
+  {
+    return new MallInscription(new Options(commerceCode, apiKey, Environment.Integration));
+  }
+
+  /**
+   * Creates and returns an instance of `MallInscription` configured for the production environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `MallInscription` configured for the production environment (Environment.Production).
+   */
+  static buildForProduction(commerceCode: string, apiKey: string): MallInscription
+  {
+    return new MallInscription(new Options(commerceCode, apiKey, Environment.Production));
   }
 
   /**
