@@ -1,8 +1,7 @@
 import { IntegrationApiKeys, IntegrationCommerceCodes, PatpassComercio } from "../../lib";
 import ApiConstants from "../../lib/transbank/common/api_constants";
 import Environment from "../../lib/transbank/patpass/common/environment";
-
-const nock = require('nock');
+import nock from 'nock';
 
 describe('PatpassComercioTest', () => {
     const apiUrl = `${Environment.Integration}${ApiConstants.PATPASS_COMERCIO_ENDPOINT}`;
