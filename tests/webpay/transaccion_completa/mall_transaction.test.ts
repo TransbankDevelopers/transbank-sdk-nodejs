@@ -40,7 +40,7 @@ describe('MallFullTransactionTest', () => {
               amountMallTwo,
               mallTwoCommerceCode,
               buyOrderMallTwo
-            ),
+            )
           ];
     
         nock(apiUrl)
@@ -84,7 +84,7 @@ describe('MallFullTransactionTest', () => {
                 idQueryInstallmentsTwo,
                 deferredPeriodIndexTwo,
                 false
-            ),
+            )
           ];
         const expectedResponse = generateJsonResponse();
 

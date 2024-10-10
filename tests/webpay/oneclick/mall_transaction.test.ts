@@ -36,7 +36,7 @@ describe('OneclickMallTest', () => {
               amountMallTwo,
               mallTwoCommerceCode,
               buyOrderMallTwo
-            ),
+            )
           ];
 
         nock(apiUrl)

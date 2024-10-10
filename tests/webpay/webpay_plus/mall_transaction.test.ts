@@ -44,7 +44,7 @@ describe('WebpayPlusMallTest', () => {
               amountMallTwo,
               mallTwoCommerceCode,
               buyOrderMallTwo
-            ),
+            )
           ];
 
         const response = await new WebpayPlus.MallTransaction(option)
