@@ -16,7 +16,6 @@ describe('MallFullTransactionTest', () => {
         const token = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
         const buyOrder = "O-" + randomInt(0, 1000).toString();
         const sessionId = "S-" + randomInt(0, 1000).toString();
-        const amount = 1000;
         const cvv = 123;
         const cardNumber = 'XXXXXXXXXXXX6623';
         const month = '12';
@@ -165,7 +164,6 @@ describe('MallFullTransactionTest', () => {
     });
 
     test('refund', async () => {
-        const url = `/${apiUrl}/transactions/${testToken}/refunds`;
         const type = 'REVERSED';
 
         nock(apiUrl)

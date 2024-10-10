@@ -95,7 +95,6 @@ describe('WebpayPlusMallTest', () => {
     });
 
     test('refund', async () => {
-        const url = `/${apiUrl}/transactions/${testToken}/refunds`;
         const type = 'REVERSED';
 
         nock(apiUrl)
