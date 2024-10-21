@@ -1,6 +1,5 @@
 import nock from 'nock';
-import { randomInt } from 'crypto';
-import { Environment, IntegrationApiKeys, IntegrationCommerceCodes, Options, TransactionDetail, WebpayPlus } from '../../../lib';
+import { Environment, IntegrationApiKeys, IntegrationCommerceCodes, Options, WebpayPlus } from '../../../lib';
 import ApiConstants from '../../../lib/transbank/common/api_constants';
 import { WEBPAY_MALL_TRANSACTION_CAPTURE_RESPONSE_MOCK, WEBPAY_MALL_TRANSACTION_STATUS_RESPONSE_MOCK } from '../../mocks/webpay_data';
 
@@ -13,63 +12,35 @@ describe('WebpayPlusMallTest', () => {
         nock.cleanAll();
     });
 
-    test('create', async () => {
-        const urlResponse = 'https://webpay3gint.transbank.cl/webpayserver/initTransaction';
-        nock(apiUrl)
-            .post('/transactions')
-            .reply(200, {
-                token: testToken,
-                url: urlResponse
-            });
-
-        const returnUrl = 'https://www.google.com';
-        const buyOrder = randomInt(0, 1000).toString();
-        const sessionId = randomInt(0, 1000).toString();
-        const buyOrderMallOne = randomInt(0, 1000).toString();
-        const amountMallOne = 1000;
-        const mallOneCommerceCode = '597055555536';
-        const buyOrderMallTwo = randomInt(0, 1000).toString();
-        const amountMallTwo = 1000;
-        const mallTwoCommerceCode = '597055555537';
-
-        let mallDetails = [
-            new TransactionDetail(amountMallOne, mallOneCommerceCode, buyOrderMallOne),
-            new TransactionDetail(amountMallTwo, mallTwoCommerceCode, buyOrderMallTwo)
-          ];
-
-        const response = await new WebpayPlus.MallTransaction(option)
-            .create(buyOrder, sessionId, returnUrl, mallDetails);
-
-        expect(response.token).toBe(testToken);
-        expect(response.url).toBe(urlResponse);
-    });
-
-    test('commit', async () => {
+    test('status', async () => {
         const expectedResponse = WEBPAY_MALL_TRANSACTION_STATUS_RESPONSE_MOCK;
         nock(apiUrl)
-            .put(`/transactions/${testToken}`)
+            .get(`/transactions/${testToken}`)
             .reply(200, expectedResponse);
 
         const response = await new WebpayPlus.MallTransaction(option)
-            .commit(testToken);
+            .status(testToken);
         testResponse(response, expectedResponse);
     });
 
-    test('refund', async () => {
-        const type = 'REVERSED';
-
+    test('capture', async () => {
+        const expectedResponse = WEBPAY_MALL_TRANSACTION_CAPTURE_RESPONSE_MOCK;
         nock(apiUrl)
-            .post(`/transactions/${testToken}/refunds`)
-            .reply(200, { type });
-
-        const childBuyOrder = '500894028';
-        const childCommerceCode = '597055555536';
+            .put(`/transactions/${testToken}/capture`)
+            .reply(200, expectedResponse);
+    
+        const commerceCode = "597055555537";
+        const buyOrder = 'order_123';
+        const authorization = '1213';
         const amount = 1000;
-
+    
         const response = await new WebpayPlus.MallTransaction(option)
-            .refund(testToken, childBuyOrder, childCommerceCode, amount);
-
-        expect(response.type).toBe(type);
+            .capture(commerceCode, testToken, buyOrder, authorization, amount);
+    
+        expect(response.authorization_code).toBe(expectedResponse.authorization_code);
+        expect(response.authorization_date).toBe(expectedResponse.authorization_date);
+        expect(response.captured_amount).toBe(expectedResponse.captured_amount);
+        expect(response.response_code).toBe(expectedResponse.response_code);
     });
 
     function testResponse(response: any, expectedResponse: any) {

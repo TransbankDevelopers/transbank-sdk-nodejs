@@ -30,7 +30,6 @@ test('the timeout parameter is set successfully', async () => {
   );
 
   const handleTimeout = (
-    resolve: (value?: unknown) => void,
     reject: (reason?: any) => void
   ): void => {
     setTimeout(() => {
