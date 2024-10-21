@@ -2,6 +2,7 @@ import nock from 'nock';
 import { randomInt } from 'crypto';
 import { Environment, IntegrationApiKeys, IntegrationCommerceCodes, Options, TransactionDetail, WebpayPlus } from '../../../lib';
 import ApiConstants from '../../../lib/transbank/common/api_constants';
+import { WEBPAY_MALL_TRANSACTION_CAPTURE_RESPONSE_MOCK, WEBPAY_MALL_TRANSACTION_STATUS_RESPONSE_MOCK } from '../../mocks/webpay_data';
 
 describe('WebpayPlusMallTest', () => {
     const apiUrl = `${Environment.Integration}${ApiConstants.WEBPAY_ENDPOINT}`;
@@ -22,29 +23,18 @@ describe('WebpayPlusMallTest', () => {
             });
 
         const returnUrl = 'https://www.google.com';
-
         const buyOrder = randomInt(0, 1000).toString();
         const sessionId = randomInt(0, 1000).toString();
-
         const buyOrderMallOne = randomInt(0, 1000).toString();
         const amountMallOne = 1000;
         const mallOneCommerceCode = '597055555536';
-
         const buyOrderMallTwo = randomInt(0, 1000).toString();
         const amountMallTwo = 1000;
         const mallTwoCommerceCode = '597055555537';
 
         let mallDetails = [
-            new TransactionDetail(
-              amountMallOne,
-              mallOneCommerceCode,
-              buyOrderMallOne
-            ),
-            new TransactionDetail(
-              amountMallTwo,
-              mallTwoCommerceCode,
-              buyOrderMallTwo
-            )
+            new TransactionDetail(amountMallOne, mallOneCommerceCode, buyOrderMallOne),
+            new TransactionDetail(amountMallTwo, mallTwoCommerceCode, buyOrderMallTwo)
           ];
 
         const response = await new WebpayPlus.MallTransaction(option)
@@ -55,43 +45,14 @@ describe('WebpayPlusMallTest', () => {
     });
 
     test('commit', async () => {
-        const expectedResponse = generateJsonResponse();
-
+        const expectedResponse = WEBPAY_MALL_TRANSACTION_STATUS_RESPONSE_MOCK;
         nock(apiUrl)
             .put(`/transactions/${testToken}`)
             .reply(200, expectedResponse);
 
         const response = await new WebpayPlus.MallTransaction(option)
             .commit(testToken);
-
-        expect(response.vci).toBe(expectedResponse.vci);
-        expect(response.buy_order).toBe(expectedResponse.buy_order);
-        expect(response.session_id).toBe(expectedResponse.session_id);
-        expect(response.card_detail.card_number).toBe(expectedResponse.card_detail.card_number);
-        expect(response.accounting_date).toBe(expectedResponse.accounting_date);
-        expect(response.accounting_date).toBe(expectedResponse.accounting_date);
-
-        let expectedDetail = expectedResponse.details[0];
-        let detail = response.details[0];
-        expect(detail.amount).toBe(expectedDetail.amount);
-        expect(detail.status).toBe(expectedDetail.status);
-        expect(detail.authorization_code).toBe(expectedDetail.authorization_code);
-        expect(detail.payment_type_code).toBe(expectedDetail.payment_type_code);
-        expect(detail.response_code).toBe(expectedDetail.response_code);
-        expect(detail.installments_number).toBe(expectedDetail.installments_number);
-        expect(detail.commerce_code).toBe(expectedDetail.commerce_code);
-        expect(detail.buy_order).toBe(expectedDetail.buy_order);
-
-        expectedDetail = expectedResponse.details[1];
-        detail = response.details[1];
-        expect(detail.amount).toBe(expectedDetail.amount);
-        expect(detail.status).toBe(expectedDetail.status);
-        expect(detail.authorization_code).toBe(expectedDetail.authorization_code);
-        expect(detail.payment_type_code).toBe(expectedDetail.payment_type_code);
-        expect(detail.response_code).toBe(expectedDetail.response_code);
-        expect(detail.installments_number).toBe(expectedDetail.installments_number);
-        expect(detail.commerce_code).toBe(expectedDetail.commerce_code);
-        expect(detail.buy_order).toBe(expectedDetail.buy_order);
+        testResponse(response, expectedResponse);
     });
 
     test('refund', async () => {
@@ -112,53 +73,18 @@ describe('WebpayPlusMallTest', () => {
     });
 
     test('status', async () => {
-        const expectedResponse = generateJsonResponse();
-
+        const expectedResponse = WEBPAY_MALL_TRANSACTION_STATUS_RESPONSE_MOCK;
         nock(apiUrl)
             .get(`/transactions/${testToken}`)
             .reply(200, expectedResponse);
 
         const response = await new WebpayPlus.MallTransaction(option)
             .status(testToken);
-
-        expect(response.vci).toBe(expectedResponse.vci);
-        expect(response.buy_order).toBe(expectedResponse.buy_order);
-        expect(response.session_id).toBe(expectedResponse.session_id);
-        expect(response.card_detail.card_number).toBe(expectedResponse.card_detail.card_number);
-        expect(response.accounting_date).toBe(expectedResponse.accounting_date);
-        expect(response.accounting_date).toBe(expectedResponse.accounting_date);
-
-        let expectedDetail = expectedResponse.details[0];
-        let detail = response.details[0];
-        expect(detail.amount).toBe(expectedDetail.amount);
-        expect(detail.status).toBe(expectedDetail.status);
-        expect(detail.authorization_code).toBe(expectedDetail.authorization_code);
-        expect(detail.payment_type_code).toBe(expectedDetail.payment_type_code);
-        expect(detail.response_code).toBe(expectedDetail.response_code);
-        expect(detail.installments_number).toBe(expectedDetail.installments_number);
-        expect(detail.commerce_code).toBe(expectedDetail.commerce_code);
-        expect(detail.buy_order).toBe(expectedDetail.buy_order);
-
-        expectedDetail = expectedResponse.details[1];
-        detail = response.details[1];
-        expect(detail.amount).toBe(expectedDetail.amount);
-        expect(detail.status).toBe(expectedDetail.status);
-        expect(detail.authorization_code).toBe(expectedDetail.authorization_code);
-        expect(detail.payment_type_code).toBe(expectedDetail.payment_type_code);
-        expect(detail.response_code).toBe(expectedDetail.response_code);
-        expect(detail.installments_number).toBe(expectedDetail.installments_number);
-        expect(detail.commerce_code).toBe(expectedDetail.commerce_code);
-        expect(detail.buy_order).toBe(expectedDetail.buy_order);
+        testResponse(response, expectedResponse);
     });
 
     test('capture', async () => {
-        const expectedResponse = {
-            authorization_code: "1213",
-            authorization_date: "2021-07-31T23:31:14.249Z",
-            captured_amount: 1000,
-            response_code: 0
-        };
-
+        const expectedResponse = WEBPAY_MALL_TRANSACTION_CAPTURE_RESPONSE_MOCK;
         nock(apiUrl)
             .put(`/transactions/${testToken}/capture`)
             .reply(200, expectedResponse);
@@ -177,38 +103,26 @@ describe('WebpayPlusMallTest', () => {
         expect(response.response_code).toBe(expectedResponse.response_code);
     });
 
-    function generateJsonResponse(): any {
-        return {
-            vci: "TSY",
-            buy_order: "1643997337",
-            session_id: "1134425622",
-            card_detail: {
-                card_number: "6623"
-            },
-            accounting_date: "0731",
-            transaction_date: "2021-07-31T23:31:14.249Z",
-            details: [
-                {
-                    amount: 1000,
-                    status: "AUTHORIZED",
-                    authorization_code: "1213",
-                    payment_type_code: "VN",
-                    response_code: 0,
-                    installments_number: 0,
-                    commerce_code: "597055555536",
-                    buy_order: "500894028"
-                },
-                {
-                    amount: 2000,
-                    status: "AUTHORIZED",
-                    authorization_code: "1213",
-                    payment_type_code: "VN",
-                    response_code: 0,
-                    installments_number: 0,
-                    commerce_code: "597055555537",
-                    buy_order: "1936357040"
-                }
-            ]
-        };
+    function testResponse(response: any, expectedResponse: any) {
+        expect(response.vci).toBe(expectedResponse.vci);
+        expect(response.buy_order).toBe(expectedResponse.buy_order);
+        expect(response.session_id).toBe(expectedResponse.session_id);
+        expect(response.card_detail.card_number).toBe(expectedResponse.card_detail.card_number);
+        expect(response.accounting_date).toBe(expectedResponse.accounting_date);
+        expect(response.accounting_date).toBe(expectedResponse.accounting_date);
+        testDetailResponse(response.details[0], expectedResponse.details[0]);
+        testDetailResponse(response.details[1], expectedResponse.details[1]);
     }
+
+    function testDetailResponse(detailResponse: any, expectedDetailResponse: any) {
+        expect(detailResponse.amount).toBe(expectedDetailResponse.amount);
+        expect(detailResponse.status).toBe(expectedDetailResponse.status);
+        expect(detailResponse.authorization_code).toBe(expectedDetailResponse.authorization_code);
+        expect(detailResponse.payment_type_code).toBe(expectedDetailResponse.payment_type_code);
+        expect(detailResponse.response_code).toBe(expectedDetailResponse.response_code);
+        expect(detailResponse.installments_number).toBe(expectedDetailResponse.installments_number);
+        expect(detailResponse.commerce_code).toBe(expectedDetailResponse.commerce_code);
+        expect(detailResponse.buy_order).toBe(expectedDetailResponse.buy_order);
+    }
+
 });
