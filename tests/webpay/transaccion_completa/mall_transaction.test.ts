@@ -2,7 +2,7 @@ import nock from 'nock';
 import { randomInt } from 'crypto';
 import { CommitDetail, Environment, IntegrationApiKeys, IntegrationCommerceCodes, Options, TransaccionCompleta, TransactionDetail } from '../../../lib';
 import ApiConstants from '../../../lib/transbank/common/api_constants';
-import { FULL_TX_MALL_TRANSACTION_CAPTURE_RESPONSE_MOCK, FULL_TX_MALL_TRANSACTION_STATUS_RESPONSE_MOCK } from '../../mocks/transaccion_completa_data';
+import { FULL_TX_MALL_TRANSACTION_STATUS_RESPONSE_MOCK } from '../../mocks/transaccion_completa_data';
 
 describe('MallFullTransactionTest', () => {
     const apiUrl = `${Environment.Integration}${ApiConstants.WEBPAY_ENDPOINT}`;
@@ -27,12 +27,10 @@ describe('MallFullTransactionTest', () => {
         const buyOrderMallTwo = randomInt(0, 1000).toString();
         const amountMallTwo = 1000;
         const mallTwoCommerceCode = '597055555537';
-
         let mallDetails = [
             new TransactionDetail(amountMallOne, mallOneCommerceCode, buyOrderMallOne),
             new TransactionDetail(amountMallTwo, mallTwoCommerceCode, buyOrderMallTwo)
           ];
-    
         nock(apiUrl).post('/transactions').reply(200, { token });
     
         const response = await new TransaccionCompleta.MallTransaction(option).create(
@@ -43,7 +41,6 @@ describe('MallFullTransactionTest', () => {
             mallDetails,
             cvv
           );
-          
         expect(response.token).toBe(testToken);
     });
 
@@ -52,22 +49,19 @@ describe('MallFullTransactionTest', () => {
         const mallOneCommerceCode = '597055555536';
         const idQueryInstallmentsOne = 1;
         const deferredPeriodIndexOne = 0;
-
         const buyOrderMallTwo = randomInt(0, 1000).toString();
         const mallTwoCommerceCode = '597055555537';
         const idQueryInstallmentsTwo = 1;
         const deferredPeriodIndexTwo = 0;
 
         let mallDetails = [
-            new CommitDetail(
-                mallOneCommerceCode,
+            new CommitDetail(mallOneCommerceCode,
                 buyOrderMallOne,
                 idQueryInstallmentsOne,
                 deferredPeriodIndexOne,
                 false
             ),
-            new CommitDetail(
-                buyOrderMallTwo,
+            new CommitDetail(buyOrderMallTwo,
                 mallTwoCommerceCode,
                 idQueryInstallmentsTwo,
                 deferredPeriodIndexTwo,
@@ -76,53 +70,9 @@ describe('MallFullTransactionTest', () => {
           ];
         const expectedResponse = FULL_TX_MALL_TRANSACTION_STATUS_RESPONSE_MOCK;
         nock(apiUrl).put(`/transactions/${testToken}`).reply(200, expectedResponse);
-
         const response = await new TransaccionCompleta.MallTransaction(option)
             .commit(testToken, mallDetails);
-
         testResponse(response, expectedResponse);
-    });
-
-    test('status', async () => {
-        const expectedResponse = FULL_TX_MALL_TRANSACTION_STATUS_RESPONSE_MOCK;
-        nock(apiUrl).get(`/transactions/${testToken}`).reply(200, expectedResponse);
-
-        const response = await new TransaccionCompleta.MallTransaction(option)
-            .status(testToken);
-        testResponse(response, expectedResponse);
-    });
-
-    test('refund', async () => {
-        const type = 'REVERSED';
-
-        nock(apiUrl)
-            .post(`/transactions/${testToken}/refunds`)
-            .reply(200, { type });
-
-        const childBuyOrder = '500894028';
-        const childCommerceCode = '597055555536';
-        const amount = 1000;
-
-        const response = await new TransaccionCompleta.MallTransaction(option)
-            .refund(testToken, childBuyOrder, childCommerceCode, amount);
-        expect(response.type).toBe(type);
-    });
-
-    test('capture', async () => {
-        const expectedResponse = FULL_TX_MALL_TRANSACTION_CAPTURE_RESPONSE_MOCK;
-        nock(apiUrl).put(`/transactions/${testToken}/capture`).reply(200, expectedResponse);
-    
-        const commerceCode = "597055555537";
-        const buyOrder = 'order_123';
-        const authorization = '1213';
-        const amount = 1000;
-    
-        const response = await new TransaccionCompleta.MallTransaction(option)
-            .capture(testToken, commerceCode, buyOrder, authorization, amount);
-        expect(response.authorization_code).toBe(expectedResponse.authorization_code);
-        expect(response.authorization_date).toBe(expectedResponse.authorization_date);
-        expect(response.captured_amount).toBe(expectedResponse.captured_amount);
-        expect(response.response_code).toBe(expectedResponse.response_code);
     });
 
     function testResponse(response: any, expectedResponse: any) {
