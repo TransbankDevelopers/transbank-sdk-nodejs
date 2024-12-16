@@ -1,4 +1,3 @@
-import TransaccionCompleta from '.';
 import Options from '../../common/options';
 import InstallmentDetail from '../common/installments_detail';
 import TransaccionCompletaCommitDetail from './common/commit_detail';
@@ -8,8 +7,6 @@ import { InstallmentsRequest, MallCommitRequest, MallCreateRequest, MallRefundRe
 import RequestService from '../../common/request_service';
 import MallCaptureRequest from './requests/mall_capture_request';
 import Environment from '../common/environment';
-import IntegrationCommerceCodes from '../../common/integration_commerce_codes';
-import IntegrationApiKeys from '../../common/integration_api_keys';
 import ValidationUtil from '../../common/validation_util';
 import ApiConstants from '../../common/api_constants';
 
@@ -17,11 +14,34 @@ class MallTransaction extends BaseTransaction {
 
   /**
    * Constructor class MallTransaction.
-   * @param options (Optional) You can pass options to use a custom configuration.
+   * @param options You can pass options to use a custom configuration.
    */
    constructor(options: Options) { 
-    options = options || TransaccionCompleta.getDefaultOptions() || new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration);
     super(options);
+  }
+
+  /**
+   * Creates and returns an instance of `MallTransaction` configured for the integration environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `MallTransaction` configured for the test environment (Environment.Integration).
+   */
+  static buildForIntegration(commerceCode: string, apiKey: string): MallTransaction
+  {
+    return new MallTransaction(new Options(commerceCode, apiKey, Environment.Integration));
+  }
+
+  /**
+   * Creates and returns an instance of `MallTransaction` configured for the production environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `MallTransaction` configured for the production environment (Environment.Production).
+   */
+  static buildForProduction(commerceCode: string, apiKey: string): MallTransaction
+  {
+    return new MallTransaction(new Options(commerceCode, apiKey, Environment.Production));
   }
 
   /**
