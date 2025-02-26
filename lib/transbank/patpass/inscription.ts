@@ -1,21 +1,41 @@
 import BaseTransaction from '../common/base_transaction';
 import Options from '../common/options';
-import PatpassComercio from '.';
 import { StatusRequest, StartRequest } from './requests';
 import RequestService from '../common/request_service';
-import IntegrationCommerceCodes from '../common/integration_commerce_codes';
-import IntegrationApiKeys from '../common/integration_api_keys';
 import Environment from './common/environment';
 
 class Inscription extends BaseTransaction {
 
   /**
    * Constructor class Inscription PatpassComercio.
-   * @param options (Optional) You can pass options to use a custom configuration.
+   * @param options You can pass options to use a custom configuration.
    */
    constructor(options: Options) { 
-    options = options || PatpassComercio.getDefaultOptions() || new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, Environment.Integration);
     super(options);
+  }
+
+  /**
+   * Creates and returns an instance of `Inscription` configured for the integration environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `Inscription` configured for the test environment (Environment.Integration).
+   */
+  static buildForIntegration(commerceCode: string, apiKey: string): Inscription
+  {
+    return new Inscription(new Options(commerceCode, apiKey, Environment.Integration));
+  }
+
+  /**
+   * Creates and returns an instance of `Inscription` configured for the production environment.
+   *
+   * @param commerceCode The commerce code.
+   * @param apiKey The API key used for authentication.
+   * @return A new instance of `Inscription` configured for the production environment (Environment.Production).
+   */
+  static buildForProduction(commerceCode: string, apiKey: string): Inscription
+  {
+    return new Inscription(new Options(commerceCode, apiKey, Environment.Production));
   }
 
   /**
