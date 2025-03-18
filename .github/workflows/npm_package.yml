@@ -1,9 +1,8 @@
 name: NPM Package Release
 
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types: [published]
 
 jobs:
   publish:
