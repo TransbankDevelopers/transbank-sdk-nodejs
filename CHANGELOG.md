@@ -5,6 +5,32 @@ Todos los cambios notables a este proyecto serán docuemntados en este archivo.
 El formato está basado en [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [6.0.0] - 2025-05-05
+
+Esta versión no introduce cambios en el comportamiento de las funcionalidades del API.
+¡Importante!
+
+El SDK ya no apunta por defecto al ambiente de integración. Ahora es necesario configurar de forma explícita las credenciales para el ambiente de integración. Para esto se debe inicializar explícitamente los objetos de los distintos productos, ya sea utilizando la clase Options o a través de los nuevos métodos buildForIntegration y buildForProduction.
+
+### Agrega:
+
+- Se agrega el parámetro timeout para que pueda modificarse en todos los productos.
+- Se agregan los métodos buildForIntegration y buildForProduction a todos los productos
+- Se agregan tests
+
+### Actualiza:
+
+- Se configura por defecto el timeout a 600 segundos para todas las peticiones.
+- Se actualizan las versiones de las dependencias.
+
+### Elimina:
+
+- Se eliminan el constructor por defecto y los métodos configureForIntegration, configureForProduction, configureForTestingDeferred, configureForTestingMall, configureForTestingMallDeferred en Webpayplus
+- Se eliminan el constructor por defecto y los métodos configureForIntegration, configureForProduction, configureOneclickMallForTesting, configureOneclickMallDeferredForTesting en Oneclick
+- Se eliminan el constructor por defecto y los métodos configureForIntegration, configureForProduction, configureForTesting en Patpass Comercio
+- Se eliminan el constructor por defecto y los métodos configureForIntegration, configureForProduction, configureForTesting, configureForTestingDeferred, configureForTestingMall, configureForTestingMallDeferred,configureForTestingNoCVV, configureForTestingDeferredNoCVV, configureForTestingMallNoCVV, configureForTestingMallDeferredNoCVV en Full Transaction y Mall Full Transaction
+- Se elimina el código que hace referencia al producto 'Webpay Modal'
+
 ## [5.0.0] - 2024-03-01
 
 ### Changed
