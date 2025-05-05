@@ -12,7 +12,7 @@ class Options {
    * Production, each has a unique URL. */
   environment: string;
   /** Timeout for requests in milliseconds */
-  timeout: number;
+  timeout?: number;
 
   /**
    * Create an instance of Options
@@ -23,10 +23,11 @@ class Options {
    * @param timeout Timeout for requests in milliseconds
    */
   constructor(commerceCode: string, apiKey: string, environment: string, timeout?: number) {
+    const defaultTimeout = 1000 * 60 * 10;
     this.commerceCode = commerceCode;
     this.apiKey = apiKey;
     this.environment = environment;
-    this.timeout = timeout ?? 60000;
+    this.timeout = timeout ?? defaultTimeout;
   }
 }
 
