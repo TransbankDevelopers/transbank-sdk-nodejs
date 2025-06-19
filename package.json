@@ -10,7 +10,8 @@
   },
   "scripts": {
     "build": "rm -rf dist/ && node_modules/typedoc/bin/typedoc lib/index.ts --out ./docs && tsc && tsc --build tsconfig.es5.json",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
