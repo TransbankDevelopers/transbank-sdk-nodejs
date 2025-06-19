@@ -30,6 +30,8 @@ jobs:
           fetch-depth: 0
       - name: Install dependencies
         run: npm install
+      - name: Run tests with coverage
+        run: npm test
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
