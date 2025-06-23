@@ -27,7 +27,7 @@ class AuthorizeRequest extends RequestBase {
       username: this.userName,
       tbk_user: this.tbkUser,
       buy_order: this.buyOrder,
-      details: this.details.map((detail) => detail.toPlainObject()),
+      details: this.details.map((detail) => detail.toPlainObject())
     });
   }
 }

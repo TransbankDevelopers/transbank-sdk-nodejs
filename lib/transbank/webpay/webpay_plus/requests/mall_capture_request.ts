@@ -27,7 +27,7 @@ class MallCaptureRequest extends RequestBase {
       commerce_code: this.commerceCode,
       buy_order: this.buyOrder,
       authorization_code: this.authorizationCode,
-      capture_amount: this.amount,
+      capture_amount: this.amount
     });
   }
 }

@@ -17,7 +17,7 @@ class InstallmentDetail {
     let object: any = {
       commerce_code: this.commerceCode,
       buy_order: this.buyOrder,
-      installments_number: this.installmentsNumber,
+      installments_number: this.installmentsNumber
     };
 
     if (this.installmentsNumber != undefined) {

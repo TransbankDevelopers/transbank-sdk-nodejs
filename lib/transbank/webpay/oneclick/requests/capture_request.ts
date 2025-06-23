@@ -21,7 +21,7 @@ class CaptureRequest extends RequestBase {
       commerce_code: this.commerceCode,
       buy_order: this.buyOrder,
       capture_amount: this.amount,
-      authorization_code: this.authorizationCode,
+      authorization_code: this.authorizationCode
     });
   }
 }

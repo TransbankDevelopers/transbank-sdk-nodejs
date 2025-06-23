@@ -18,7 +18,7 @@ class StartRequest extends RequestBase {
     return JSON.stringify({
       username: this.userName,
       email: this.email,
-      response_url: this.responseUrl,
+      response_url: this.responseUrl
     });
   }
 }

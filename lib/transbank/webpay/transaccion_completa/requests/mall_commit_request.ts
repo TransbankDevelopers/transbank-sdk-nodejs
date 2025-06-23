@@ -12,7 +12,7 @@ class MallCommitRequest extends RequestBase {
 
   toJson(): string {
     return JSON.stringify({
-      details: this.details.map((detail) => detail.toPlainObject()),
+      details: this.details.map((detail) => detail.toPlainObject())
     });
   }
 }

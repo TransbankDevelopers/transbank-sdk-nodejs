@@ -28,7 +28,7 @@ class CommitDetail {
       buy_order: this.buyOrder,
       id_query_installments: this.idQueryInstallments,
       deferred_period_index: this.deferredPeriodIndex,
-      grace_period: this.gracePeriod,
+      grace_period: this.gracePeriod
     };
   }
 }
