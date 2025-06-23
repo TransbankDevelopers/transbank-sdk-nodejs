@@ -35,7 +35,7 @@ class MallCreateRequest extends RequestBase {
       cvv: this.cvv,
       card_number: this.cardNumber,
       card_expiration_date: this.cardExpirationDate,
-      details: this.details.map((detail) => detail.toPlainObject()),
+      details: this.details.map((detail) => detail.toPlainObject())
     });
   }
 }

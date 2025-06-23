@@ -18,7 +18,7 @@ class RefundRequest extends RequestBase {
     return JSON.stringify({
       commerce_code: this.commerceCode,
       detail_buy_order: this.childBuyOrder,
-      amount: this.amount,
+      amount: this.amount
     });
   }
 }

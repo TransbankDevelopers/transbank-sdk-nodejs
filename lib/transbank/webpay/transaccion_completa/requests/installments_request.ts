@@ -23,7 +23,7 @@ class InstallmentsRequest extends RequestBase {
     return JSON.stringify({
       installments_number: this.installmentsNumber,
       commerce_code: this.commerceCode,
-      buy_order: this.buyOrder,
+      buy_order: this.buyOrder
     });
   }
 }

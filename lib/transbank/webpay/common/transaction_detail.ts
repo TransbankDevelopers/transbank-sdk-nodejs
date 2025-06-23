@@ -24,7 +24,7 @@ class TransactionDetail {
       amount: this.amount,
       commerce_code: this.commerceCode,
       buy_order: this.buyOrder,
-      installments_number: this.installmentsNumber,
+      installments_number: this.installmentsNumber
     };
   }
 }

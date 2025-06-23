@@ -11,7 +11,7 @@ class QueryBinRequest extends RequestBase {
 
   toJson(): string {
     return JSON.stringify({
-      tbk_user: this.tbkUser,
+      tbk_user: this.tbkUser
     });
   }
 }

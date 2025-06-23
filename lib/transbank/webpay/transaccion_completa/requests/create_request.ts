@@ -34,7 +34,7 @@ class CreateRequest extends RequestBase {
       amount: this.amount,
       cvv: this.cvv,
       card_number: this.cardNumber,
-      card_expiration_date: this.cardExprationDate,
+      card_expiration_date: this.cardExprationDate
     });
   }
 }

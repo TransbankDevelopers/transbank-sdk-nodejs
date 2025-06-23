@@ -21,7 +21,7 @@ class CreateRequest extends RequestBase {
       buy_order: this.buyOrder,
       session_id: this.sessionId,
       amount: this.amount,
-      return_url: this.returnUrl,
+      return_url: this.returnUrl
     });
   }
 }

@@ -18,7 +18,7 @@ class CaptureRequest extends RequestBase {
     return JSON.stringify({
       buy_order: this.buyOrder,
       authorization_code: this.authorizationCode,
-      capture_amount: this.amount,
+      capture_amount: this.amount
     });
   }
 }
