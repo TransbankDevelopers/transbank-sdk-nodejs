@@ -1,17 +1,14 @@
 [![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/transbankdevelopers/transbank-sdk-nodejs)](https://github.com/TransbankDevelopers/transbank-sdk-nodejs/releases/latest)
 [![GitHub](https://img.shields.io/github/license/transbankdevelopers/transbank-sdk-nodejs)](LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/transbankdevelopers/transbank-sdk-nodejs)](https://github.com/TransbankDevelopers/transbank-sdk-nodejs/graphs/contributors)
-[![Build Status](https://travis-ci.org/TransbankDevelopers/transbank-sdk-nodejs.svg?branch=master)](https://travis-ci.org/TransbankDevelopers/transbank-sdk-nodejs)
 
 # Transbank SDK Node.js
 
 Este es el SDK oficial de Transbank para Node.js
 
-## Requisitos:
+### Requisitos:
 
 - Node.js 8+
-
-# Instalación
 
 ### Instalar con `npm`
 
@@ -37,6 +34,19 @@ npm audit
 
 # Este comando te permite reparar las vulnerabilidades
 npm audit fix
+```
+
+### Compilar
+```bash
+npm run build
+```
+
+### Ejecutar test
+```bash
+npm run test
+
+# Tests con coverage
+npm run test:coverage
 ```
 
 ## Documentación
