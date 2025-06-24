@@ -13,7 +13,7 @@ const getHeaders = (
   return {
     [commerceCodeHeader]: options.commerceCode,
     [apiKeyHeader]: options.apiKey,
-    'Content-Type': CONTENT_TYPE,
+    'Content-Type': CONTENT_TYPE
   };
 };
 
@@ -25,7 +25,7 @@ const getPatpassHeaders = (
   return {
     [commerceCodeHeader]: options.commerceCode,
     [apiKeyHeader]: options.apiKey,
-    'Content-Type': CONTENT_TYPE,
+    'Content-Type': CONTENT_TYPE
   };
 };
 
@@ -37,7 +37,7 @@ const RequestService = {
       url: options.environment + request.endpoint,
       headers: requestHeaders,
       timeout: options.timeout,
-      data: request.toJson(),
+      data: request.toJson()
     })
       .then((response) => {
         if (response.status == 204) {
@@ -58,7 +58,7 @@ const RequestService = {
       url: options.environment + request.endpoint,
       headers: requestHeaders,
       timeout: options.timeout,
-      data: request.toJson(),
+      data: request.toJson()
     })
       .then((response) => {
         if (response.status == 204) {
@@ -74,7 +74,7 @@ const RequestService = {
             : 'Unexpected error';
         throw new TransbankError(error, msg);
       });
-  },
+  }
 };
 
 export default RequestService;

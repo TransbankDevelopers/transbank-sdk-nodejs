@@ -5,6 +5,18 @@ Todos los cambios notables a este proyecto serán docuemntados en este archivo.
 El formato está basado en [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 y este proyecto adhiere a [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [6.1.0] - 2025-06-24
+
+Esta versión agrega una clase para la nueva funcionalidad de la API de OneClick. Los métodos existentes no tienen cambios.
+
+### Agrega:
+
+- Se agrega la clase MallBinInfo, la cual contiene el método queryBin para la consulta de información de una tarjeta registrada en OneClick.
+
+### Actualiza:
+
+- Se actualizan las dependencias necesarias para construir el proyecto.
+
 ## [6.0.0] - 2025-05-05
 
 Esta versión no introduce cambios en el comportamiento de las funcionalidades del API.

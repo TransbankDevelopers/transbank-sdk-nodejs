@@ -5,6 +5,7 @@ import { RefundRequest } from './refund_request';
 import { StartRequest } from './start_request';
 import { StatusRequest } from './status_request';
 import { CaptureRequest } from './capture_request';
+import { QueryBinRequest } from './query_bin_request';
 
 export {
   AuthorizeRequest,
@@ -13,5 +14,6 @@ export {
   RefundRequest,
   StartRequest,
   StatusRequest,
-  CaptureRequest
+  CaptureRequest,
+  QueryBinRequest,
 };

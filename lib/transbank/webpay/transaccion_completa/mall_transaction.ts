@@ -96,13 +96,12 @@ class MallTransaction extends BaseTransaction {
     ValidationUtil.hasTextWithMaxLength(token, ApiConstants.TOKEN_LENGTH, "token");
     let response = [];
     for (let detail of details) {
-      let installmentsRequest = new InstallmentsRequest(
+      response.push(await RequestService.perform(new InstallmentsRequest(
         token,
         detail.installmentsNumber,
         detail.commerceCode,
         detail.buyOrder
-      );
-      response.push(await RequestService.perform(installmentsRequest, this.options));
+      ), this.options));
     }
     return response;
   }

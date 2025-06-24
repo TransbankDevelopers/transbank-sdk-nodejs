@@ -23,7 +23,7 @@ class CommitRequest extends RequestBase {
     return JSON.stringify({
       id_query_installments: this.idQueryInstallments,
       deferred_period_index: this.deferredPeriodIndex,
-      grace_period: this.gracePeriod,
+      grace_period: this.gracePeriod
     });
   }
 }

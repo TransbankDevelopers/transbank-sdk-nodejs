@@ -27,7 +27,7 @@ class MallCreateRequest extends RequestBase {
       buy_order: this.buyOrder,
       session_id: this.sessionId,
       details: this.details.map((detail) => detail.toPlainObject()),
-      return_url: this.returnUrl,
+      return_url: this.returnUrl
     });
   }
 }
