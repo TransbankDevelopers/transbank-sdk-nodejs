@@ -43,4 +43,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.branch.name=${{ env.GITHUB_REF_NAME }}
+            -Dsonar.branch.name=${{ github.ref_name }}
