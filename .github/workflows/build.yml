@@ -37,10 +37,10 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:coverage
       - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
+        uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.branch.name=${{ env.GITHUB_REF_NAME }}
+            -Dsonar.branch.name=${{ github.ref_name }}
