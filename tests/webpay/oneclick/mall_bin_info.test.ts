@@ -12,12 +12,16 @@ describe('MallBinInfoTest', () => {
       bin_brand: 'Visa'
     };
     const tbkUser = 'tbkUser1234567890';
+
+    const bodyMatcher = (body) => {
+      expect(body).toEqual({ tbk_user: tbkUser });
+      return true;
+    };
+
     nock(apiUrl)
-      .post(`/bin_info`, (body) => {
-        expect(body).toEqual({ tbk_user: tbkUser });
-        return true;
-      })
+      .post('/bin_info', bodyMatcher)
       .reply(200, expectedResponse);
+
     const binInfo = Oneclick.MallBinInfo.buildForIntegration('testCommerceCode', 'testApiKey');
     const response = await binInfo.queryBin(tbkUser);
     expect(response).toEqual(expectedResponse);
