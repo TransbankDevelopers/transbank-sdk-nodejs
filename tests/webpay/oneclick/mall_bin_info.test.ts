@@ -13,7 +13,7 @@ describe('MallBinInfoTest', () => {
     };
     const tbkUser = 'tbkUser1234567890';
 
-    const bodyMatcher = (body) => {
+    const bodyMatcher = (body: any) => {
       expect(body).toEqual({ tbk_user: tbkUser });
       return true;
     };
