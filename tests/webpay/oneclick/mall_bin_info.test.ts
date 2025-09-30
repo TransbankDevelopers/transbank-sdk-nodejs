@@ -9,7 +9,7 @@ describe('MallBinInfoTest', () => {
     const expectedResponse = {
       bin_issuer: 'TEST COMMERCE BANK',
       bin_payment_type: 'Credito',
-      bin_brand: 'Visa',
+      bin_brand: 'Visa'
     };
     const tbkUser = 'tbkUser1234567890';
     nock(apiUrl)
@@ -33,7 +33,7 @@ describe('MallBinInfoTest', () => {
   test('Error API Response', async () => {
     nock(apiUrl).post(`/bin_info`).reply(422, {
       error: 'Invalid request',
-      message: 'Error processing request',
+      message: 'Error processing request'
     });
     const binInfo = Oneclick.MallBinInfo.buildForIntegration('testCommerceCode', 'testApiKey');
     await expect(binInfo.queryBin('tbkUser1234567890')).rejects.toThrow(TransbankError);
