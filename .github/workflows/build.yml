@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: npm install
+        run: npm ci --ignore-scripts
       - name: Build
         run: npm run build
   sonar-cloud-check:
@@ -33,7 +33,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install dependencies
-        run: npm install
+        run: npm ci --ignore-scripts
       - name: Run tests with coverage
         run: npm run test:coverage
       - name: SonarQube Scan
