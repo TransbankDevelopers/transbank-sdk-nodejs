@@ -8,7 +8,7 @@ Este es el SDK oficial de Transbank para Node.js
 
 ### Requisitos:
 
-- Node.js 8+
+- Node.js 18+
 
 ### Instalar con `npm`
 
@@ -37,11 +37,13 @@ npm audit fix
 ```
 
 ### Compilar
+
 ```bash
 npm run build
 ```
 
 ### Ejecutar test
+
 ```bash
 npm run test
 
@@ -129,8 +131,9 @@ Para generar una nueva versión, se debe crear un PR (con un título "release: p
 En ese PR deben incluirse los siguientes cambios:
 
 1. Modificar el archivo `CHANGELOG.md` para incluir una nueva entrada (al comienzo) para `X.Y.Z` que explique en español los cambios.
-2. Modificar el archivo `package.json` y modificar la versión.
+2. Actualizar `README.md` en caso de que se requiera. Validar si cambiaron instrucciones o requerimientos.
+3. Modificar el archivo `package.json` y modificar la versión.
 
-Luego de obtener aprobación del PR, debe mezclarse a master e inmediatamente generar un release en GitHub con el tag `vX.Y.Z`. En la descripción del release debes poner lo mismo que agregaste al changelog.
+Luego de obtener aprobación del PR, debe mezclarse a master e inmediatamente generar un release en GitHub con el tag `X.Y.Z`. En la descripción del release debes poner lo mismo que agregaste al changelog.
 
 Posterior a la liberación debes mezclar la rama release en develop, finalmente realizar un rebase de la rama develop utilizando como base la rama main.
