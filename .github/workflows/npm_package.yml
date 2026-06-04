@@ -6,24 +6,24 @@ on:
 
 permissions:
   contents: read
-  id-token: write 
+  id-token: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20.x' 
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Update npm
-        run: npm install -g npm@latest
+        run: npm install -g npm@11.16.0
 
       - name: Install dependencies
         run: npm ci --ignore-scripts
@@ -35,4 +35,4 @@ jobs:
         run: npm test
 
       - name: npm publish
-        run: npm publish 
+        run: npm publish
