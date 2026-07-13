@@ -28,7 +28,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Update npm
-        run: npm install -g npm@11.16.0
+        run: npm install -g npm@11.16.0 --ignore-scripts
 
       - name: Install dependencies
         run: pnpm install --ignore-scripts
