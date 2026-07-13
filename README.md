@@ -39,16 +39,16 @@ npm audit fix
 ### Compilar
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ### Ejecutar test
 
 ```bash
-npm run test
+pnpm test
 
 # Tests con coverage
-npm run test:coverage
+pnpm test:coverage
 ```
 
 ## Documentación
