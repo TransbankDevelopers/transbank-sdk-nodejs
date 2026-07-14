@@ -11,6 +11,10 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ["22.x", "24.x"]
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
@@ -22,7 +26,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: "24.x"
+          node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: pnpm install --ignore-scripts
       - name: Build
@@ -30,6 +34,7 @@ jobs:
       - name: Run tests with coverage
         run: pnpm run test:coverage
       - name: SonarQube Scan
+        if: matrix.node-version == '24.x'
         uses: SonarSource/sonarqube-scan-action@713881670b6b3676cda39549040e2d88c70d582e
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
