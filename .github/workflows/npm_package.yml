@@ -27,9 +27,6 @@ jobs:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Update npm
-        run: npm install -g npm@11.16.0 --ignore-scripts
-
       - name: Install dependencies
         run: pnpm install --ignore-scripts
 
@@ -39,5 +36,5 @@ jobs:
       - name: Run Tests
         run: pnpm test
 
-      - name: npm publish
-        run: npm publish
+      - name: pnpm publish
+        run: pnpm publish --no-git-checks
