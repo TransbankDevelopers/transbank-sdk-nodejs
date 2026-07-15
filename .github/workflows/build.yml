@@ -17,8 +17,6 @@ jobs:
         node-version: ["22.x", "24.x"]
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
-        with:
-          fetch-depth: 0
       - name: Use pnpm
         uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271
         with:
