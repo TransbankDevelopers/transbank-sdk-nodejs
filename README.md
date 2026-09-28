@@ -8,7 +8,7 @@ Este es el SDK oficial de Transbank para Node.js
 
 ### Requisitos:
 
-- Node.js 22+
+- Node.js 24+
 
 ### Instalar con `npm`
 
