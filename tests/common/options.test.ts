@@ -3,6 +3,10 @@ import RequestService from '../../lib/transbank/common/request_service';
 import { CreateRequest } from '../../lib/transbank/webpay/webpay_plus/requests';
 import { Options, Environment } from '../../lib';
 
+afterAll(() => {
+  nock.cleanAll();
+});
+
 test('creates Options object', () => {
   let options = new Options('123456', 'asdfg', Environment.Integration);
   expect(options.commerceCode).toBe('123456');
