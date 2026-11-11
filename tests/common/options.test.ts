@@ -1,4 +1,4 @@
-import axios from 'axios';
+import nock from 'nock';
 import RequestService from '../../lib/transbank/common/request_service';
 import { CreateRequest } from '../../lib/transbank/webpay/webpay_plus/requests';
 import { Options, Environment } from '../../lib';
@@ -29,21 +29,13 @@ test('the timeout parameter is set successfully', async () => {
     20
   );
 
-  const handleTimeout = (
-    reject: (reason?: any) => void
-  ): void => {
-    setTimeout(() => {
-      reject({ code: 'ECONNABORTED', message: 'timeout of 20ms exceeded' });
-    }, 2000);
-  };
-
-  jest.spyOn(axios, 'request').mockImplementation(() => {
-    return new Promise(handleTimeout);
-  });
+  const scope = nock(Environment.Integration)
+    .post(request.endpoint)
+    .delay(100)
+    .reply(200, {});
 
   await expect(RequestService.perform(request, options)).rejects.toThrow(
     'AxiosError: timeout of 20ms exceeded'
   );
-
-  (axios.request as jest.Mock).mockRestore();
+  expect(scope.isDone()).toBe(true);
 });
