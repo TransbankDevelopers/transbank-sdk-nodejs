@@ -3,10 +3,12 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "dev",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-  "remoteUser": "node",
   "postCreateCommand": "bash /workspaces/${localWorkspaceFolderBasename}/.devcontainer/post-create.sh",
   "shutdownAction": "stopCompose",
-  "mounts": ["source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,consistency=cached"],
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,consistency=cached",
+    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+  ],
   "features": {
     "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {
       "plugins": "git zsh-autosuggestions zsh-syntax-highlighting",
@@ -18,13 +20,11 @@
       "settings": {
         "explorer.confirmDelete": false,
         "editor.bracketPairColorization.enabled": true,
-        "editor.guides.bracketPairs": true,
         "editor.autoClosingBrackets": "always",
         "editor.linkedEditing": true,
         "editor.fontLigatures": true,
         "editor.suggestSelection": "first",
         "editor.inlineSuggest.enabled": true,
-        "editor.guides.bracketPairsHorizontal": true,
         "editor.unicodeHighlight.invisibleCharacters": false,
         "editor.codeLens": true,
         "editor.formatOnSave": true,
