@@ -6,7 +6,7 @@ class FinishRequest extends RequestBase {
     super(`${ApiConstants.ONECLICK_ENDPOINT}/inscriptions/${token}`, 'PUT');
   }
 
-  tooJson(): undefined {
+  toJson(): undefined {
     return undefined;
   }
 }
