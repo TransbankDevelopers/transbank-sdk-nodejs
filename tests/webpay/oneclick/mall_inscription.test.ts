@@ -1,6 +1,7 @@
 import nock from 'nock';
 import { Environment, IntegrationApiKeys, IntegrationCommerceCodes, Oneclick, Options, TransactionDetail, WebpayPlus } from '../../../lib';
 import ApiConstants from '../../../lib/transbank/common/api_constants';
+import { FinishRequest } from '../../../lib/transbank/webpay/oneclick/requests';
 
 describe('InscriptionOneclickMallTest', () => {
     const apiUrl = `${Environment.Integration}${ApiConstants.ONECLICK_ENDPOINT}`;
@@ -42,8 +43,10 @@ describe('InscriptionOneclickMallTest', () => {
         const testToken = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
         nock(apiUrl)
-            .put(`/inscriptions/${testToken}`)
+            .put(`/inscriptions/${testToken}`, (body) => !body)
             .reply(200, expectedResponse);
+
+        expect(new FinishRequest(testToken).toJson()).toBeUndefined();
 
         const response = await new Oneclick.MallInscription(option)
             .finish(testToken);
